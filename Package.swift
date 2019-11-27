@@ -8,6 +8,7 @@ let package = Package(
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(name: "CypherPoetCoreDataKit", targets: ["CypherPoetCoreDataKit"]),
+        .library(name: "CypherPoetCoreDataKit.Extensions", targets: ["CypherPoetCoreDataKit.Extensions"]),
         .library(name: "CypherPoetCoreDataKit.PredicateUtils", targets: ["CypherPoetCoreDataKit.PredicateUtils"]),
     ],
     dependencies: [
@@ -20,8 +21,13 @@ let package = Package(
         .target(
             name: "CypherPoetCoreDataKit",
             dependencies: [
-                "CypherPoetCoreDataKit.PredicateUtils"
+                "CypherPoetCoreDataKit.Extensions",
+                "CypherPoetCoreDataKit.PredicateUtils",
             ]
+        ),
+        .target(
+            name: "CypherPoetCoreDataKit.Extensions",
+            path: "Sources/Extensions"
         ),
         .target(
             name: "CypherPoetCoreDataKit.PredicateUtils",
