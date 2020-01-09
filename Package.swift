@@ -5,9 +5,15 @@ import PackageDescription
 
 let package = Package(
     name: "CypherPoetCoreDataKit",
+    platforms: [
+        .iOS(.v13),
+        .macOS(.v10_15),
+    ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(name: "CypherPoetCoreDataKit", targets: ["CypherPoetCoreDataKit"]),
+
+        .library(name: "CypherPoetCoreDataKit.CoreDataManager", targets: ["CypherPoetCoreDataKit.CoreDataManager"]),
         .library(name: "CypherPoetCoreDataKit.Extensions", targets: ["CypherPoetCoreDataKit.Extensions"]),
         .library(name: "CypherPoetCoreDataKit.PredicateUtils", targets: ["CypherPoetCoreDataKit.PredicateUtils"]),
     ],
@@ -21,14 +27,25 @@ let package = Package(
         .target(
             name: "CypherPoetCoreDataKit",
             dependencies: [
+                "CypherPoetCoreDataKit.CoreDataManager",
                 "CypherPoetCoreDataKit.Extensions",
                 "CypherPoetCoreDataKit.PredicateUtils",
             ]
         ),
+        
+        
+        .target(
+            name: "CypherPoetCoreDataKit.CoreDataManager",
+            path: "Sources/CoreDataManager"
+        ),
+        
+        
         .target(
             name: "CypherPoetCoreDataKit.Extensions",
             path: "Sources/Extensions"
         ),
+        
+        
         .target(
             name: "CypherPoetCoreDataKit.PredicateUtils",
             path: "Sources/PredicateUtils"
