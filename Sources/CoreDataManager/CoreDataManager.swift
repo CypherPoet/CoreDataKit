@@ -42,7 +42,7 @@ public final class CoreDataManager {
     
     
     // MARK: - Init
-    init(
+    public init(
         managedObjectModelName: String,
         storeType: String = NSSQLiteStoreType
     ) {
