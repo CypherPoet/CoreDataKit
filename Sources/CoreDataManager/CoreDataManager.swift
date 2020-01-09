@@ -5,12 +5,13 @@ import CoreData
 public final class CoreDataManager {
     public typealias LoadCompletionHandler = (() -> Void)
 
+    private var managedObjectModelName: String
     private var storeType: String = NSSQLiteStoreType
     
     
     // MARK: - PersistentContainer
     public lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: ManagedObjectModelName.application)
+        let container = NSPersistentContainer(name: managedObjectModelName)
         let description = container.persistentStoreDescriptions.first
         
         description?.type = storeType
@@ -38,6 +39,16 @@ public final class CoreDataManager {
         
         return context
     }()
+    
+    
+    // MARK: - Init
+    init(
+        managedObjectModelName: String,
+        storeType: String = NSSQLiteStoreType
+    ) {
+        self.managedObjectModelName = managedObjectModelName
+        self.storeType = storeType
+    }
 }
 
 
@@ -59,9 +70,7 @@ extension CoreDataManager {
 // MARK: - Public Methods
 extension CoreDataManager {
     
-    public func setup(storeType: String = NSSQLiteStoreType, then completionHandler: LoadCompletionHandler? = nil) {
-        self.storeType = storeType
-        
+    public func setup(then completionHandler: LoadCompletionHandler? = nil) {
         loadPersistentStore() {
             completionHandler?()
         }
