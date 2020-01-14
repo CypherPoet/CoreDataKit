@@ -1,5 +1,6 @@
 import Foundation
 import CoreData
+import Combine
 
 
 public final class CoreDataManager {
@@ -66,6 +67,14 @@ extension CoreDataManager {
     }
 }
 
+// MARK: - Error
+extension CoreDataManager {
+    public enum Error: Swift.Error {
+        case saveFailed(NSError)
+    }
+}
+
+
 
 // MARK: - Public Methods
 extension CoreDataManager {
@@ -77,22 +86,39 @@ extension CoreDataManager {
     }
     
     
-    public func save(_ context: NSManagedObjectContext) {
-        context.performAndWait {
-            if context.hasChanges {
-                do {
-                    try context.save()
-                } catch {
-                    // TODO: Better error handling would be needed here for a production app
-                    let nsError = error as NSError
-                    print("Error while attempting to save Core Data context named: \"\(context.name ?? "")\": \(nsError), \(nsError.userInfo)")
+    public func save(_ context: NSManagedObjectContext) -> Future<Void, Error> {
+        Future { resolve in
+            context.performAndWait {
+                if context.hasChanges {
+                    do {
+                        try context.save()
+                        resolve(.success(()))
+                    } catch let error as NSError {
+                        resolve(.failure(.saveFailed(error)))
+                    }
                 }
             }
         }
     }
+
     
-    
-    public func saveContexts() {
-        [mainContext, backgroundContext].forEach { save($0) }
+    public func saveContexts() -> Future<Void, Error> {
+        Future { [weak self] resolve in
+            guard let self = self else { return }
+            
+            [self.backgroundContext, self.mainContext].forEach { context in
+                context.performAndWait {
+                    if context.hasChanges {
+                        do {
+                            try context.save()
+                        } catch let error as NSError {
+                            resolve(.failure(.saveFailed(error)))
+                        }
+                    }
+                }
+            }
+            
+            resolve(.success(()))
+        }
     }
 }
