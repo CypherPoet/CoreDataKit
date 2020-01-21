@@ -13,6 +13,7 @@ let package = Package(
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(name: "CypherPoetCoreDataKit", targets: ["CypherPoetCoreDataKit"]),
 
+        .library(name: "CypherPoetCoreDataKit.BindingUtils", targets: ["CypherPoetCoreDataKit.BindingUtils"]),
         .library(name: "CypherPoetCoreDataKit.CoreDataManager", targets: ["CypherPoetCoreDataKit.CoreDataManager"]),
         .library(name: "CypherPoetCoreDataKit.Extensions", targets: ["CypherPoetCoreDataKit.Extensions"]),
         .library(name: "CypherPoetCoreDataKit.PredicateUtils", targets: ["CypherPoetCoreDataKit.PredicateUtils"]),
@@ -27,10 +28,17 @@ let package = Package(
         .target(
             name: "CypherPoetCoreDataKit",
             dependencies: [
+                "CypherPoetCoreDataKit.BindingUtils",
                 "CypherPoetCoreDataKit.CoreDataManager",
                 "CypherPoetCoreDataKit.Extensions",
                 "CypherPoetCoreDataKit.PredicateUtils",
             ]
+        ),
+        
+
+        .target(
+            name: "CypherPoetCoreDataKit.BindingUtils",
+            path: "Sources/BindingUtils"
         ),
         
         
