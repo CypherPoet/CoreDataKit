@@ -16,6 +16,7 @@ let package = Package(
         .library(name: "CypherPoetCoreDataKit.BindingUtils", targets: ["CypherPoetCoreDataKit.BindingUtils"]),
         .library(name: "CypherPoetCoreDataKit.CoreDataManager", targets: ["CypherPoetCoreDataKit.CoreDataManager"]),
         .library(name: "CypherPoetCoreDataKit.Extensions", targets: ["CypherPoetCoreDataKit.Extensions"]),
+        .library(name: "CypherPoetCoreDataKit.FetchUtils", targets: ["CypherPoetCoreDataKit.FetchUtils"]),
         .library(name: "CypherPoetCoreDataKit.PredicateUtils", targets: ["CypherPoetCoreDataKit.PredicateUtils"]),
     ],
     dependencies: [
@@ -31,6 +32,7 @@ let package = Package(
                 "CypherPoetCoreDataKit.BindingUtils",
                 "CypherPoetCoreDataKit.CoreDataManager",
                 "CypherPoetCoreDataKit.Extensions",
+                "CypherPoetCoreDataKit.FetchUtils",
                 "CypherPoetCoreDataKit.PredicateUtils",
             ]
         ),
@@ -51,6 +53,12 @@ let package = Package(
         .target(
             name: "CypherPoetCoreDataKit.Extensions",
             path: "Sources/Extensions"
+        ),
+        
+        
+        .target(
+            name: "CypherPoetCoreDataKit.FetchUtils",
+            path: "Sources/FetchUtils"
         ),
         
         
