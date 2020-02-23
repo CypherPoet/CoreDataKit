@@ -6,6 +6,7 @@ public protocol FetchedResultsControlling: NSObject {
     associatedtype FetchedResult: NSFetchRequestResult
     
     var fetchRequest: NSFetchRequest<FetchedResult> { get }
+    var managedObjectContext: NSManagedObjectContext { get }
     var fetchedResultsController: NSFetchedResultsController<FetchedResult> { get }
     
     
@@ -24,7 +25,6 @@ extension FetchedResultsControlling {
 
     
     public func makeFetchedResultsController(
-        managedObjectContext: NSManagedObjectContext,
         sectionNameKeyPath: String? = nil,
         cacheName: String? = nil
     ) -> FetchedResultsController {
