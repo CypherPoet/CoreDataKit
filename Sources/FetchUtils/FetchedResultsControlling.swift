@@ -24,6 +24,9 @@ extension FetchedResultsControlling {
     public typealias FetchRequest = NSFetchRequest<FetchedResult>
 
     
+    public var fetchedResultsController: NSFetchedResultsController<FetchedResult> { makeFetchedResultsController() }
+    
+    
     public func makeFetchedResultsController(
         sectionNameKeyPath: String? = nil,
         cacheName: String? = nil
