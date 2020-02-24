@@ -10,6 +10,7 @@ public protocol FetchedResultsControlling: NSObject {
     var fetchedResultsController: NSFetchedResultsController<FetchedResult> { get }
     
     
+    /// Helper function for initializing the `fetchedResultsController` used by the conforming type's instance.
     func makeFetchedResultsController(
         sectionNameKeyPath: String?,
         cacheName: String?
@@ -23,9 +24,6 @@ extension FetchedResultsControlling {
     public typealias FetchedResultsController = NSFetchedResultsController<FetchedResult>
     public typealias FetchRequest = NSFetchRequest<FetchedResult>
 
-    
-    public var fetchedResultsController: NSFetchedResultsController<FetchedResult> { makeFetchedResultsController() }
-    
     
     public func makeFetchedResultsController(
         sectionNameKeyPath: String? = nil,
@@ -49,3 +47,18 @@ extension FetchedResultsControlling {
         return fetchedResults
     }
 }
+
+
+// 🔑 Example of adopting `NSFetchedResultsControllerDelegate` and updating
+// a "results" property on the `FetchedResultsControlling` type.
+//
+//// MARK: - NSFetchedResultsControllerDelegate
+//extension ViewModel: NSFetchedResultsControllerDelegate {
+//
+//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        guard let controller = controller as? FetchedResultsController else { return }
+//
+//        print("controllerDidChangeContent")
+//        results = extractResults(from: controller)
+//    }
+//}
