@@ -2,11 +2,11 @@
 
 <p>
     <img src="https://img.shields.io/badge/Swift-5.3-F06C33.svg" />
-    <img src="https://img.shields.io/badge/iOS-14.0+-865EFC.svg" />
-    <img src="https://img.shields.io/badge/iPadOS-14.0+-F65EFC.svg" />
-    <img src="https://img.shields.io/badge/macOS-11.0+-179AC8.svg" />
-    <img src="https://img.shields.io/badge/tvOS-14.0+-41465B.svg" />
-    <img src="https://img.shields.io/badge/watchOS-7.0+-1FD67A.svg" />
+    <img src="https://img.shields.io/badge/iOS-13.0+-865EFC.svg" />
+    <img src="https://img.shields.io/badge/iPadOS-13.0+-F65EFC.svg" />
+    <img src="https://img.shields.io/badge/macOS-10.15+-179AC8.svg" />
+    <img src="https://img.shields.io/badge/tvOS-13.0+-41465B.svg" />
+    <img src="https://img.shields.io/badge/watchOS-6.0+-1FD67A.svg" />
     <img src="https://img.shields.io/badge/License-MIT-blue.svg" />
     <a href="https://github.com/apple/swift-package-manager">
       <img src="https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat" />
@@ -27,6 +27,10 @@ _A collection of utilities for building Core Data applications in SwiftUI._
 <!-- [[ Header Screenshot ]] -->
 ![CypherPoetCoreDataKit Header Image](./Resources/Screenshots/header.png)
 
+
+## 🚧 Disclaimer
+
+This library is still a WIP as I study some of the best practices and patterns enabled by SwiftUI 2.0 -- and refactor accordingly.
 
 
 ## Features
@@ -62,13 +66,6 @@ Then simply `import CypherPoetCoreDataKit` wherever you’d like to use it.
 
 
 ## Usage
-
-
-
-## Roadmap
-
-- World Domination
-
 
 
 ## Contributing
