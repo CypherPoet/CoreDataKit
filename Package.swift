@@ -1,23 +1,22 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "CypherPoetCoreDataKit",
-    platforms: [
-        .iOS(.v13),
-        .macOS(.v10_15),
+        platforms: [
+        .iOS(SupportedPlatform.IOSVersion.v13),
+        .macOS(SupportedPlatform.MacOSVersion.v10_15),
+        .tvOS(SupportedPlatform.TVOSVersion.v13),
+        .watchOS(SupportedPlatform.WatchOSVersion.v6),
     ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
-        .library(name: "CypherPoetCoreDataKit", targets: ["CypherPoetCoreDataKit"]),
-
-        .library(name: "CypherPoetCoreDataKit.BindingUtils", targets: ["CypherPoetCoreDataKit.BindingUtils"]),
-        .library(name: "CypherPoetCoreDataKit.CoreDataManager", targets: ["CypherPoetCoreDataKit.CoreDataManager"]),
-        .library(name: "CypherPoetCoreDataKit.Extensions", targets: ["CypherPoetCoreDataKit.Extensions"]),
-        .library(name: "CypherPoetCoreDataKit.FetchUtils", targets: ["CypherPoetCoreDataKit.FetchUtils"]),
-        .library(name: "CypherPoetCoreDataKit.PredicateUtils", targets: ["CypherPoetCoreDataKit.PredicateUtils"]),
+        .library(
+            name: "CypherPoetCoreDataKit",
+            targets: ["CypherPoetCoreDataKit"]
+        ),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -28,48 +27,13 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "CypherPoetCoreDataKit",
-            dependencies: [
-                "CypherPoetCoreDataKit.BindingUtils",
-                "CypherPoetCoreDataKit.CoreDataManager",
-                "CypherPoetCoreDataKit.Extensions",
-                "CypherPoetCoreDataKit.FetchUtils",
-                "CypherPoetCoreDataKit.PredicateUtils",
-            ]
-        ),
-        
-
-        .target(
-            name: "CypherPoetCoreDataKit.BindingUtils",
-            path: "Sources/BindingUtils"
-        ),
-        
-        
-        .target(
-            name: "CypherPoetCoreDataKit.CoreDataManager",
-            path: "Sources/CoreDataManager"
-        ),
-        
-        
-        .target(
-            name: "CypherPoetCoreDataKit.Extensions",
-            path: "Sources/Extensions"
-        ),
-        
-        
-        .target(
-            name: "CypherPoetCoreDataKit.FetchUtils",
-            path: "Sources/FetchUtils"
-        ),
-        
-        
-        .target(
-            name: "CypherPoetCoreDataKit.PredicateUtils",
-            path: "Sources/PredicateUtils"
+            dependencies: [],
+            path: "Sources/"
         ),
         .testTarget(
-            name: "CypherPoetCoreDataKit.PredicateUtilsTests",
-            dependencies: ["CypherPoetCoreDataKit.PredicateUtils"],
-            path: "Tests/PredicateUtils"
+            name: "CypherPoetCoreDataKitTests",
+            dependencies: ["CypherPoetCoreDataKit"],
+            path: "Tests/"
         ),
     ]
 )

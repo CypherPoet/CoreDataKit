@@ -1,6 +1,6 @@
 import XCTest
 
-@testable import CypherPoetCoreDataKit_PredicateUtils
+@testable import CypherPoetCoreDataKit
 
 
 
