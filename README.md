@@ -1,5 +1,9 @@
 # CypherPoetCoreDataKit
 
+<p align="center">
+   <img width="600px" src="./Resources/Images/Banner.png" alt="CypherPoetCoreDataKit Header Image">
+</p>
+
 <p>
     <img src="https://img.shields.io/badge/Swift-5.3-F06C33.svg" />
     <img src="https://img.shields.io/badge/iOS-13.0+-865EFC.svg" />
@@ -22,10 +26,6 @@
 _A collection of utilities for building Core Data applications in SwiftUI._
 
 <p />
-
-
-<!-- [[ Header Screenshot ]] -->
-![CypherPoetCoreDataKit Header Image](./Resources/Screenshots/header.png)
 
 
 ## 🚧 Disclaimer
