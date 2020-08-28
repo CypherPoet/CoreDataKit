@@ -2,9 +2,13 @@ import Foundation
 import CoreData
 
 
-public protocol FetchedResultsControlling: NSObject {
+public protocol FetchedResultsControlling: NSObject, NSFetchedResultsControllerDelegate {
     associatedtype FetchedResult: NSFetchRequestResult
-    
+
+    typealias FetchedResultsController = NSFetchedResultsController<FetchedResult>
+    typealias FetchRequest = NSFetchRequest<FetchedResult>
+
+
     var fetchRequest: NSFetchRequest<FetchedResult> { get }
     var managedObjectContext: NSManagedObjectContext { get }
     var fetchedResultsController: NSFetchedResultsController<FetchedResult> { get }
@@ -15,16 +19,14 @@ public protocol FetchedResultsControlling: NSObject {
         sectionNameKeyPath: String?,
         cacheName: String?
     ) -> FetchedResultsController
-    
+
+
     func extractResults(from fetchedResultsController: FetchedResultsController) -> [FetchedResult]
 }
 
 
 extension FetchedResultsControlling {
-    public typealias FetchedResultsController = NSFetchedResultsController<FetchedResult>
-    public typealias FetchRequest = NSFetchRequest<FetchedResult>
 
-    
     public func makeFetchedResultsController(
         sectionNameKeyPath: String? = nil,
         cacheName: String? = nil
