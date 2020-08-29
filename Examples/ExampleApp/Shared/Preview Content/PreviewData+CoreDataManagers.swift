@@ -7,13 +7,11 @@
 //
 
 import Foundation
-import CypherPoetCoreDataKit
 
 
 extension PreviewData {
 
     enum CoreDataManagers {
-
         static let `default` = CoreDataManager.preview
     }
 }

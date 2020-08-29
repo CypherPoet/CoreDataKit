@@ -10,6 +10,10 @@ import Foundation
 import CypherPoetCoreDataKit
 
 
+// Expose the `CoreDataManager` type to the rest of our app
+typealias CoreDataManager = CypherPoetCoreDataKit.CoreDataManager
+
+
 extension CoreDataManager {
     static let managedObjectModelName = "ExampleApp"
 

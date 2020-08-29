@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F3770B1224FA659D006BC773 /* CoreDataManager+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3770B1124FA659D006BC773 /* CoreDataManager+Utils.swift */; };
+		F3770B1324FA659D006BC773 /* CoreDataManager+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3770B1124FA659D006BC773 /* CoreDataManager+Utils.swift */; };
+		F3770B1424FA65A1006BC773 /* ProcessInfo+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C7310124F755FF00DC328E /* ProcessInfo+Utils.swift */; };
 		F3A8470124F651BD00E3DD8D /* ExampleApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F3A846EB24F651BC00E3DD8D /* ExampleApp.xcdatamodeld */; };
 		F3A8470224F651BD00E3DD8D /* ExampleApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F3A846EB24F651BC00E3DD8D /* ExampleApp.xcdatamodeld */; };
 		F3A8470324F651BD00E3DD8D /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A846ED24F651BC00E3DD8D /* ExampleApp.swift */; };
@@ -17,7 +20,6 @@
 		F3A8470A24F651BD00E3DD8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3A846F024F651BD00E3DD8D /* Assets.xcassets */; };
 		F3A8471624F6521900E3DD8D /* CypherPoetCoreDataKit in Frameworks */ = {isa = PBXBuildFile; productRef = F3A8471524F6521900E3DD8D /* CypherPoetCoreDataKit */; };
 		F3A8471824F6521E00E3DD8D /* CypherPoetCoreDataKit in Frameworks */ = {isa = PBXBuildFile; productRef = F3A8471724F6521E00E3DD8D /* CypherPoetCoreDataKit */; };
-		F3A8471F24F653D900E3DD8D /* CoreDataManager+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A8471E24F653D900E3DD8D /* CoreDataManager+Utils.swift */; };
 		F3A8472224F656F400E3DD8D /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A8472124F656F400E3DD8D /* PreviewData.swift */; };
 		F3A8472324F656F400E3DD8D /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A8472124F656F400E3DD8D /* PreviewData.swift */; };
 		F3A8472524F6576700E3DD8D /* PreviewData+CoreDataManagers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A8472424F6576700E3DD8D /* PreviewData+CoreDataManagers.swift */; };
@@ -28,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F3770B1124FA659D006BC773 /* CoreDataManager+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreDataManager+Utils.swift"; sourceTree = "<group>"; };
 		F3A846EC24F651BC00E3DD8D /* ExampleApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExampleApp.xcdatamodel; sourceTree = "<group>"; };
 		F3A846ED24F651BC00E3DD8D /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		F3A846EE24F651BC00E3DD8D /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -38,7 +41,6 @@
 		F3A846FF24F651BD00E3DD8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3A8470024F651BD00E3DD8D /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
 		F3A8471324F651D800E3DD8D /* CypherPoetCoreDataKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CypherPoetCoreDataKit; path = ../..; sourceTree = "<group>"; };
-		F3A8471E24F653D900E3DD8D /* CoreDataManager+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataManager+Utils.swift"; sourceTree = "<group>"; };
 		F3A8472124F656F400E3DD8D /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		F3A8472424F6576700E3DD8D /* PreviewData+CoreDataManagers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewData+CoreDataManagers.swift"; sourceTree = "<group>"; };
 		F3A8472724F7390000E3DD8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -135,9 +137,8 @@
 		F3A8471A24F6522900E3DD8D /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				F3A8471D24F653C500E3DD8D /* Models */,
 				F3A846EB24F651BC00E3DD8D /* ExampleApp.xcdatamodeld */,
-				F3A8471E24F653D900E3DD8D /* CoreDataManager+Utils.swift */,
+				F3A8471D24F653C500E3DD8D /* Models */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -177,6 +178,7 @@
 		F3C7310024F755E900DC328E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F3770B1124FA659D006BC773 /* CoreDataManager+Utils.swift */,
 				F3C7310124F755FF00DC328E /* ProcessInfo+Utils.swift */,
 			);
 			path = Extensions;
@@ -289,10 +291,10 @@
 				F3A8472524F6576700E3DD8D /* PreviewData+CoreDataManagers.swift in Sources */,
 				F3A8470324F651BD00E3DD8D /* ExampleApp.swift in Sources */,
 				F3A8472224F656F400E3DD8D /* PreviewData.swift in Sources */,
+				F3770B1224FA659D006BC773 /* CoreDataManager+Utils.swift in Sources */,
 				F3A8470124F651BD00E3DD8D /* ExampleApp.xcdatamodeld in Sources */,
 				F3A8470524F651BD00E3DD8D /* RootView.swift in Sources */,
 				F3C7310224F755FF00DC328E /* ProcessInfo+Utils.swift in Sources */,
-				F3A8471F24F653D900E3DD8D /* CoreDataManager+Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,10 +303,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3A8472324F656F400E3DD8D /* PreviewData.swift in Sources */,
+				F3770B1424FA65A1006BC773 /* ProcessInfo+Utils.swift in Sources */,
 				F3A8470424F651BD00E3DD8D /* ExampleApp.swift in Sources */,
 				F3A8470224F651BD00E3DD8D /* ExampleApp.xcdatamodeld in Sources */,
 				F3A8472924F7390000E3DD8D /* AppDelegate.swift in Sources */,
 				F3A8470624F651BD00E3DD8D /* RootView.swift in Sources */,
+				F3770B1324FA659D006BC773 /* CoreDataManager+Utils.swift in Sources */,
 				F3A8472624F6576700E3DD8D /* PreviewData+CoreDataManagers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
