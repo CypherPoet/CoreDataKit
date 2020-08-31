@@ -35,8 +35,9 @@ This library is still a WIP as I study some of the best practices and patterns e
 
 ## Features
 
-- [x] Feature 1
-- [x] Feature 2
+- A [`CoreDataManager`](./Sources/CoreDataManager/) that handles setting up your ["Core Data Stack"](https://developer.apple.com/documentation/coredata/core_data_stack).
+- A [`FetchedResultsControlling` protocol](./Sources/FetchUtils/FetchedResultsControlling.swift) that helps architect `NSFetchedResultsController` instances and extract data from their `NSFetchRequest` results.
+- Predicate Utilities
 
 
 ## Installation
@@ -66,6 +67,7 @@ Then simply `import CypherPoetCoreDataKit` wherever you’d like to use it.
 
 
 ## Usage
+
 
 
 ## Contributing

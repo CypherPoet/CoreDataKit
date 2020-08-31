@@ -99,7 +99,8 @@ extension CoreDataManager {
         }
     }
     
-    
+
+    @discardableResult
     public func save(_ context: NSManagedObjectContext) -> Future<Void, CoreDataManagerError> {
         Future { resolve in
             context.performAndWait {
