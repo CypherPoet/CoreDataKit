@@ -68,7 +68,13 @@ Then simply `import CypherPoetCoreDataKit` wherever you’d like to use it.
 
 ## Usage
 
+<!--
 
+Usage of these utilities is best demonstrated by the [Example App](./Examples/ExampleApp/).
+
+- [Using launch arguments]() to help with Core Data-related debugging.
+
+ -->
 
 ## Contributing
 
