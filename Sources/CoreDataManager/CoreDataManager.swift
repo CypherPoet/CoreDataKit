@@ -38,8 +38,17 @@ public final class CoreDataManager {
         let context = self.persistentContainer.viewContext
         
         context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        context.automaticallyMergesChangesFromParent = true
         context.shouldDeleteInaccessibleFaults = true
+
+        // 🔑 Ensures that the `mainContext` is aware of any changes that were made
+        // to the persistent container.
+        //
+        // For example, when we save a background context,
+        // the persistent container is automatically informed of the changes that
+        // were made. And since the `mainContext` is considered to be a child of
+        // the persistent container, it will receive those updates -- merging
+        // any changes, as the name suggests, automatically.
+        context.automaticallyMergesChangesFromParent = true
         
         return context
     }()
