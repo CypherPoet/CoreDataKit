@@ -1,7 +1,7 @@
 # CypherPoetCoreDataKit
 
 <p align="center">
-   <img width="600px" src="./Resources/Images/Banner.png" alt="CypherPoetCoreDataKit Header Image">
+   <img width="600px" src="./Resources/Images/Banner-1.png" alt="CypherPoetCoreDataKit Header Image">
 </p>
 
 <p>
