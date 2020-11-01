@@ -67,6 +67,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F30B2DB3254E2B0500C68CD8 /* Misc Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F3C7310024F755E900DC328E /* Extensions */,
+			);
+			path = "Misc Helpers";
+			sourceTree = "<group>";
+		};
 		F3A846E524F651BC00E3DD8D = {
 			isa = PBXGroup;
 			children = (
@@ -85,7 +93,7 @@
 				F3A846ED24F651BC00E3DD8D /* ExampleApp.swift */,
 				F3A8471924F6522700E3DD8D /* App */,
 				F3A8471A24F6522900E3DD8D /* Data */,
-				F3C7310024F755E900DC328E /* Extensions */,
+				F30B2DB3254E2B0500C68CD8 /* Misc Helpers */,
 				F3A8472024F656D100E3DD8D /* Preview Content */,
 				F3A8471B24F6522C00E3DD8D /* Resources */,
 				F3A8471C24F6522F00E3DD8D /* Scene Views */,

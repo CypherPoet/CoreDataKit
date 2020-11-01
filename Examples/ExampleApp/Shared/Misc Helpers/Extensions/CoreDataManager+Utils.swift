@@ -16,13 +16,4 @@ typealias CoreDataManager = CypherPoetCoreDataKit.CoreDataManager
 
 extension CoreDataManager {
     static let managedObjectModelName = "ExampleApp"
-
-    static let shared = CoreDataManager(
-        managedObjectModelName: CoreDataManager.managedObjectModelName
-    )
-
-    static let preview = CoreDataManager(
-        managedObjectModelName: CoreDataManager.managedObjectModelName,
-        storageType: .inMemory
-    )
 }

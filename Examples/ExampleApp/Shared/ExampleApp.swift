@@ -2,8 +2,6 @@
 //  ExampleApp.swift
 //  Shared
 //
-//  Created by Brian Sipple on 8/26/20.
-//
 
 import SwiftUI
 
