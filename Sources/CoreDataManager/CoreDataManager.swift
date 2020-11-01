@@ -7,60 +7,25 @@ public final class CoreDataManager {
     public typealias LoadCompletionHandler = (() -> Void)
 
     private var managedObjectModelName: String
-    private var storageType: StorageType
+    private var storageStrategy: StorageStrategy
 
 
     // MARK: - PersistentContainer
-    public lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: managedObjectModelName)
-
-        if storageType == .inMemory {
-            container.persistentStoreDescriptions = [inMemoryStoreDescription]
-        }
-
-        container.persistentStoreDescriptions.first?.type = storeType
-
-        return container
-    }()
+    public lazy var persistentContainer: NSPersistentContainer = makePersistentContainer()
 
 
     // MARK: - Managed Object Contexts
-    public lazy var backgroundContext: NSManagedObjectContext = {
-        let context = self.persistentContainer.newBackgroundContext()
-        
-        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+    public lazy var backgroundContext: NSManagedObjectContext = makeBackgroundContext()
+    public lazy var mainContext: NSManagedObjectContext = makeMainContext()
 
-        return context
-    }()
-    
-    
-    public lazy var mainContext: NSManagedObjectContext = {
-        let context = self.persistentContainer.viewContext
-        
-        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        context.shouldDeleteInaccessibleFaults = true
-
-        // 🔑 Ensures that the `mainContext` is aware of any changes that were made
-        // to the persistent container.
-        //
-        // For example, when we save a background context,
-        // the persistent container is automatically informed of the changes that
-        // were made. And since the `mainContext` is considered to be a child of
-        // the persistent container, it will receive those updates -- merging
-        // any changes, as the name suggests, automatically.
-        context.automaticallyMergesChangesFromParent = true
-        
-        return context
-    }()
-    
     
     // MARK: - Init
     public init(
         managedObjectModelName: String,
-        storageType: StorageType = .persistent
+        storageStrategy: StorageStrategy = .persistent
     ) {
         self.managedObjectModelName = managedObjectModelName
-        self.storageType = storageType
+        self.storageStrategy = storageStrategy
     }
 }
 
@@ -68,8 +33,8 @@ public final class CoreDataManager {
 // MARK: - Computeds
 extension CoreDataManager {
 
-    var storeType: String {
-        switch storageType {
+    public var storeKind: String {
+        switch storageStrategy {
         case .persistent:
             return NSSQLiteStoreType
         case .inMemory:
@@ -80,21 +45,6 @@ extension CoreDataManager {
 
     private var inMemoryStoreDescription: NSPersistentStoreDescription {
         .init(url: URL(fileURLWithPath: "/dev/null"))
-    }
-}
-
-
-// MARK: - Private Methods
-extension CoreDataManager {
-    
-    private func loadPersistentStore(then completionHandler: @escaping LoadCompletionHandler) {
-        persistentContainer.loadPersistentStores { description, error in
-            guard error == nil else {
-                fatalError("Error while loading persistent stores: \(error!)")
-            }
-            
-            completionHandler()
-        }
     }
 }
 
@@ -146,4 +96,81 @@ extension CoreDataManager {
             resolve(.success(()))
         }
     }
+}
+
+
+// MARK: - Private Methods
+extension CoreDataManager {
+
+    private func loadPersistentStore(then completionHandler: @escaping LoadCompletionHandler) {
+        persistentContainer.loadPersistentStores { description, error in
+            guard error == nil else {
+                fatalError("Error while loading persistent stores: \(error!)")
+            }
+
+            completionHandler()
+        }
+    }
+}
+
+// MARK: - Private Factories
+extension CoreDataManager {
+
+    private func makePersistentContainer() -> NSPersistentContainer {
+        let container = NSPersistentContainer(name: managedObjectModelName)
+
+        if storageStrategy == .inMemory {
+            container.persistentStoreDescriptions = [inMemoryStoreDescription]
+        }
+
+        container.persistentStoreDescriptions.first?.type = storeKind
+
+        return container
+    }
+
+
+    private func makeBackgroundContext() -> NSManagedObjectContext {
+        let context = self.persistentContainer.newBackgroundContext()
+
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+
+        return context
+    }
+
+
+    private func makeMainContext() -> NSManagedObjectContext {
+        let context = self.persistentContainer.viewContext
+
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        context.shouldDeleteInaccessibleFaults = true
+
+        // 🔑 Ensures that the `mainContext` is aware of any changes that were made
+        // to the persistent container.
+        //
+        // For example, when we save a background context,
+        // the persistent container is automatically informed of the changes that
+        // were made. And since the `mainContext` is considered to be a child of
+        // the persistent container, it will receive those updates -- merging
+        // any changes, as the name suggests, automatically.
+        context.automaticallyMergesChangesFromParent = true
+
+        return context
+    }
+}
+
+
+// MARK: - Static Properties
+extension CoreDataManager {
+
+    // 📝 Set this in your own app.
+    public static var managedObjectModelName = ""
+
+    public static let shared = CoreDataManager(
+        managedObjectModelName: managedObjectModelName
+    )
+
+    public static let preview = CoreDataManager(
+        managedObjectModelName: managedObjectModelName,
+        storageStrategy: .inMemory
+    )
 }
