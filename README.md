@@ -30,7 +30,7 @@ _A collection of utilities for building Core Data applications in SwiftUI._
 
 ## 🚧 Disclaimer
 
-This library is still a WIP as I study some of the best practices and patterns enabled by SwiftUI 2.0 -- and refactor accordingly.
+This library is still very much a WIP as I study some of the new best practices, patterns, and affordances for Core Data after the release of SwiftUI 2.0. Please treat it as a guideline/reference for the time being 🙂. 
 
 
 ## Features
@@ -58,7 +58,7 @@ You can add `CypherPoetCoreDataKit` as a dependency in your `Package.swift` file
 let package = Package(
     //...
     dependencies: [
-        .package(url: "https://github.com/CypherPoet/CypherPoetCoreDataKit", from: "0.0.13"),
+        .package(url: "https://github.com/CypherPoet/CypherPoetCoreDataKit", from: "0.0.14"),
     ],
     //...
 )
