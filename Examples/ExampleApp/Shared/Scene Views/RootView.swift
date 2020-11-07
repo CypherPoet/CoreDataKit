@@ -29,15 +29,11 @@ struct RootView: View {
         }
         .toolbar {
             #if os(iOS)
-            ToolbarItem(placement: .automatic) {
-                EditButton()
-            }
+            EditButton()
             #endif
 
-            ToolbarItem(placement: .bottomBar) {
-                Button(action: addItem) {
-                    Label("Add Item", systemImage: "plus")
-                }
+            Button(action: addItem) {
+                Label("Add Item", systemImage: "plus")
             }
         }
     }

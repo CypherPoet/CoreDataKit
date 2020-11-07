@@ -30,7 +30,7 @@ _A collection of utilities for building Core Data applications in SwiftUI._
 
 ## 🚧 Disclaimer
 
-This library is still very much a WIP as I study some of the new best practices, patterns, and affordances for Core Data after the release of SwiftUI 2.0. Please treat it as a guideline/reference for the time being 🙂. 
+This library is still very much a WIP as I study some of the new best practices, patterns, and affordances for Core Data after the release of SwiftUI 2.0. Please treat it as a guideline/reference for the time being 🙂.
 
 
 ## Features
@@ -71,13 +71,14 @@ Then simply `import CypherPoetCoreDataKit` wherever you’d like to use it.
 
 ## Usage
 
-<!--
-
 Usage of these utilities is best demonstrated by the [Example App](./Examples/ExampleApp/).
 
-- [Using launch arguments]() to help with Core Data-related debugging.
+### Setting up the Core Data stack on launch by utilizing `CoreDataManager`'s default shared instance.
+- [iOS Example](./Examples/ExampleApp/iOS/App/AppDelegate.swift)
+- [macOS Example](./Examples/ExampleApp/macOS/App/AppDelegate.swift)
+- 🔑 This corresponds to [setting `CoreDataManager.managedObjectModelName` to match](https://github.com/CypherPoet/CypherPoetCoreDataKit/blob/4382ac9205a97f91ee142cac9febdeb025098ee2/Examples/ExampleApp/Shared/Misc%20Helpers/Extensions/CoreDataManager%2BUtils.swift#L18) the name of your app's `xcdatamodeld` file.
+- For more control and customization, a `CoreDataManager` instance can be [initialized directly](https://github.com/CypherPoet/CypherPoetCoreDataKit/blob/4382ac9205a97f91ee142cac9febdeb025098ee2/Sources/CoreDataManager/CoreDataManager.swift#L23) with a `managedObjectModelName` and a `storageStrategy`.
 
- -->
 
 ## Contributing
 

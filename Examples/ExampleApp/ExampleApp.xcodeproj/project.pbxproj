@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F3001E042557101500927041 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3001E032557101000927041 /* AppDelegate.swift */; };
+		F3001E092557103A00927041 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3001E082557103300927041 /* AppDelegate.swift */; };
 		F3770B1224FA659D006BC773 /* CoreDataManager+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3770B1124FA659D006BC773 /* CoreDataManager+Utils.swift */; };
 		F3770B1324FA659D006BC773 /* CoreDataManager+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3770B1124FA659D006BC773 /* CoreDataManager+Utils.swift */; };
 		F3770B1424FA65A1006BC773 /* ProcessInfo+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C7310124F755FF00DC328E /* ProcessInfo+Utils.swift */; };
@@ -24,12 +26,12 @@
 		F3A8472324F656F400E3DD8D /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A8472124F656F400E3DD8D /* PreviewData.swift */; };
 		F3A8472524F6576700E3DD8D /* PreviewData+CoreDataManagers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A8472424F6576700E3DD8D /* PreviewData+CoreDataManagers.swift */; };
 		F3A8472624F6576700E3DD8D /* PreviewData+CoreDataManagers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A8472424F6576700E3DD8D /* PreviewData+CoreDataManagers.swift */; };
-		F3A8472824F7390000E3DD8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A8472724F7390000E3DD8D /* AppDelegate.swift */; };
-		F3A8472924F7390000E3DD8D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3A8472724F7390000E3DD8D /* AppDelegate.swift */; };
 		F3C7310224F755FF00DC328E /* ProcessInfo+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C7310124F755FF00DC328E /* ProcessInfo+Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F3001E032557101000927041 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F3001E082557103300927041 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3770B1124FA659D006BC773 /* CoreDataManager+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreDataManager+Utils.swift"; sourceTree = "<group>"; };
 		F3A846EC24F651BC00E3DD8D /* ExampleApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ExampleApp.xcdatamodel; sourceTree = "<group>"; };
 		F3A846ED24F651BC00E3DD8D /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
@@ -43,7 +45,6 @@
 		F3A8471324F651D800E3DD8D /* CypherPoetCoreDataKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CypherPoetCoreDataKit; path = ../..; sourceTree = "<group>"; };
 		F3A8472124F656F400E3DD8D /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		F3A8472424F6576700E3DD8D /* PreviewData+CoreDataManagers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewData+CoreDataManagers.swift"; sourceTree = "<group>"; };
-		F3A8472724F7390000E3DD8D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F3C7310124F755FF00DC328E /* ProcessInfo+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessInfo+Utils.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -67,6 +68,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F3001E022557100900927041 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F3001E032557101000927041 /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		F3001E072557102E00927041 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				F3001E082557103300927041 /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
 		F30B2DB3254E2B0500C68CD8 /* Misc Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +130,7 @@
 		F3A846F724F651BD00E3DD8D /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				F3001E022557100900927041 /* App */,
 				F3A846F824F651BD00E3DD8D /* Info.plist */,
 			);
 			path = iOS;
@@ -121,6 +139,7 @@
 		F3A846FE24F651BD00E3DD8D /* macOS */ = {
 			isa = PBXGroup;
 			children = (
+				F3001E072557102E00927041 /* App */,
 				F3A846FF24F651BD00E3DD8D /* Info.plist */,
 				F3A8470024F651BD00E3DD8D /* macOS.entitlements */,
 			);
@@ -137,7 +156,6 @@
 		F3A8471924F6522700E3DD8D /* App */ = {
 			isa = PBXGroup;
 			children = (
-				F3A8472724F7390000E3DD8D /* AppDelegate.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -242,7 +260,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1220;
 				TargetAttributes = {
 					F3A846F424F651BD00E3DD8D = {
 						CreatedOnToolsVersion = 12.0;
@@ -295,9 +313,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3A8472824F7390000E3DD8D /* AppDelegate.swift in Sources */,
 				F3A8472524F6576700E3DD8D /* PreviewData+CoreDataManagers.swift in Sources */,
 				F3A8470324F651BD00E3DD8D /* ExampleApp.swift in Sources */,
+				F3001E042557101500927041 /* AppDelegate.swift in Sources */,
 				F3A8472224F656F400E3DD8D /* PreviewData.swift in Sources */,
 				F3770B1224FA659D006BC773 /* CoreDataManager+Utils.swift in Sources */,
 				F3A8470124F651BD00E3DD8D /* ExampleApp.xcdatamodeld in Sources */,
@@ -313,8 +331,8 @@
 				F3A8472324F656F400E3DD8D /* PreviewData.swift in Sources */,
 				F3770B1424FA65A1006BC773 /* ProcessInfo+Utils.swift in Sources */,
 				F3A8470424F651BD00E3DD8D /* ExampleApp.swift in Sources */,
+				F3001E092557103A00927041 /* AppDelegate.swift in Sources */,
 				F3A8470224F651BD00E3DD8D /* ExampleApp.xcdatamodeld in Sources */,
-				F3A8472924F7390000E3DD8D /* AppDelegate.swift in Sources */,
 				F3A8470624F651BD00E3DD8D /* RootView.swift in Sources */,
 				F3770B1324FA659D006BC773 /* CoreDataManager+Utils.swift in Sources */,
 				F3A8472624F6576700E3DD8D /* PreviewData+CoreDataManagers.swift in Sources */,
@@ -328,6 +346,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -387,6 +406,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -486,6 +506,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = QRXXH2RKAG;
@@ -510,6 +531,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = QRXXH2RKAG;
