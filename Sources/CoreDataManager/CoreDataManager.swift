@@ -158,19 +158,3 @@ extension CoreDataManager {
     }
 }
 
-
-// MARK: - Static Properties
-extension CoreDataManager {
-
-    // 📝 Set this in your own app.
-    public static var managedObjectModelName = ""
-
-    public static let shared = CoreDataManager(
-        managedObjectModelName: managedObjectModelName
-    )
-
-    public static let preview = CoreDataManager(
-        managedObjectModelName: managedObjectModelName,
-        storageStrategy: .inMemory
-    )
-}
