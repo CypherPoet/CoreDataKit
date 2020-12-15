@@ -59,7 +59,7 @@ You can add `CypherPoetCoreDataKit` as a dependency in your `Package.swift` file
 let package = Package(
     //...
     dependencies: [
-        .package(url: "https://github.com/CypherPoet/CypherPoetCoreDataKit", from: "0.0.14"),
+        .package(url: "https://github.com/CypherPoet/CypherPoetCoreDataKit", from: "0.0.15"),
     ],
     //...
 )
