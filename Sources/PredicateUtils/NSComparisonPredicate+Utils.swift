@@ -9,8 +9,8 @@ extension NSComparisonPredicate {
     /// - Parameters:
     ///   - diacriticSensitive: [Diacritic sensitivity](https://en.wikipedia.org/wiki/Diacritic)
     ///     refers to any possible glyphs that might be added to
-    ///     a chracter, such as accents or dots.
-    static func operatorBraces(
+    ///     a character, such as accents or dots.
+    internal static func operatorBraces(
         caseSensitive: Bool,
         diacriticSensitive: Bool
     ) -> String? {
