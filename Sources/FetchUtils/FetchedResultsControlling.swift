@@ -20,8 +20,20 @@ public protocol FetchedResultsControlling: NSObject, NSFetchedResultsControllerD
         cacheName: String?
     ) -> FetchedResultsController
 
+    
+    func extractAllResults(
+        from fetchedResultsController: FetchedResultsController
+    ) -> [FetchedResult]
+    
 
-    func extractResults(from fetchedResultsController: FetchedResultsController) -> [FetchedResult]
+    func extractFirstSectionResults(
+        from fetchedResultsController: FetchedResultsController
+    ) -> [FetchedResult]
+    
+    
+    func extractResults(
+        from sectionInfo: NSFetchedResultsSectionInfo
+    ) -> [FetchedResult]
 }
 
 
@@ -39,28 +51,46 @@ extension FetchedResultsControlling {
         )
     }
     
-    
-    public func extractResults(from fetchedResultsController: FetchedResultsController) -> [FetchedResult] {
-        guard
-            let section = fetchedResultsController.sections?.first,
-            let fetchedResults = section.objects as? [FetchedResult]
-        else { return [] }
+
+    public func extractAllResults(
+        from fetchedResultsController: FetchedResultsController
+    ) -> [FetchedResult] {
+        guard let sections = fetchedResultsController.sections else { return [] }
         
-        return fetchedResults
+        return sections.flatMap(extractResults(from:))
+    }
+    
+
+    public func extractFirstSectionResults(
+        from fetchedResultsController: FetchedResultsController
+    ) -> [FetchedResult] {
+        guard let firstSection = fetchedResultsController.sections?.first else { return [] }
+        
+        return extractResults(from: firstSection)
+    }
+    
+    
+    public func extractResults(
+        from sectionInfo: NSFetchedResultsSectionInfo
+    ) -> [FetchedResult] {
+        sectionInfo.objects as? [FetchedResult] ?? []
     }
 }
 
 
-// 🔑 Example of adopting `NSFetchedResultsControllerDelegate` and updating
-// a "results" property on the `FetchedResultsControlling` type.
+// 🔑 Example of adopting `NSFetchedResultsControllerDelegate` and sending
+// `sections` to a `sectionsPublisher` owned by the `FetchedResultsControlling` type.
 //
 //// MARK: - NSFetchedResultsControllerDelegate
 //extension ViewModel: NSFetchedResultsControllerDelegate {
 //
-//    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        guard let controller = controller as? FetchedResultsController else { return }
-//
-//        print("controllerDidChangeContent")
-//        results = extractResults(from: controller)
-//    }
+//func controllerDidChangeContent(
+//    _ controller: NSFetchedResultsController<NSFetchRequestResult>
+//) {
+//    guard
+//        let fetchedResultsController = controller as? FetchedResultsController
+//    else { return }
+//        
+//    sectionsPublisher.send(fetchedResultsController.sections ?? [])
+//}
 //}

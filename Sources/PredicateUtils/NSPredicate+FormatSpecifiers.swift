@@ -1,8 +1,14 @@
 import Foundation
 
 
+// 📝 More useful NSPredicate tips: https://nspredicate.xyz/
+
+
 extension NSPredicate {
 
+    /// Constants to help clarify the format specifiers
+    /// documented [here](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Strings/Articles/formatSpecifiers.html)
+    /// a long time ago (and possibly not completely 😆).
     public enum FormatSpecifiers {
 
         /// string value returned by an object's `description` property.
