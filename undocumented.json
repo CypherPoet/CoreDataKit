@@ -1,0 +1,229 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/CoreDataManager/CoreDataManager+Error.swift",
+      "line": 4,
+      "symbol": "CoreDataManagerError",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/CoreDataManager/CoreDataManager+Error.swift",
+      "line": 5,
+      "symbol": "CoreDataManagerError.saveFailed(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/CoreDataManager/CoreDataManager+StorageType.swift",
+      "line": 9,
+      "symbol": "CoreDataManager.StorageStrategy.persistent",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/CoreDataManager/CoreDataManager+StorageType.swift",
+      "line": 10,
+      "symbol": "CoreDataManager.StorageStrategy.inMemory",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/CoreDataManager/CoreDataManager.swift",
+      "line": 3,
+      "symbol": "CoreDataManager",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/CoreDataManager/CoreDataManager.swift",
+      "line": 6,
+      "symbol": "CoreDataManager",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/CoreDataManager/CoreDataManager.swift",
+      "line": 7,
+      "symbol": "CoreDataManager.LoadCompletionHandler",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/CoreDataManager/CoreDataManager.swift",
+      "line": 14,
+      "symbol": "CoreDataManager.persistentContainer",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/CoreDataManager/CoreDataManager.swift",
+      "line": 18,
+      "symbol": "CoreDataManager.backgroundContext",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/CoreDataManager/CoreDataManager.swift",
+      "line": 19,
+      "symbol": "CoreDataManager.mainContext",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/CoreDataManager/CoreDataManager.swift",
+      "line": 23,
+      "symbol": "CoreDataManager.init(managedObjectModelName:storageStrategy:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/CoreDataManager/CoreDataManager.swift",
+      "line": 34,
+      "symbol": "CoreDataManager",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/CoreDataManager/CoreDataManager.swift",
+      "line": 36,
+      "symbol": "CoreDataManager.storeKind",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/CoreDataManager/CoreDataManager.swift",
+      "line": 53,
+      "symbol": "CoreDataManager",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/CoreDataManager/CoreDataManager.swift",
+      "line": 55,
+      "symbol": "CoreDataManager.setup(then:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/CoreDataManager/CoreDataManager.swift",
+      "line": 63,
+      "symbol": "CoreDataManager.save(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/CoreDataManager/CoreDataManager.swift",
+      "line": 80,
+      "symbol": "CoreDataManager.saveContexts()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/FetchUtils/FetchedResultsControlling.swift",
+      "line": 5,
+      "symbol": "FetchedResultsControlling",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/FetchUtils/FetchedResultsControlling.swift",
+      "line": 6,
+      "symbol": "FetchedResultsControlling.FetchedResult",
+      "symbol_kind": "source.lang.swift.decl.associatedtype",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/FetchUtils/FetchedResultsControlling.swift",
+      "line": 8,
+      "symbol": "FetchedResultsControlling.FetchedResultsController",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/FetchUtils/FetchedResultsControlling.swift",
+      "line": 9,
+      "symbol": "FetchedResultsControlling.FetchRequest",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/FetchUtils/FetchedResultsControlling.swift",
+      "line": 12,
+      "symbol": "FetchedResultsControlling.fetchRequest",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/FetchUtils/FetchedResultsControlling.swift",
+      "line": 13,
+      "symbol": "FetchedResultsControlling.managedObjectContext",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/FetchUtils/FetchedResultsControlling.swift",
+      "line": 14,
+      "symbol": "FetchedResultsControlling.fetchedResultsController",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/FetchUtils/FetchedResultsControlling.swift",
+      "line": 24,
+      "symbol": "FetchedResultsControlling.extractAllResults(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/FetchUtils/FetchedResultsControlling.swift",
+      "line": 29,
+      "symbol": "FetchedResultsControlling.extractFirstSectionResults(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/FetchUtils/FetchedResultsControlling.swift",
+      "line": 34,
+      "symbol": "FetchedResultsControlling.extractResults(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/FetchUtils/FetchedResultsControlling.swift",
+      "line": 40,
+      "symbol": "FetchedResultsControlling",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/FetchUtils/FetchedResultsControlling.swift",
+      "line": 55,
+      "symbol": "FetchedResultsControlling.extractAllResults(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/FetchUtils/FetchedResultsControlling.swift",
+      "line": 64,
+      "symbol": "FetchedResultsControlling.extractFirstSectionResults(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/FetchUtils/FetchedResultsControlling.swift",
+      "line": 73,
+      "symbol": "FetchedResultsControlling.extractResults(from:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit/Sources/PredicateUtils/NSComparisonPredicate+Utils.swift",
+      "line": 62,
+      "symbol": "NSComparisonPredicate.stringValue(for:caseSensitive:diacriticSensitive:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/runner/work/CypherPoetCoreDataKit/CypherPoetCoreDataKit"
+}

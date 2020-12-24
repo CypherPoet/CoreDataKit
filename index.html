@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+
+    <a title="  Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+           Docs
+        </a>
+         (50% documented)
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/CypherPoet/CypherPoetCoreDataKit">
+            <img class="header-icon" src="img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html"> Reference</a>
+      <img class="carat" src="img/carat.png" />
+        Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/CoreDataManager.html">CoreDataManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/CoreDataManager/StorageStrategy.html">– StorageStrategy</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/CoreDataManagerError.html">CoreDataManagerError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Binding.html">Binding</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/CodingUserInfoKey.html">CodingUserInfoKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/NSComparisonPredicate.html">NSComparisonPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/NSPredicate.html">NSPredicate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Extensions/NSPredicate/FormatSpecifiers.html">– FormatSpecifiers</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/FetchedResultsControlling.html">FetchedResultsControlling</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            
+            <h1 id='cypherpoetcoredatakit' class='heading'>CypherPoetCoreDataKit</h1>
+
+<p align="center">
+   <img width="600px" src="./Resources/Images/Banner-1.png" alt="CypherPoetCoreDataKit Header Image">
+</p>
+
+<p>
+    <img src="https://img.shields.io/badge/Swift-5.3-F06C33.svg" />
+    <img src="https://img.shields.io/badge/iOS-13.0+-865EFC.svg" />
+    <img src="https://img.shields.io/badge/iPadOS-13.0+-F65EFC.svg" />
+    <img src="https://img.shields.io/badge/macOS-10.15+-179AC8.svg" />
+    <img src="https://img.shields.io/badge/tvOS-13.0+-41465B.svg" />
+    <img src="https://img.shields.io/badge/watchOS-6.0+-1FD67A.svg" />
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg" />
+    <img src="https://github.com/CypherPoet/CypherPoetCoreDataKit/workflows/Build%20&%20Test/badge.svg" />
+    <a href="https://github.com/apple/swift-package-manager">
+      <img src="https://img.shields.io/badge/spm-compatible-brightgreen.svg?style=flat" />
+    </a>
+    <a href="https://twitter.com/cypher_poet">
+        <img src="https://img.shields.io/badge/Contact-@cypher_poet-lightgrey.svg?style=flat" alt="Twitter: @cypher_poet" />
+    </a>
+</p>
+
+<p><p align="center"></p>
+
+<p><em>A collection of utilities for building Core Data applications in SwiftUI.</em></p>
+
+<p><p /></p>
+<h2 id='disclaimer' class='heading'>🚧 Disclaimer</h2>
+
+<p>This library is still very much a WIP as I study some of the new best practices, patterns, and affordances for Core Data after the release of SwiftUI 2.0. Please treat it as a guideline/reference for the time being 🙂.</p>
+<h2 id='features' class='heading'>Features</h2>
+
+<ul>
+<li>✅ A <a href="./Sources/CoreDataManager/"><code><a href="Classes/CoreDataManager.html">CoreDataManager</a></code></a> that handles setting up your <a href="https://developer.apple.com/documentation/coredata/core_data_stack">&ldquo;Core Data Stack&rdquo;</a>.</li>
+<li>✅ A <a href="./Sources/FetchUtils/FetchedResultsControlling.swift"><code><a href="Protocols/FetchedResultsControlling.html">FetchedResultsControlling</a></code> protocol</a> that helps architect <code>NSFetchedResultsController</code> instances and extract data from their <code>NSFetchRequest</code> results.</li>
+<li>✅ Predicate Utilities</li>
+<li>✅ Strongly-typed errors for save operations.</li>
+<li>✅ <code>NSPersistentStore</code> helpers for using <code>NSSQLiteStoreType</code> in production apps and <code>NSInMemoryStoreType</code> in tests or previews:</li>
+</ul>
+<h2 id='installation' class='heading'>Installation</h2>
+<h3 id='xcode-projects' class='heading'>Xcode Projects</h3>
+
+<p>Select <code>File</code> -&gt; <code>Swift Packages</code> -&gt; <code>Add Package Dependency</code> and enter <code>https://github.com/CypherPoet/CypherPoetCoreDataKit</code>.</p>
+<h3 id='swift-package-manager-projects' class='heading'>Swift Package Manager Projects</h3>
+
+<p>You can add <code>CypherPoetCoreDataKit</code> as a dependency in your <code>Package.swift</code> file:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">package</span> <span class="o">=</span> <span class="kt">Package</span><span class="p">(</span>
+    <span class="c1">//...</span>
+    <span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+        <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/CypherPoet/CypherPoetCoreDataKit"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"0.0.16"</span><span class="p">),</span>
+    <span class="p">],</span>
+    <span class="c1">//...</span>
+<span class="p">)</span>
+</code></pre>
+
+<p>Then simply <code>import CypherPoetCoreDataKit</code> wherever you’d like to use it.</p>
+<h2 id='usage' class='heading'>Usage</h2>
+
+<p>Usage of these utilities is best demonstrated by the <a href="./Examples/ExampleApp/">Example App</a>.</p>
+<h3 id='setting-up-the-core-data-stack-on-launch-by-utilizing-code-coredatamanager-code-39-s-default-shared-instance' class='heading'>Setting up the Core Data stack on launch by utilizing <code><a href="Classes/CoreDataManager.html">CoreDataManager</a></code>&lsquo;s default shared instance.</h3>
+
+<ul>
+<li><a href="./Examples/ExampleApp/iOS/App/AppDelegate.swift">iOS Example</a></li>
+<li><a href="./Examples/ExampleApp/macOS/App/AppDelegate.swift">macOS Example</a></li>
+<li>🔑 This corresponds to <a href="https://github.com/CypherPoet/CypherPoetCoreDataKit/blob/4382ac9205a97f91ee142cac9febdeb025098ee2/Examples/ExampleApp/Shared/Misc%20Helpers/Extensions/CoreDataManager%2BUtils.swift#L18">setting <code>CoreDataManager.managedObjectModelName</code> to match</a> the name of your app&rsquo;s <code>xcdatamodeld</code> file.</li>
+<li>For more control and customization, a <code><a href="Classes/CoreDataManager.html">CoreDataManager</a></code> instance can be <a href="https://github.com/CypherPoet/CypherPoetCoreDataKit/blob/4382ac9205a97f91ee142cac9febdeb025098ee2/Sources/CoreDataManager/CoreDataManager.swift#L23">initialized directly</a> with a <code>managedObjectModelName</code> and a <code>storageStrategy</code>.</li>
+</ul>
+<h2 id='contributing' class='heading'>Contributing</h2>
+
+<p>Contributions to <code>CypherPoetCoreDataKit</code> are most welcome. Check out some of the <a href="./.github/ISSUE_TEMPLATE/">issue templates</a> for more info.</p>
+<h2 id='developing' class='heading'>Developing</h2>
+<h3 id='requirements' class='heading'>Requirements</h3>
+
+<ul>
+<li>Xcode 12.0+ (for developing)</li>
+</ul>
+<h3 id='generating-documentation' class='heading'>Generating Documentation</h3>
+
+<p>Documentation is generated by <a href="https://github.com/realm/jazzy">Jazzy</a>. Installation instructions can be found <a href="https://github.com/realm/jazzy#installation">here</a>, and as soon as you have it set up, docs can be generated simply by running <code>jazzy</code> from the command line.</p>
+
+<p>📝 Note that this will only generate the <code>docs</code> folder for you to view locally. This folder is being ignored by <code>git</code>, as an <a href="./.github/workflows/PublishDocumentation.yml">action</a> exists to automatically generate docs and serve them on the project&rsquo;s <code>gh-pages</code> branch.</p>
+<h2 id='license' class='heading'>License</h2>
+
+<p><code>CypherPoetCoreDataKit</code> is available under the MIT license. See the <a href="./LICENSE">LICENSE file</a> for more info.</p>
+
+          </div>
+        </section>
+
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>Copyright 2020 CypherPoet</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
