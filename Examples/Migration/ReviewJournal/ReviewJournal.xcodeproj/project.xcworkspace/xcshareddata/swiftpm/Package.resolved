@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CypherPoetReduxUtils",
+        "repositoryURL": "https://github.com/CypherPoet/CypherPoetReduxUtils",
+        "state": {
+          "branch": null,
+          "revision": "fbe24e5fb43df254e7fe37782f823f39c9e8b375",
+          "version": "0.2.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

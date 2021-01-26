@@ -3,46 +3,34 @@ import CoreData
 import Combine
 
 
-public final class CoreDataManager {
-    public typealias LoadCompletionHandler = (() -> Void)
-
-    private var managedObjectModelName: String
+public final class CoreDataManager<VersionLog: PersistentStoreVersionLogging> {
     private var storageStrategy: StorageStrategy
-
-
+    private var migrator: PersistentStoreMigrating
+    
+    
     // MARK: - PersistentContainer
-    public lazy var persistentContainer: NSPersistentContainer = makePersistentContainer()
-
-
+    public private(set) lazy var persistentContainer: NSPersistentContainer = makePersistentContainer()
+    
+    
     // MARK: - Managed Object Contexts
     public lazy var backgroundContext: NSManagedObjectContext = makeBackgroundContext()
     public lazy var mainContext: NSManagedObjectContext = makeMainContext()
-
+    
     
     // MARK: - Init
     public init(
-        managedObjectModelName: String,
-        storageStrategy: StorageStrategy = .persistent
+        storageStrategy: StorageStrategy = .persistent,
+        migrator: PersistentStoreMigrating? = nil
     ) {
-        self.managedObjectModelName = managedObjectModelName
         self.storageStrategy = storageStrategy
+        self.migrator = migrator ?? PersistentStoreMigrator(storageStrategy: storageStrategy)
     }
 }
 
 
 // MARK: - Computeds
 extension CoreDataManager {
-
-    public var storeKind: String {
-        switch storageStrategy {
-        case .persistent:
-            return NSSQLiteStoreType
-        case .inMemory:
-            return NSInMemoryStoreType
-        }
-    }
-
-
+    
     private var inMemoryStoreDescription: NSPersistentStoreDescription {
         .init(url: URL(fileURLWithPath: "/dev/null"))
     }
@@ -52,33 +40,41 @@ extension CoreDataManager {
 // MARK: - Public Methods
 extension CoreDataManager {
     
-    public func setup(then completionHandler: LoadCompletionHandler? = nil) {
-        loadPersistentStore() {
-            completionHandler?()
-        }
+    @discardableResult
+    public func setup(
+        runningOn schedulingQueue: DispatchQueue = .global(qos: .userInitiated),
+        completingOn receptionQueue: DispatchQueue = .main
+    ) -> AnyPublisher<Void, CoreDataManager.Error> {
+        performMigrationIfNeeded()
+            .subscribe(on: schedulingQueue)
+            .receive(on: receptionQueue)
+            .flatMap { _ in
+                self.loadPersistentStores()
+            }
+            .eraseToAnyPublisher()
     }
     
-
+    
     @discardableResult
-    public func save(_ context: NSManagedObjectContext) -> Future<Void, CoreDataManagerError> {
-        Future { resolve in
+    public func save(_ context: NSManagedObjectContext) -> Future<Void, CoreDataManager.Error> {
+        Future { promise in
             context.performAndWait {
                 if context.hasChanges {
                     do {
                         try context.save()
-                        resolve(.success(()))
+                        promise(.success(()))
                     } catch let error as NSError {
-                        resolve(.failure(.saveFailed(error)))
+                        promise(.failure(.saveFailed(error)))
                     }
                 }
             }
         }
     }
-
-
+    
+    
     @discardableResult
-    public func saveContexts() -> Future<Void, CoreDataManagerError> {
-        Future { [weak self] resolve in
+    public func saveContexts() -> Future<Void, CoreDataManager.Error> {
+        Future { [weak self] promise in
             guard let self = self else { return }
             
             [self.backgroundContext, self.mainContext].forEach { context in
@@ -87,13 +83,13 @@ extension CoreDataManager {
                         do {
                             try context.save()
                         } catch let error as NSError {
-                            resolve(.failure(.saveFailed(error)))
+                            promise(.failure(.saveFailed(error)))
                         }
                     }
                 }
             }
             
-            resolve(.success(()))
+            promise(.success(()))
         }
     }
 }
@@ -101,49 +97,84 @@ extension CoreDataManager {
 
 // MARK: - Private Methods
 extension CoreDataManager {
-
-    private func loadPersistentStore(then completionHandler: @escaping LoadCompletionHandler) {
-        persistentContainer.loadPersistentStores { description, error in
-            guard error == nil else {
-                fatalError("Error while loading persistent stores: \(error!)")
+    
+    
+    private func performMigrationIfNeeded() -> Future<Void, CoreDataManager.Error> {
+            Future { [weak self] promise in
+                guard let self = self else { return }
+                
+                guard let storeURL = self.persistentContainer.persistentStoreDescriptions.first?.url else {
+                    promise(.failure(.persistentStoreURLNotFound))
+                    return
+                }
+                
+                let currentVersion = VersionLog.currentVersion
+                
+                guard self.migrator.requiresMigration(at: storeURL, to: currentVersion) else {
+                    promise(.success(()))
+                    return
+                }
+                
+                do {
+                    try self.migrator.migrateStore(at: storeURL, to: currentVersion)
+                    promise(.success(()))
+                } catch let error as PersistentStoreMigrator.Error {
+                    promise(.failure(.migrationFailed(error)))
+                } catch {
+                    promise(.failure(.unknownError(error)))
+                }
             }
-
-            completionHandler()
+    }
+    
+    
+    private func loadPersistentStores() -> Future<Void, CoreDataManager.Error> {
+        Future { [weak self] promise in
+            self?.persistentContainer.loadPersistentStores { description, error in
+                guard error == nil else {
+                    promise(.failure(.persistentStoreLoadingFailed(error! as NSError)))
+                    return
+                }
+                
+                promise(.success(()))
+            }
         }
     }
 }
 
+
 // MARK: - Private Factories
 extension CoreDataManager {
-
+    
     private func makePersistentContainer() -> NSPersistentContainer {
-        let container = NSPersistentContainer(name: managedObjectModelName)
-
+        let container = NSPersistentContainer(name: VersionLog.currentVersion.modelSchemaName)
+        
         if storageStrategy == .inMemory {
             container.persistentStoreDescriptions = [inMemoryStoreDescription]
         }
-
-        container.persistentStoreDescriptions.first?.type = storeKind
-
+        
+        container.persistentStoreDescriptions.first?.type = storageStrategy.storeKind
+        container.persistentStoreDescriptions.first?.shouldMigrateStoreAutomatically = false
+        container.persistentStoreDescriptions.first?.shouldInferMappingModelAutomatically = false
+        
         return container
     }
-
-
+    
+    
     private func makeBackgroundContext() -> NSManagedObjectContext {
         let context = self.persistentContainer.newBackgroundContext()
-
+        
         context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-
+        
         return context
     }
-
-
+    
+    
     private func makeMainContext() -> NSManagedObjectContext {
         let context = self.persistentContainer.viewContext
-
+        
         context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         context.shouldDeleteInaccessibleFaults = true
-
+        
         // 🔑 Ensures that the `mainContext` is aware of any changes that were made
         // to the persistent container.
         //
@@ -153,7 +184,7 @@ extension CoreDataManager {
         // the persistent container, it will receive those updates -- merging
         // any changes, as the name suggests, automatically.
         context.automaticallyMergesChangesFromParent = true
-
+        
         return context
     }
 }

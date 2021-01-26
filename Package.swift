@@ -33,7 +33,10 @@ let package = Package(
         .testTarget(
             name: "CypherPoetCoreDataKitTests",
             dependencies: ["CypherPoetCoreDataKit"],
-            path: "Tests/"
+            path: "Tests/",
+            resources: [
+                .copy("./Data/SQLiteExamples"),
+            ]
         ),
     ]
 )
