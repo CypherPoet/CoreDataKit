@@ -34,15 +34,30 @@ extension AppState.CoreDataStackMiddleware.Error: LocalizedError {
         case .coreDataManagerError(let error):
             switch error {
             case .migrationFailed(let persistentStoreMigratorError):
-                return "Failed to migrate persistent stores. Error: \(persistentStoreMigratorError.localizedDescription)"
+                return NSLocalizedString(
+                    "Failed to migrate persistent stores. Error: \(persistentStoreMigratorError.localizedDescription)",
+                    comment: ""
+                )
             case .persistentStoreURLNotFound:
-                return "(persistentStoreURLNotFound) Failed to find persistent store"
+                return NSLocalizedString(
+                    "(persistentStoreURLNotFound) Failed to find persistent store",
+                    comment: ""
+                )
             case .saveFailed(let error):
-                return "(saveFailed) An error occurred while setting up the app's data store: \(error.localizedDescription)"
+                return NSLocalizedString(
+                    "(saveFailed) An error occurred while setting up the app's data store: \(error.localizedDescription)",
+                    comment: ""
+                )
             case .persistentStoreLoadingFailed(let error):
-                return "(persistentStoreLoadingFailed) An error occurred while setting up the app's data store: \(error.localizedDescription)"
+                return NSLocalizedString(
+                    "(persistentStoreLoadingFailed) An error occurred while setting up the app's data store: \(error.localizedDescription)",
+                    comment: ""
+                )
             case .unknownError(let error):
-                return "(unknownError) An error occurred while setting up the app's data store: \(error.localizedDescription)"
+                return NSLocalizedString(
+                    "(unknownError) An error occurred while setting up the app's data store: \(error.localizedDescription)",
+                    comment: ""
+                )
             }
         }
     }
