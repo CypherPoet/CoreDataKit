@@ -53,7 +53,7 @@ extension CoreDataManager {
             }
             .eraseToAnyPublisher()
     }
-    
+  
     
     @discardableResult
     public func save(_ context: NSManagedObjectContext) -> Future<Void, CoreDataManager.Error> {
@@ -70,12 +70,12 @@ extension CoreDataManager {
             }
         }
     }
-    
-    
+
     @discardableResult
     public func saveContexts() -> Future<Void, CoreDataManager.Error> {
         Future { [weak self] promise in
             guard let self = self else { return }
+            print("saveContexts")
             
             [self.backgroundContext, self.mainContext].forEach { context in
                 context.performAndWait {
@@ -100,30 +100,30 @@ extension CoreDataManager {
     
     
     private func performMigrationIfNeeded() -> Future<Void, CoreDataManager.Error> {
-            Future { [weak self] promise in
-                guard let self = self else { return }
-                
-                guard let storeURL = self.persistentContainer.persistentStoreDescriptions.first?.url else {
-                    promise(.failure(.persistentStoreURLNotFound))
-                    return
-                }
-                
-                let currentVersion = VersionLog.currentVersion
-                
-                guard self.migrator.requiresMigration(at: storeURL, to: currentVersion) else {
-                    promise(.success(()))
-                    return
-                }
-                
-                do {
-                    try self.migrator.migrateStore(at: storeURL, to: currentVersion)
-                    promise(.success(()))
-                } catch let error as PersistentStoreMigrator.Error {
-                    promise(.failure(.migrationFailed(error)))
-                } catch {
-                    promise(.failure(.unknownError(error)))
-                }
+        Future { [weak self] promise in
+            guard let self = self else { return }
+
+            guard let storeURL = self.persistentContainer.persistentStoreDescriptions.first?.url else {
+                promise(.failure(.persistentStoreURLNotFound))
+                return
             }
+
+            let currentVersion = VersionLog.currentVersion
+
+            guard self.migrator.requiresMigration(at: storeURL, to: currentVersion) else {
+                promise(.success(()))
+                return
+            }
+
+            do {
+                try self.migrator.migrateStore(at: storeURL, to: currentVersion)
+                promise(.success(()))
+            } catch let error as PersistentStoreMigrator.Error {
+                promise(.failure(.migrationFailed(error)))
+            } catch {
+                promise(.failure(.unknownError(error)))
+            }
+        }
     }
     
     
@@ -146,15 +146,19 @@ extension CoreDataManager {
 extension CoreDataManager {
     
     private func makePersistentContainer() -> NSPersistentContainer {
-        let container = NSPersistentContainer(name: VersionLog.currentVersion.modelSchemaName)
+        let container = NSPersistentContainer(name: VersionLog.persistentContainerName)
         
         if storageStrategy == .inMemory {
             container.persistentStoreDescriptions = [inMemoryStoreDescription]
         }
         
-        container.persistentStoreDescriptions.first?.type = storageStrategy.storeKind
-        container.persistentStoreDescriptions.first?.shouldMigrateStoreAutomatically = false
-        container.persistentStoreDescriptions.first?.shouldInferMappingModelAutomatically = false
+        guard let description = container.persistentStoreDescriptions.first else {
+            preconditionFailure("Unable to find a persistent store description")
+        }
+        
+        description.type = storageStrategy.storeKind
+        description.shouldMigrateStoreAutomatically = false
+        description.shouldInferMappingModelAutomatically = false
         
         return container
     }

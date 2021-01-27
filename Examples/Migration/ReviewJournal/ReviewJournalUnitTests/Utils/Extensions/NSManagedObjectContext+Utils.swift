@@ -20,10 +20,17 @@ extension NSManagedObjectContext {
         self.persistentStoreCoordinator = persistentStoreCoordinator
     }
     
-    func destroyStore() {
-        persistentStoreCoordinator?.persistentStores.forEach {
-            try? persistentStoreCoordinator?.remove($0)
-            try? persistentStoreCoordinator?.destroyPersistentStore(at: $0.url!, ofType: $0.type, options: nil)
+    
+    func destroyStores() throws {
+        guard let persistentStoreCoordinator = persistentStoreCoordinator else { return }
+        
+        for store in persistentStoreCoordinator.persistentStores {
+            try! persistentStoreCoordinator.remove(store)
+            try! persistentStoreCoordinator.destroyPersistentStore(
+                at: store.url!,
+                ofType: store.type,
+                options: nil
+            )
         }
     }
 }

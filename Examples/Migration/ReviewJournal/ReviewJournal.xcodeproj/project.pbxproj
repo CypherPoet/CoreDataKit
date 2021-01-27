@@ -1099,7 +1099,7 @@
 				F357BDE425BE10FC00A9C20B /* ReviewJournal v2.xcdatamodel */,
 				F3B2A87325BDF8DA0080D5F5 /* ReviewJournal.xcdatamodel */,
 			);
-			currentVersion = F3B2A87325BDF8DA0080D5F5 /* ReviewJournal.xcdatamodel */;
+			currentVersion = F357BDE425BE10FC00A9C20B /* ReviewJournal v2.xcdatamodel */;
 			path = ReviewJournal.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

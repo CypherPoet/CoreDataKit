@@ -30,4 +30,9 @@ extension AppDelegate: UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         CoreDataManager.current.saveContexts()
     }
+    
+    
+    func applicationWillTerminate(_ application: UIApplication) {
+//        CoreDataManager.current.saveContexts()
+    }
 }

@@ -36,9 +36,13 @@ extension AppState.CoreDataStackMiddleware.Error: LocalizedError {
             case .migrationFailed(let persistentStoreMigratorError):
                 return "Failed to migrate persistent stores. Error: \(persistentStoreMigratorError.localizedDescription)"
             case .persistentStoreURLNotFound:
-                return "Failed to find persistent store"
-            default:
-                return "An error occurred while setting up the app's data store."
+                return "(persistentStoreURLNotFound) Failed to find persistent store"
+            case .saveFailed(let error):
+                return "(saveFailed) An error occurred while setting up the app's data store: \(error.localizedDescription)"
+            case .persistentStoreLoadingFailed(let error):
+                return "(persistentStoreLoadingFailed) An error occurred while setting up the app's data store: \(error.localizedDescription)"
+            case .unknownError(let error):
+                return "(unknownError) An error occurred while setting up the app's data store: \(error.localizedDescription)"
             }
         }
     }

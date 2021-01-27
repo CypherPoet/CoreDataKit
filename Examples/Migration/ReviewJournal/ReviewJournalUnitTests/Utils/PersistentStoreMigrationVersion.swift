@@ -19,10 +19,9 @@ enum PersistentStoreMigrationVersion: String {
 // MARK - PersistentStoreVersionLogging
 extension PersistentStoreMigrationVersion: PersistentStoreVersionLogging {
     
+    static var persistentContainerName: String { "ReviewJournal" }
+    
     var modelSchemaName: String { rawValue }
-//    var modelSchemaSubdirectoryName: String { "\(rawValue).momd" }
-//    var modelSchemaSubdirectoryName: String? { nil }
-    var modelSchemaSubdirectoryName: String? { "ReviewJournal.momd" }
     
 
     // MARK: - Current

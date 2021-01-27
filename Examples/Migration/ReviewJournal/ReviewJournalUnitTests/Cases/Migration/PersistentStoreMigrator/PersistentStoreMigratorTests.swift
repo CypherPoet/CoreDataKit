@@ -16,6 +16,7 @@ final class PersistentStoreMigratorTests: XCTestCase {
     private var sut: PersistentStoreMigrator!
     private var storageStrategy: StorageStrategy!
     private var fileManager = FileManager.default
+    private var startingStoreFileName: String!
     private var newStoreURL: URL!
 }
 
@@ -41,6 +42,7 @@ extension PersistentStoreMigratorTests {
     override func tearDownWithError() throws {
         storageStrategy = nil
         sut = nil
+        startingStoreFileName = nil
         newStoreURL = nil
         
         try super.tearDownWithError()
@@ -73,14 +75,19 @@ private extension PersistentStoreMigratorTests {
 // MARK: - "When" Helpers (Actions Are Performed)
 private extension PersistentStoreMigratorTests {
     
-    func givenAStoreIsReadyForMigration(storeFileName: String) {
+    func givenStartingStoreFileName(_ fileName: String) {
+        startingStoreFileName = fileName
+    }
+    
+    
+    func givenStoreIsReadyForMigration() {
         newStoreURL = fileManager.temporaryDirectory
-            .appendingPathComponent(storeFileName)
+            .appendingPathComponent(startingStoreFileName)
             .appendingPathExtension("sqlite")
         
         FileManager.copyFile(
             in: Bundle(for: Self.self),
-            named: storeFileName,
+            named: startingStoreFileName,
             withExtension: "sqlite",
             to: newStoreURL,
             using: fileManager
@@ -89,14 +96,47 @@ private extension PersistentStoreMigratorTests {
 }
 
 
+// MARK: - Test Checking if Migration is Required
+extension PersistentStoreMigratorTests {
+    
+    func test_RequiringMigration_WhenRequired_ReturnsTrue() throws {
+        givenStartingStoreFileName("ReviewJournal_1")
+        givenStoreIsReadyForMigration()
+        
+        XCTAssertEqual(
+            sut.requiresMigration(
+                at: newStoreURL,
+                to: PersistentStoreMigrationVersion.version2
+            ),
+            true
+        )
+    }
+    
+    
+    
+    func test_RequiringMigration_WhenVersionsAreEqual_ReturnsFalse() throws {
+        givenStartingStoreFileName("ReviewJournal_1")
+        givenStoreIsReadyForMigration()
+        
+        XCTAssertEqual(
+            sut.requiresMigration(
+                at: newStoreURL,
+                to: PersistentStoreMigrationVersion.version1
+            ),
+            false
+        )
+    }
+}
+
+
 // MARK: - Test Single Step Migrations
 extension PersistentStoreMigratorTests {
     
-    func test_MigratingFromV1ToV2_WithInitialEntities_MigratesEntitiesAndPreservesProperties() throws {
+    func test_MigratingFromV1ToV2_WhenEntitiesExist_MigratesEntitiesAndPreservesProperties() throws {
         let destinationVersion = PersistentStoreMigrationVersion.version2
-        let sourceStoreFileName = "ReviewJournal_1"
         
-        givenAStoreIsReadyForMigration(storeFileName: sourceStoreFileName)
+        givenStartingStoreFileName("ReviewJournal_1")
+        givenStoreIsReadyForMigration()
         
         try sut.migrateStore(
             at: newStoreURL,
@@ -161,5 +201,7 @@ extension PersistentStoreMigratorTests {
         XCTAssertEqual(bodyText, "Hot")
         XCTAssertEqual(score, 4.3)
         XCTAssertEqual(imageData, nil)
+        
+        try newVersionManagedObjectContext.destroyStores()
     }
 }

@@ -11,8 +11,8 @@ import Foundation
 import CypherPoetCoreDataKit
 
 
-// Syntactic sugar for our app's specialized `CoreDataManager` type that
-// can be used throughout.
+// Syntactic sugar for our specialized `CoreDataManager` type that
+// can then be used throughout the app.
 typealias CoreDataManager = CypherPoetCoreDataKit.CoreDataManager<PersistentStoreMigrationVersion>
 
 

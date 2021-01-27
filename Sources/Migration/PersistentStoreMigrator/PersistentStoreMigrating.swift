@@ -49,28 +49,29 @@ extension PersistentStoreMigrator {
             let metadata = NSPersistentStoreCoordinator.metadata(
                 forStoreAt: storeURL,
                 using: storageStrategy
-            )
+            ),
+            let compatibleVersion = Version.compatibleVersion(for: metadata)
         else {
             return false
         }
         
-        return Version.compatibleVersion(for: metadata) != version
+        return compatibleVersion != version
     }
     
     
     public func migrateStore<Version>(
-        at startingStoreURL: URL,
+        at urlForStoreToUpdate: URL,
         to destinationVersion: Version
     ) throws where Version: PersistentStoreVersionLogging {
-        try forceWALCheckpointing(forStoreAt: startingStoreURL, beforeMigratingTo: destinationVersion)
+        try forceWALCheckpointing(forStoreAt: urlForStoreToUpdate)
         
-        var currentURL = startingStoreURL
+        var temporaryStoreURL = urlForStoreToUpdate
         
         /// Before a migration can be performed,
         /// Core Data must first construct the individual migration
         /// steps into a migration path.
         let migrationSteps = try self.migrationSteps(
-            forStoreAt: startingStoreURL,
+            forStoreAt: urlForStoreToUpdate,
             targeting: destinationVersion
         )
         
@@ -88,7 +89,7 @@ extension PersistentStoreMigrator {
 
             do {
                 try migrationManager.migrateStore(
-                    from: currentURL,
+                    from: temporaryStoreURL,
                     sourceType: storeKind,
                     options: nil,
                     with: migrationStep.mappingModel,
@@ -100,27 +101,27 @@ extension PersistentStoreMigrator {
                 throw Error.migrationFailedAtStep(migrationStep)
             }
             
-            if currentURL != startingStoreURL {
+            if temporaryStoreURL != urlForStoreToUpdate {
                 // Destroy the intermediate step's store
-                try cleanup(storeAtURL: currentURL)
+                try cleanup(storeAtURL: temporaryStoreURL)
             }
             
-            currentURL = destinationURL
+            temporaryStoreURL = destinationURL
         }
         
         
-        // 🔑 Once the migration is complete, the original persistent store overwritten.
+        // 🔑 Once the migration is complete, overwrite the original persistent store.
         do {
             try NSPersistentStoreCoordinator.replaceStore(
-                at: startingStoreURL,
-                withStoreAt: currentURL
+                at: urlForStoreToUpdate,
+                withStoreAt: temporaryStoreURL
             )
         } catch {
             throw Error.persistentStoreReplacementFailed(error: error)
         }
 
-        if currentURL != startingStoreURL {
-            try cleanup(storeAtURL: currentURL)
+        if temporaryStoreURL != urlForStoreToUpdate {
+            try cleanup(storeAtURL: temporaryStoreURL)
         }
     }
 }
@@ -202,10 +203,7 @@ extension PersistentStoreMigrator {
     /// To avoid this crash, we need to force any data in the sqlite-wal file into the
     /// sqlite file before we perform a migration -- a process known as "checkpointing"
     /// (AKA forcing a "commit").
-    private func forceWALCheckpointing<VersionLog>(
-        forStoreAt storeURL: URL,
-        beforeMigratingTo newVersion: VersionLog
-    ) throws where VersionLog: PersistentStoreVersionLogging {
+    private func forceWALCheckpointing(forStoreAt storeURL: URL) throws {
         guard
             let metadata = NSPersistentStoreCoordinator.metadata(
                 forStoreAt: storeURL,
