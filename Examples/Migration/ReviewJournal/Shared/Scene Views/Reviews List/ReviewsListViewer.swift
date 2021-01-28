@@ -22,11 +22,11 @@ extension ReviewsListViewer: View {
     
     var body: some View {
         Group {
-            if viewModel.reviews.isEmpty {
+            if viewModel.displayedReviews.isEmpty {
                 emptyStateView
             } else {
                 ReviewsListView(
-                    reviews: viewModel.reviews,
+                    reviews: viewModel.displayedReviews,
                     buildDestination: buildDestination(for:)
                 )
                 .listStyle(PlainListStyle())
@@ -34,11 +34,23 @@ extension ReviewsListViewer: View {
         }
         .toolbar { toolbarContent }
         .navigationTitle("Reviews")
-        .sheet(isPresented: $isShowingNewReviewSheet, content: {
+        .sheet(
+            isPresented: $isShowingNewReviewSheet,
+            onDismiss: {
+                viewModel.newReviewForForm = nil
+            },
+            content: {
             NavigationView {
-                NewReviewFormView(onSubmit: viewModel.createNewReview(_:))
+                NewReviewFormView(
+                    newReview: viewModel.newReviewForForm!,
+                    onSubmit: viewModel.createNewReview(_:)
+                )
             }
             .environment(\.managedObjectContext, CoreDataManager.current.backgroundContext)
+        })
+        .onAppear(perform: viewModel.fetchReviews)
+        .onReceive(viewModel.$newReviewForForm, perform: { newReview in
+            isShowingNewReviewSheet = newReview != nil
         })
     }
 }
@@ -61,7 +73,8 @@ private extension ReviewsListViewer {
         ToolbarItem(placement: .primaryAction) {
             Button(
                 action: {
-                    isShowingNewReviewSheet = true
+//                    isShowingNewReviewSheet = true
+                    viewModel.setupNewReviewForForm()
                 },
                 label: {
                     Label("Create a new Review", systemImage: "plus")

@@ -39,9 +39,15 @@ extension ReviewsListViewer {
             }
         }
 
+        
+        // MARK: - Sendable Subjects
+        let allReviews = PassthroughSubject<[Review], Never>()
+        
+        
         // MARK: - Published Outputs
-        @Published var reviews: [FetchedResult] = []
-
+        @Published var displayedReviews: [FetchedResult] = []
+        @Published var newReviewForForm: Review?
+        
 
         // MARK: - Init
         init(
@@ -54,12 +60,12 @@ extension ReviewsListViewer {
             self.managedObjectContext = managedObjectContext
             self.fetchRequest = fetchRequest
             self.cacheName = cacheName
-
+            
             super.init()
 
-            self.fetchedResultsController.delegate = self
+            fetchedResultsController.delegate = self
 
-            fetchReviews()
+            setupSubscribers()
         }
     }
 }
@@ -76,7 +82,7 @@ extension ViewModel {
     func fetchReviews() {
         do {
             try fetchedResultsController.performFetch()
-            reviews = extractFirstSectionResults(from: fetchedResultsController)
+            allReviews.send(extractFirstSectionResults(from: fetchedResultsController))
         } catch {
             print("Fetch Error: \(error.localizedDescription)")
         }
@@ -89,12 +95,36 @@ extension ViewModel {
         }
         
         coreDataManager.save(managedObjectContext)
+        newReviewForForm = nil
+        fetchReviews()
+    }
+    
+    
+    func setupNewReviewForForm() {
+        managedObjectContext.perform { [weak self] in
+            guard let self = self else { return }
+            
+            self.newReviewForForm = Review(context: self.managedObjectContext)
+        }
     }
 }
 
 
 // MARK: - Private Helpers
 private extension ViewModel {
+    
+    var displayedReviewsPublisher: AnyPublisher<[Review], Never> {
+        allReviews
+            .map { $0.filter(\.hasBeenPersistedInStore) }
+            .eraseToAnyPublisher()
+    }
+    
+    
+    func setupSubscribers() {
+        displayedReviewsPublisher
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$displayedReviews)
+    }
 }
 
 
@@ -102,6 +132,7 @@ private extension ViewModel {
 extension ViewModel: NSFetchedResultsControllerDelegate {
 
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        reviews = extractFirstSectionResults(from: fetchedResultsController)
+        allReviews.send(extractFirstSectionResults(from: fetchedResultsController))
     }
+    
 }

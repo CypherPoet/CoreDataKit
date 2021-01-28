@@ -32,16 +32,6 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F3B2A7AC25BDE7E30080D5F5"
-               BuildableName = "Tests iOS.xctest"
-               BlueprintName = "Tests iOS"
-               ReferencedContainer = "container:ReviewJournal.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "F357BE6C25BE68DB00A9C20B"
                BuildableName = "ReviewJournalUnitTests.xctest"
                BlueprintName = "ReviewJournalUnitTests"
@@ -89,7 +79,7 @@
          </CommandLineArgument>
          <CommandLineArgument
             argument = "-com.apple.CoreData.ConcurrencyDebug 1"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>

@@ -7,20 +7,20 @@
 //
 
 import SwiftUI
+import CypherPoetCoreDataKit
 
 
 struct NewReviewFormView {
     @Environment(\.managedObjectContext) private var managedObjectContext
     @Environment(\.presentationMode) private var presentationMode
     
-    
+    @ObservedObject var newReview: Review
     var onSubmit: (Review) -> Void
     
-    @State private var titleText = ""
-    @State private var bodyText = ""
 //    @State private var selectedPhotos: [UIImage] = []
     
 //    @State private var isShowingPhotoPicker = false
+    
 }
 
 
@@ -32,7 +32,7 @@ extension NewReviewFormView: View {
             Section(
                 header: Text("Title")
             ) {
-                TextField("Enter A Title", text: $titleText)
+                TextField("Enter A Title", text: Binding($newReview.title, replacingNilWith: ""))
             }
 
 //            GroupBox {
@@ -57,7 +57,7 @@ extension NewReviewFormView: View {
             Section(
                 header: Text("Description")
             ) {
-                TextEditor(text: $bodyText)
+                TextEditor(text: Binding($newReview.bodyText, replacingNilWith: ""))
                     .frame(minHeight: 300, idealHeight: 500, maxHeight: .infinity)
             }
         }
@@ -77,33 +77,12 @@ extension NewReviewFormView: View {
 extension NewReviewFormView {
     
     var canSubmit: Bool {
-        titleText.isEmpty == false
+        newReview.title?.isEmpty == false
     }
     
 //    var featuredImageData: Data? {
 //        selectedPhotos.first?.pngData()
 //    }
-//    
-    var reviewFromFormData: Review? {
-        guard canSubmit else { return nil }
-        
-        // TODO: Prevent this from crashing when Concurrency Debugging active
-        let review = Review(context: managedObjectContext)
-        
-        review.title = titleText
-        review.bodyText = bodyText
-        
-//        if let featuredImageData = featuredImageData {
-//            let attachment = ImageAttachment(context: managedObjectContext)
-//            
-//            attachment.imageData = featuredImageData
-//            attachment.title = "Featured Image"
-//            
-//            attachment.review = review
-//        }
-        
-        return review
-    }
 }
 
 
@@ -120,10 +99,7 @@ private extension NewReviewFormView {
             
             ToolbarItem(placement: .primaryAction) {
                 Button("Submit", action: {
-                    guard let review = reviewFromFormData else { preconditionFailure() }
-                    
-                    onSubmit(review)
-                    presentationMode.wrappedValue.dismiss()
+                    onSubmit(newReview)
                 })
                 .disabled(canSubmit == false)
             }
@@ -144,6 +120,7 @@ struct NewReviewFormView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             NewReviewFormView(
+                newReview: Review(context: PreviewData.managedObjectContext),
                 onSubmit: { _ in }
             )
         }

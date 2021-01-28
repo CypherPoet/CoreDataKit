@@ -75,7 +75,6 @@ extension CoreDataManager {
     public func saveContexts() -> Future<Void, CoreDataManager.Error> {
         Future { [weak self] promise in
             guard let self = self else { return }
-            print("saveContexts")
             
             [self.backgroundContext, self.mainContext].forEach { context in
                 context.performAndWait {
