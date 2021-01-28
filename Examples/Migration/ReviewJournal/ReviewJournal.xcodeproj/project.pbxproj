@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		F3525C9D25BF4AFC0032829D /* ReviewJournal_1.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = F3525C9C25BF4AFC0032829D /* ReviewJournal_1.sqlite */; };
 		F3525CA525BF4E4C0032829D /* NSManagedObjectContext+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3525CA425BF4E4C0032829D /* NSManagedObjectContext+Utils.swift */; };
+		F3525CBD25C265D30032829D /* ReviewAttachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3525CBC25C265D30032829D /* ReviewAttachable.swift */; };
+		F3525CBE25C265D30032829D /* ReviewAttachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3525CBC25C265D30032829D /* ReviewAttachable.swift */; };
 		F357BDC325BE0C5900A9C20B /* ReviewsListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F357BDBF25BE0C5900A9C20B /* ReviewsListRowView.swift */; };
 		F357BDC425BE0C5900A9C20B /* ReviewsListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F357BDBF25BE0C5900A9C20B /* ReviewsListRowView.swift */; };
 		F357BDC525BE0C5900A9C20B /* ReviewsListViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F357BDC025BE0C5900A9C20B /* ReviewsListViewer.swift */; };
@@ -97,6 +99,8 @@
 /* Begin PBXFileReference section */
 		F3525C9C25BF4AFC0032829D /* ReviewJournal_1.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ReviewJournal_1.sqlite; sourceTree = "<group>"; };
 		F3525CA425BF4E4C0032829D /* NSManagedObjectContext+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Utils.swift"; sourceTree = "<group>"; };
+		F3525CBC25C265D30032829D /* ReviewAttachable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAttachable.swift; sourceTree = "<group>"; };
+		F3525CC225C2662C0032829D /* ReviewJournal v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ReviewJournal v3.xcdatamodel"; sourceTree = "<group>"; };
 		F357BDBF25BE0C5900A9C20B /* ReviewsListRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewsListRowView.swift; sourceTree = "<group>"; };
 		F357BDC025BE0C5900A9C20B /* ReviewsListViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewsListViewer.swift; sourceTree = "<group>"; };
 		F357BDC125BE0C5900A9C20B /* ReviewsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewsListView.swift; sourceTree = "<group>"; };
@@ -449,6 +453,7 @@
 		F3B2A81B25BDEF780080D5F5 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				F3525CBC25C265D30032829D /* ReviewAttachable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -690,6 +695,7 @@
 				F3B2A7F525BDEF680080D5F5 /* AppState+CoreDataStackMiddleware+Error.swift in Sources */,
 				F3B2A82B25BDEF790080D5F5 /* PhotoPickerComponent+Coordinator.swift in Sources */,
 				F3B2A80525BDEF680080D5F5 /* PreviewData+AppStores.swift in Sources */,
+				F3525CBD25C265D30032829D /* ReviewAttachable.swift in Sources */,
 				F3B2A87E25BDFA2C0080D5F5 /* Review+CoreDataProperties.swift in Sources */,
 				F3B2A87425BDF8DA0080D5F5 /* ReviewJournal.xcdatamodeld in Sources */,
 				F3B2A82925BDEF790080D5F5 /* PhotoPickerComponent.swift in Sources */,
@@ -728,6 +734,7 @@
 				F3B2A7F625BDEF680080D5F5 /* AppState+CoreDataStackMiddleware+Error.swift in Sources */,
 				F3B2A82C25BDEF790080D5F5 /* PhotoPickerComponent+Coordinator.swift in Sources */,
 				F3B2A80625BDEF680080D5F5 /* PreviewData+AppStores.swift in Sources */,
+				F3525CBE25C265D30032829D /* ReviewAttachable.swift in Sources */,
 				F3B2A87F25BDFA2C0080D5F5 /* Review+CoreDataProperties.swift in Sources */,
 				F3B2A87525BDF8DA0080D5F5 /* ReviewJournal.xcdatamodeld in Sources */,
 				F3B2A82A25BDEF790080D5F5 /* PhotoPickerComponent.swift in Sources */,
@@ -1096,6 +1103,7 @@
 		F3B2A87225BDF8DA0080D5F5 /* ReviewJournal.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				F3525CC225C2662C0032829D /* ReviewJournal v3.xcdatamodel */,
 				F357BDE425BE10FC00A9C20B /* ReviewJournal v2.xcdatamodel */,
 				F3B2A87325BDF8DA0080D5F5 /* ReviewJournal.xcdatamodel */,
 			);

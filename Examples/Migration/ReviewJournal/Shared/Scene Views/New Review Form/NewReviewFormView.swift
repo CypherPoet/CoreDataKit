@@ -14,12 +14,13 @@ struct NewReviewFormView {
     @Environment(\.managedObjectContext) private var managedObjectContext
     @Environment(\.presentationMode) private var presentationMode
     
+
     @ObservedObject var newReview: Review
     var onSubmit: (Review) -> Void
     
-//    @State private var selectedPhotos: [UIImage] = []
-    
-//    @State private var isShowingPhotoPicker = false
+
+    @State private var selectedPhotos: [UIImage] = []
+    @State private var isShowingPhotoPicker = false
     
 }
 
@@ -35,24 +36,24 @@ extension NewReviewFormView: View {
                 TextField("Enter A Title", text: Binding($newReview.title, replacingNilWith: ""))
             }
 
-//            GroupBox {
-//                Button(
-//                    action: { isShowingPhotoPicker = true },
-//                    label: {
-//                        Label("Select a Photo", systemImage: "camera.circle")
-//                            .imageScale(.large)
-//                    }
-//                )
-//                .frame(maxWidth: .infinity)
-//                
-//                if let featuredImage = selectedPhotos.first {
-//                    Image(uiImage: featuredImage)
-//                        .resizable()
-//                        .scaledToFit()
-//                        .padding(.top)
-//                }
-//            }
-//            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+            GroupBox {
+                Button(
+                    action: { isShowingPhotoPicker = true },
+                    label: {
+                        Label("Select a Photo", systemImage: "camera.circle")
+                            .imageScale(.large)
+                    }
+                )
+                .frame(maxWidth: .infinity)
+                
+                if let featuredImage = selectedPhotos.first {
+                    Image(uiImage: featuredImage)
+                        .resizable()
+                        .scaledToFit()
+                        .padding(.top)
+                }
+            }
+            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
             
             Section(
                 header: Text("Description")
@@ -61,12 +62,12 @@ extension NewReviewFormView: View {
                     .frame(minHeight: 300, idealHeight: 500, maxHeight: .infinity)
             }
         }
-//        .sheet(isPresented: $isShowingPhotoPicker, content: {
-//            PhotoPickerComponent(
-//                results: $selectedPhotos,
-//                selectionLimit: .single
-//            )
-//        })
+        .sheet(isPresented: $isShowingPhotoPicker, content: {
+            PhotoPickerComponent(
+                results: $selectedPhotos,
+                selectionLimit: .single
+            )
+        })
         .navigationTitle("New Review")
         .toolbar { toolbarContent }
     }
@@ -80,9 +81,9 @@ extension NewReviewFormView {
         newReview.title?.isEmpty == false
     }
     
-//    var featuredImageData: Data? {
-//        selectedPhotos.first?.pngData()
-//    }
+    var featuredImageData: Data? {
+        selectedPhotos.first?.pngData()
+    }
 }
 
 
@@ -99,6 +100,7 @@ private extension NewReviewFormView {
             
             ToolbarItem(placement: .primaryAction) {
                 Button("Submit", action: {
+                    newReview.imageData = featuredImageData
                     onSubmit(newReview)
                 })
                 .disabled(canSubmit == false)
