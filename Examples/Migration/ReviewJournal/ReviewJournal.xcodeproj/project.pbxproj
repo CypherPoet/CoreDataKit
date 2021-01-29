@@ -11,6 +11,12 @@
 		F3525CA525BF4E4C0032829D /* NSManagedObjectContext+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3525CA425BF4E4C0032829D /* NSManagedObjectContext+Utils.swift */; };
 		F3525CBD25C265D30032829D /* ReviewAttachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3525CBC25C265D30032829D /* ReviewAttachable.swift */; };
 		F3525CBE25C265D30032829D /* ReviewAttachable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3525CBC25C265D30032829D /* ReviewAttachable.swift */; };
+		F3525CD125C26A5A0032829D /* ImageAttachment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3525CCB25C26A5A0032829D /* ImageAttachment+CoreDataClass.swift */; };
+		F3525CD225C26A5A0032829D /* ImageAttachment+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3525CCB25C26A5A0032829D /* ImageAttachment+CoreDataClass.swift */; };
+		F3525CD325C26A5A0032829D /* ImageAttachment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3525CCC25C26A5A0032829D /* ImageAttachment+CoreDataProperties.swift */; };
+		F3525CD425C26A5A0032829D /* ImageAttachment+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3525CCC25C26A5A0032829D /* ImageAttachment+CoreDataProperties.swift */; };
+		F3525CE325C3514D0032829D /* ReviewJournalMigration_v2_to_v3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = F3525CE225C3514D0032829D /* ReviewJournalMigration_v2_to_v3.xcmappingmodel */; };
+		F3525CE425C3514D0032829D /* ReviewJournalMigration_v2_to_v3.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = F3525CE225C3514D0032829D /* ReviewJournalMigration_v2_to_v3.xcmappingmodel */; };
 		F357BDC325BE0C5900A9C20B /* ReviewsListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F357BDBF25BE0C5900A9C20B /* ReviewsListRowView.swift */; };
 		F357BDC425BE0C5900A9C20B /* ReviewsListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F357BDBF25BE0C5900A9C20B /* ReviewsListRowView.swift */; };
 		F357BDC525BE0C5900A9C20B /* ReviewsListViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F357BDC025BE0C5900A9C20B /* ReviewsListViewer.swift */; };
@@ -101,6 +107,9 @@
 		F3525CA425BF4E4C0032829D /* NSManagedObjectContext+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Utils.swift"; sourceTree = "<group>"; };
 		F3525CBC25C265D30032829D /* ReviewAttachable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAttachable.swift; sourceTree = "<group>"; };
 		F3525CC225C2662C0032829D /* ReviewJournal v3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ReviewJournal v3.xcdatamodel"; sourceTree = "<group>"; };
+		F3525CCB25C26A5A0032829D /* ImageAttachment+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageAttachment+CoreDataClass.swift"; sourceTree = "<group>"; };
+		F3525CCC25C26A5A0032829D /* ImageAttachment+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageAttachment+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		F3525CE225C3514D0032829D /* ReviewJournalMigration_v2_to_v3.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = ReviewJournalMigration_v2_to_v3.xcmappingmodel; sourceTree = "<group>"; };
 		F357BDBF25BE0C5900A9C20B /* ReviewsListRowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewsListRowView.swift; sourceTree = "<group>"; };
 		F357BDC025BE0C5900A9C20B /* ReviewsListViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewsListViewer.swift; sourceTree = "<group>"; };
 		F357BDC125BE0C5900A9C20B /* ReviewsListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewsListView.swift; sourceTree = "<group>"; };
@@ -179,6 +188,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F3525CD825C26A630032829D /* ImageAttachment */ = {
+			isa = PBXGroup;
+			children = (
+				F3525CCB25C26A5A0032829D /* ImageAttachment+CoreDataClass.swift */,
+				F3525CCC25C26A5A0032829D /* ImageAttachment+CoreDataProperties.swift */,
+			);
+			path = ImageAttachment;
+			sourceTree = "<group>";
+		};
+		F3525CE825C3515F0032829D /* Mapping Models */ = {
+			isa = PBXGroup;
+			children = (
+				F3525CE225C3514D0032829D /* ReviewJournalMigration_v2_to_v3.xcmappingmodel */,
+			);
+			path = "Mapping Models";
+			sourceTree = "<group>";
+		};
 		F357BE6E25BE68DB00A9C20B /* ReviewJournalUnitTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,6 +452,7 @@
 		F3B2A81325BDEF780080D5F5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F3525CD825C26A630032829D /* ImageAttachment */,
 				F3B2A81425BDEF780080D5F5 /* Review */,
 			);
 			path = Models;
@@ -445,6 +472,7 @@
 		F3B2A81925BDEF780080D5F5 /* Migration */ = {
 			isa = PBXGroup;
 			children = (
+				F3525CE825C3515F0032829D /* Mapping Models */,
 				F3B2A81A25BDEF780080D5F5 /* PersistentStoreMigrationVersion.swift */,
 			);
 			path = Migration;
@@ -685,6 +713,7 @@
 			files = (
 				F3B2A80125BDEF680080D5F5 /* PreviewData.swift in Sources */,
 				F357BDC525BE0C5900A9C20B /* ReviewsListViewer.swift in Sources */,
+				F3525CD325C26A5A0032829D /* ImageAttachment+CoreDataProperties.swift in Sources */,
 				F357BDC725BE0C5900A9C20B /* ReviewsListView.swift in Sources */,
 				F3B2A83D25BDEF790080D5F5 /* MainView.swift in Sources */,
 				F357BDD825BE0C7300A9C20B /* ReviewDetailsView+ViewModel.swift in Sources */,
@@ -712,6 +741,8 @@
 				F3B2A7BF25BDE7E30080D5F5 /* ReviewJournalApp.swift in Sources */,
 				F357BDD025BE0C6800A9C20B /* NewReviewFormView.swift in Sources */,
 				F3B2A82F25BDEF790080D5F5 /* Review+FetchUtils.swift in Sources */,
+				F3525CE325C3514D0032829D /* ReviewJournalMigration_v2_to_v3.xcmappingmodel in Sources */,
+				F3525CD125C26A5A0032829D /* ImageAttachment+CoreDataClass.swift in Sources */,
 				F3B2A7F725BDEF680080D5F5 /* AppState+LoggingMiddleware.swift in Sources */,
 				F3B2A83725BDEF790080D5F5 /* CoreDataManager+Utils.swift in Sources */,
 				F3B2A87C25BDFA2C0080D5F5 /* Review+CoreDataClass.swift in Sources */,
@@ -724,6 +755,7 @@
 			files = (
 				F3B2A80225BDEF680080D5F5 /* PreviewData.swift in Sources */,
 				F357BDC625BE0C5900A9C20B /* ReviewsListViewer.swift in Sources */,
+				F3525CD425C26A5A0032829D /* ImageAttachment+CoreDataProperties.swift in Sources */,
 				F357BDC825BE0C5900A9C20B /* ReviewsListView.swift in Sources */,
 				F3B2A83E25BDEF790080D5F5 /* MainView.swift in Sources */,
 				F357BDD925BE0C7300A9C20B /* ReviewDetailsView+ViewModel.swift in Sources */,
@@ -751,6 +783,8 @@
 				F3B2A7C025BDE7E30080D5F5 /* ReviewJournalApp.swift in Sources */,
 				F357BDD125BE0C6800A9C20B /* NewReviewFormView.swift in Sources */,
 				F3B2A83025BDEF790080D5F5 /* Review+FetchUtils.swift in Sources */,
+				F3525CE425C3514D0032829D /* ReviewJournalMigration_v2_to_v3.xcmappingmodel in Sources */,
+				F3525CD225C26A5A0032829D /* ImageAttachment+CoreDataClass.swift in Sources */,
 				F3B2A7F825BDEF680080D5F5 /* AppState+LoggingMiddleware.swift in Sources */,
 				F3B2A83825BDEF790080D5F5 /* CoreDataManager+Utils.swift in Sources */,
 				F3B2A87D25BDFA2C0080D5F5 /* Review+CoreDataClass.swift in Sources */,
@@ -1107,7 +1141,7 @@
 				F357BDE425BE10FC00A9C20B /* ReviewJournal v2.xcdatamodel */,
 				F3B2A87325BDF8DA0080D5F5 /* ReviewJournal.xcdatamodel */,
 			);
-			currentVersion = F357BDE425BE10FC00A9C20B /* ReviewJournal v2.xcdatamodel */;
+			currentVersion = F3525CC225C2662C0032829D /* ReviewJournal v3.xcdatamodel */;
 			path = ReviewJournal.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

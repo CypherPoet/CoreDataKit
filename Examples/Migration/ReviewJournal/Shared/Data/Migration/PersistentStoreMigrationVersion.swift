@@ -13,6 +13,7 @@ import CypherPoetCoreDataKit
 enum PersistentStoreMigrationVersion: String {
     case version1 = "ReviewJournal"
     case version2 = "ReviewJournal v2"
+    case version3 = "ReviewJournal v3"
 }
 
 
@@ -26,7 +27,7 @@ extension PersistentStoreMigrationVersion: PersistentStoreVersionLogging {
 
     // MARK: - Current
     static var currentVersion: Self {
-        version2
+        version3
     }
     
 
@@ -36,6 +37,8 @@ extension PersistentStoreMigrationVersion: PersistentStoreVersionLogging {
         case .version1:
             return .version2
         case .version2:
+            return .version3
+        case .version3:
             return nil
         }
     }

@@ -100,7 +100,17 @@ private extension NewReviewFormView {
             
             ToolbarItem(placement: .primaryAction) {
                 Button("Submit", action: {
-                    newReview.imageData = featuredImageData
+                    if let imageData = featuredImageData {
+                        guard let managedObjectContext = newReview.managedObjectContext else {
+                            preconditionFailure()
+                        }
+                        
+                        let attachment = ImageAttachment(context: managedObjectContext)
+                        
+                        attachment.imageData = imageData
+                        attachment.review = newReview
+                    }
+                    
                     onSubmit(newReview)
                 })
                 .disabled(canSubmit == false)
