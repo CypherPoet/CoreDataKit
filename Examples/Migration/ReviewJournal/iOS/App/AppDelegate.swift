@@ -23,6 +23,10 @@ extension AppDelegate: UIApplicationDelegate {
     ) -> Bool {
         appStore?.send(.setupCoreDataStack)
         
+        if ProcessInfo.isRunningForXcodePreviews {
+            PreviewData.setup()
+        }
+        
         return true
     }
     

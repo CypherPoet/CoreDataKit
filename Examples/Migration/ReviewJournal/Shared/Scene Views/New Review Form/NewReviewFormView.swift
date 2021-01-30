@@ -8,20 +8,29 @@
 
 import SwiftUI
 import CypherPoetCoreDataKit
+import Combine
 
 
 struct NewReviewFormView {
-    @Environment(\.managedObjectContext) private var managedObjectContext
     @Environment(\.presentationMode) private var presentationMode
     
-
+    
+    // 🔑 Two main concepts being expressed here:
+    //
+    //      - The `newReview` is a bound `ObservedObject` that's owned elsewhere
+    //      and passed in, but ultimately, we can still write to it.
+    //      - The `viewModel` is a `StateObject` that's concerned with the "internal
+    //      data state" of the view, and thus owned exclusively by it.
+    //
+    // ... and I think this is fairly logical.
     @ObservedObject var newReview: Review
-    var onSubmit: (Review) -> Void
+    @StateObject private var viewModel = ViewModel()
     
 
-    @State private var selectedPhotos: [UIImage] = []
+    var onSubmit: (Review) -> Void
+
+
     @State private var isShowingPhotoPicker = false
-    
 }
 
 
@@ -33,7 +42,10 @@ extension NewReviewFormView: View {
             Section(
                 header: Text("Title")
             ) {
-                TextField("Enter A Title", text: Binding($newReview.title, replacingNilWith: ""))
+                TextField(
+                    "Enter A Title",
+                    text: Binding($newReview.title, replacingNilWith: "")
+                )
             }
 
             GroupBox {
@@ -46,8 +58,8 @@ extension NewReviewFormView: View {
                 )
                 .frame(maxWidth: .infinity)
                 
-                if let featuredImage = selectedPhotos.first {
-                    Image(uiImage: featuredImage)
+                featuredImage.map {
+                    Image(uiImage: $0)
                         .resizable()
                         .scaledToFit()
                         .padding(.top)
@@ -58,14 +70,16 @@ extension NewReviewFormView: View {
             Section(
                 header: Text("Description")
             ) {
-                TextEditor(text: Binding($newReview.bodyText, replacingNilWith: ""))
-                    .frame(minHeight: 300, idealHeight: 500, maxHeight: .infinity)
+                TextEditor(
+                    text: Binding($newReview.bodyText, replacingNilWith: "")
+                )
+                .frame(minHeight: 300, idealHeight: 500, maxHeight: .infinity)
             }
         }
-        .sheet(isPresented: $isShowingPhotoPicker, content: {
+        .fullScreenCover(isPresented: $isShowingPhotoPicker, content: {
             PhotoPickerComponent(
-                results: $selectedPhotos,
-                selectionLimit: .single
+                selectionLimit: .max(of: 10),
+                onPickingCompleted: viewModel.handlePhotoPickingCompletion(_:)
             )
         })
         .navigationTitle("New Review")
@@ -81,8 +95,9 @@ extension NewReviewFormView {
         newReview.title?.isEmpty == false
     }
     
-    var featuredImageData: Data? {
-        selectedPhotos.first?.pngData()
+    
+    var featuredImage: UIImage? {
+        viewModel.featuredImageData.flatMap { UIImage(data: $0) }
     }
 }
 
@@ -100,18 +115,10 @@ private extension NewReviewFormView {
             
             ToolbarItem(placement: .primaryAction) {
                 Button("Submit", action: {
-                    if let imageData = featuredImageData {
-                        guard let managedObjectContext = newReview.managedObjectContext else {
-                            preconditionFailure()
-                        }
-                        
-                        let attachment = ImageAttachment(context: managedObjectContext)
-                        
-                        attachment.imageData = imageData
-                        attachment.review = newReview
+                    viewModel.handleSubmit(for: newReview) {
+                        presentationMode.wrappedValue.dismiss()
+                        onSubmit(newReview)
                     }
-                    
-                    onSubmit(newReview)
                 })
                 .disabled(canSubmit == false)
             }
@@ -137,7 +144,6 @@ struct NewReviewFormView_Previews: PreviewProvider {
             )
         }
         .preferredColorScheme(.dark)
-        .environment(\.managedObjectContext, PreviewData.managedObjectContext)
     }
 }
 #endif

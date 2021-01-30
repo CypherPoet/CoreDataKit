@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ReviewsListViewer {
     @Environment(\.managedObjectContext) private var managedObjectContext
-
+    
     @StateObject private var viewModel = ViewModel()
     @State private var isShowingNewReviewSheet = false
 }
@@ -34,20 +34,20 @@ extension ReviewsListViewer: View {
         }
         .toolbar { toolbarContent }
         .navigationTitle("Reviews")
-        .sheet(
+        .fullScreenCover(
             isPresented: $isShowingNewReviewSheet,
             onDismiss: {
                 viewModel.newReviewForForm = nil
             },
             content: {
-            NavigationView {
-                NewReviewFormView(
-                    newReview: viewModel.newReviewForForm!,
-                    onSubmit: viewModel.createNewReview(_:)
-                )
-            }
-            .environment(\.managedObjectContext, CoreDataManager.current.backgroundContext)
-        })
+                NavigationView {
+                    NewReviewFormView(
+                        newReview: viewModel.newReviewForForm!,
+                        onSubmit: viewModel.createNewReview(_:)
+                    )
+                }
+                .environment(\.managedObjectContext, CoreDataManager.current.backgroundContext)
+            })
         .onAppear(perform: viewModel.fetchReviews)
         .onReceive(viewModel.$newReviewForForm, perform: { newReview in
             isShowingNewReviewSheet = newReview != nil
@@ -73,7 +73,6 @@ private extension ReviewsListViewer {
         ToolbarItem(placement: .primaryAction) {
             Button(
                 action: {
-//                    isShowingNewReviewSheet = true
                     viewModel.setupNewReviewForForm()
                 },
                 label: {
@@ -101,9 +100,7 @@ private extension ReviewsListViewer {
 struct ReviewsListViewer_Previews: PreviewProvider {
     
     static var previews: some View {
-        let _ = PreviewData.Reviews.all
-        
-        return NavigationView {
+        NavigationView {
             ReviewsListViewer()
                 .environment(\.managedObjectContext, PreviewData.managedObjectContext)
         }

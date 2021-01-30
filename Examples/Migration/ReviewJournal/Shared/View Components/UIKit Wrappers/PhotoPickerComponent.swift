@@ -9,14 +9,16 @@
 
 import SwiftUI
 import PhotosUI
+import Combine
+
 
 struct PhotoPickerComponent {
     typealias UIViewControllerType = PHPickerViewController
     
-    var results: Binding<[UIImage]>
-    
     var selectionLimit: SelectionLimit = .any
     var filter: PHPickerFilter = .images
+
+    var onPickingCompleted: Coordinator.CompletionHandler
 }
 
 
@@ -25,7 +27,7 @@ struct PhotoPickerComponent {
 extension PhotoPickerComponent: UIViewControllerRepresentable {
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(pickerResults: results)
+        Coordinator(onPickingCompleted: onPickingCompleted)
     }
 
 
@@ -81,5 +83,56 @@ extension PhotoPickerComponent {
                 return value
             }
         }
+    }
+}
+
+
+// MARK: - Static Methods
+extension PhotoPickerComponent {
+    
+    public static func generateUIImages(
+        from pickerResults: [PHPickerResult]
+    ) -> Future<[UIImage], PhotoPickerComponent.Error> {
+        Future { promise in
+            var convertedImages = [UIImage]()
+            let dispatchGroup = DispatchGroup()
+            
+            for result in pickerResults {
+                dispatchGroup.enter()
+
+                let itemProvider = result.itemProvider
+                
+                guard itemProvider.canLoadObject(ofClass: UIImage.self) else { return }
+
+                
+                itemProvider.loadObject(ofClass: UIImage.self) { (itemProviderReading, error) in
+                
+                    guard error == nil else {
+                        promise(.failure(.imageLoadingFailed))
+                        return
+                    }
+
+                    guard let uiImage = itemProviderReading as? UIImage else {
+                        preconditionFailure()
+                    }
+
+                    convertedImages.append(uiImage)
+                    dispatchGroup.leave()
+                }
+            }
+            
+            
+            dispatchGroup.notify(queue: .main) {
+                promise(.success(convertedImages))
+            }
+        }
+    }
+}
+
+
+extension PhotoPickerComponent {
+    
+    enum Error: Swift.Error {
+        case imageLoadingFailed
     }
 }

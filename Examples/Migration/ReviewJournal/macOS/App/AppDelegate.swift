@@ -18,7 +18,12 @@ extension AppDelegate: NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         appStore?.send(.setupCoreDataStack)
+        
+        if ProcessInfo.isRunningForXcodePreviews {
+            PreviewData.setup()
+        }
     }
+    
     
     func applicationDidResignActive(_ notification: Notification) {
         CoreDataManager.current.saveContexts()

@@ -10,4 +10,12 @@ import Foundation
 
 enum PreviewData {
     static let managedObjectContext = CoreDataManager.current.mainContext
+    
+    /// Initializes static PreviewData entities
+    static func setup() {
+        let _: [Any] = [
+            PreviewData.Reviews.all,
+        ]
+    }
+    
 }

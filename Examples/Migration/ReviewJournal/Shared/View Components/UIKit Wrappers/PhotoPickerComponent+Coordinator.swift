@@ -14,10 +14,14 @@ import PhotosUI
 extension PhotoPickerComponent {
     
     final class Coordinator: NSObject {
-        @Binding var pickerResults: [UIImage]
+        typealias CompletionHandler = (([PHPickerResult]) -> Void)?
 
-        init(pickerResults: Binding<[UIImage]>) {
-            self._pickerResults = pickerResults
+        var onPickingCompleted: CompletionHandler
+
+        init(
+            onPickingCompleted: CompletionHandler = nil
+        ) {
+            self.onPickingCompleted = onPickingCompleted
         }
     }
 }
@@ -30,28 +34,7 @@ extension PhotoPickerComponent.Coordinator: PHPickerViewControllerDelegate {
         _ picker: PHPickerViewController,
         didFinishPicking results: [PHPickerResult]
     ) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            
-            for result in results
-                where result.itemProvider.canLoadObject(ofClass: UIImage.self)
-            {
-                result.itemProvider.loadObject(ofClass: UIImage.self) { (itemProviderReading, error) in
-                    guard error == nil else {
-                        print("Error while loading image from picker itemProvider: \(error!.localizedDescription)")
-                        return
-                    }
-                    
-                    guard let uiImage = itemProviderReading as? UIImage else {
-                        preconditionFailure()
-                    }
-                    
-                    self.pickerResults.append(uiImage)
-                }
-            }
-            
-        }
-
+        onPickingCompleted?(results)
         picker.dismiss(animated: true)
     }
 }

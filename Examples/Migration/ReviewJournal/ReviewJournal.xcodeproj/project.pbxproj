@@ -36,6 +36,8 @@
 		F357BE8925BE68EF00A9C20B /* FileManager+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F357BE8125BE68EE00A9C20B /* FileManager+Utils.swift */; };
 		F357BE8A25BE68EF00A9C20B /* PersistentStoreMigrationVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F357BE7D25BE68EE00A9C20B /* PersistentStoreMigrationVersion.swift */; };
 		F357BEA425BE766100A9C20B /* ReviewJournal_2.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = F357BE8425BE68EE00A9C20B /* ReviewJournal_2.sqlite */; };
+		F36565A625C4A7D40081E21E /* NewReviewFormView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36565A525C4A7D40081E21E /* NewReviewFormView+ViewModel.swift */; };
+		F36565A725C4A7D40081E21E /* NewReviewFormView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36565A525C4A7D40081E21E /* NewReviewFormView+ViewModel.swift */; };
 		F3B2A7BF25BDE7E30080D5F5 /* ReviewJournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B2A79625BDE7E00080D5F5 /* ReviewJournalApp.swift */; };
 		F3B2A7C025BDE7E30080D5F5 /* ReviewJournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B2A79625BDE7E00080D5F5 /* ReviewJournalApp.swift */; };
 		F3B2A7C325BDE7E30080D5F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3B2A79825BDE7E30080D5F5 /* Assets.xcassets */; };
@@ -125,6 +127,7 @@
 		F357BE8125BE68EE00A9C20B /* FileManager+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Utils.swift"; sourceTree = "<group>"; };
 		F357BE8425BE68EE00A9C20B /* ReviewJournal_2.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ReviewJournal_2.sqlite; sourceTree = "<group>"; };
 		F357BE8725BE68EF00A9C20B /* PersistentStoreMigratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStoreMigratorTests.swift; sourceTree = "<group>"; };
+		F36565A525C4A7D40081E21E /* NewReviewFormView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewReviewFormView+ViewModel.swift"; sourceTree = "<group>"; };
 		F3B2A79625BDE7E00080D5F5 /* ReviewJournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewJournalApp.swift; sourceTree = "<group>"; };
 		F3B2A79825BDE7E30080D5F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3B2A79D25BDE7E30080D5F5 /* ReviewJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReviewJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -528,6 +531,7 @@
 			isa = PBXGroup;
 			children = (
 				F357BDCF25BE0C6800A9C20B /* NewReviewFormView.swift */,
+				F36565A525C4A7D40081E21E /* NewReviewFormView+ViewModel.swift */,
 			);
 			path = "New Review Form";
 			sourceTree = "<group>";
@@ -745,6 +749,7 @@
 				F3525CD125C26A5A0032829D /* ImageAttachment+CoreDataClass.swift in Sources */,
 				F3B2A7F725BDEF680080D5F5 /* AppState+LoggingMiddleware.swift in Sources */,
 				F3B2A83725BDEF790080D5F5 /* CoreDataManager+Utils.swift in Sources */,
+				F36565A625C4A7D40081E21E /* NewReviewFormView+ViewModel.swift in Sources */,
 				F3B2A87C25BDFA2C0080D5F5 /* Review+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -787,6 +792,7 @@
 				F3525CD225C26A5A0032829D /* ImageAttachment+CoreDataClass.swift in Sources */,
 				F3B2A7F825BDEF680080D5F5 /* AppState+LoggingMiddleware.swift in Sources */,
 				F3B2A83825BDEF790080D5F5 /* CoreDataManager+Utils.swift in Sources */,
+				F36565A725C4A7D40081E21E /* NewReviewFormView+ViewModel.swift in Sources */,
 				F3B2A87D25BDFA2C0080D5F5 /* Review+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
