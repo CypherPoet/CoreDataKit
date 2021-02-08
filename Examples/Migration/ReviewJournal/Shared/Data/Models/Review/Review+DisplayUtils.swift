@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 extension Review {
@@ -18,15 +19,29 @@ extension Review {
     }
     
     
+    var uiImages: [UIImage] {
+        guard let imageAttachments = imageAttachments else {
+            return []
+        }
+        
+        return imageAttachments.compactMap { UIImage(data: $0.imageData ?? Data()) }
+    }
+    
+    
     var latestImageAttachment: ImageAttachment? {
-        guard let startingAttachment = imageAttachments?.first else {
+        guard
+            let imageAttachments = imageAttachments,
+            let startingAttachment = imageAttachments.first
+        else {
             return nil
         }
         
-        return imageAttachments?.reduce(startingAttachment) { (latest, current) in
-            guard let currentCreationDate = current.creationDate else { return latest }
-            
-            return latest.creationDate?.compare(currentCreationDate) == .orderedAscending ? latest : current
+        return imageAttachments.reduce(startingAttachment) { (latest, current) in
+            latest
+                .creationDate
+                .compare(current.creationDate) == .orderedAscending ?
+                    latest
+                    : current
         }
     }
 }

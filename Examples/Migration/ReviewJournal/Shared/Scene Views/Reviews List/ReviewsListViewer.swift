@@ -36,9 +36,7 @@ extension ReviewsListViewer: View {
         .navigationTitle("Reviews")
         .fullScreenCover(
             isPresented: $isShowingNewReviewSheet,
-            onDismiss: {
-                viewModel.newReviewForForm = nil
-            },
+            onDismiss: { viewModel.newReviewForForm = nil },
             content: {
                 NavigationView {
                     NewReviewFormView(
@@ -47,7 +45,8 @@ extension ReviewsListViewer: View {
                     )
                 }
                 .environment(\.managedObjectContext, CoreDataManager.current.backgroundContext)
-            })
+            }
+        )
         .onAppear(perform: viewModel.fetchReviews)
         .onReceive(viewModel.$newReviewForForm, perform: { newReview in
             isShowingNewReviewSheet = newReview != nil

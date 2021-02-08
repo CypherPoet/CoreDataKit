@@ -11,7 +11,6 @@ import CoreData
 
 
 extension Review {
-    
     @NSManaged public var bodyText: String?
     @NSManaged public var creationDate: Date?
     @NSManaged public var lastModificationDate: Date?
@@ -31,10 +30,10 @@ extension Review {
     @NSManaged public func removeFromImageAttachments(_ value: ImageAttachment)
 
     @objc(addImageAttachments:)
-    @NSManaged public func addToImageAttachments(_ values: NSSet)
+    @NSManaged public func addToImageAttachments(_ values: Set<ImageAttachment>)
 
     @objc(removeImageAttachments:)
-    @NSManaged public func removeFromImageAttachments(_ values: NSSet)
+    @NSManaged public func removeFromImageAttachments(_ values: Set<ImageAttachment>)
 }
 
 
@@ -48,13 +47,17 @@ extension Review {
         super.awakeFromInsert()
         
         setPrimitiveValue(Date(), forKey: #keyPath(Review.creationDate))
-        setPrimitiveValue(Date(), forKey: #keyPath(Review.lastModificationDate))
+        stampDate()
     }
     
     
     public override func willSave() {
         super.willSave()
-        
+        stampDate()
+    }
+    
+    
+    func stampDate() {
         setPrimitiveValue(Date(), forKey: #keyPath(Review.lastModificationDate))
     }
 }

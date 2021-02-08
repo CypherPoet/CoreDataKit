@@ -16,17 +16,18 @@ fileprivate typealias ViewModel = NewReviewFormView.ViewModel
 
 
 extension NewReviewFormView {
-
+    
     final class ViewModel {
         private var subscriptions = Set<AnyCancellable>()
-
+        
         
         // MARK: - Init
         init(
         ) {
+            print("Init")
             setupSubscribers()
         }
-
+        
         
         // MARK: - Published Outputs
         @Published var selectedPhotos: [UIImage] = []
@@ -63,21 +64,29 @@ extension ViewModel {
                 }
             )
             .assertNoFailure()
+            .print("handlePhotoPickingCompletion")
             .assign(to: &$selectedPhotos)
     }
     
     
     func handleSubmit(for newReview: Review, then completionHandler: () -> Void) {
-        if let imageData = featuredImageData {
-            guard let managedObjectContext = newReview.managedObjectContext else {
-                preconditionFailure()
-            }
-            
+        guard let managedObjectContext = newReview.managedObjectContext else {
+            preconditionFailure()
+        }
+        
+        let attachments = selectedPhotos.map { image -> ImageAttachment in
             let attachment = ImageAttachment(context: managedObjectContext)
             
-            attachment.imageData = imageData
+            attachment.imageData = image.pngData()
+            attachment.title = "New Photo"
+            attachment.width = Float(image.size.width)
+            attachment.height = Float(image.size.height)
             attachment.review = newReview
+            
+            return attachment
         }
+        
+        newReview.imageAttachments = Set(attachments)
         
         completionHandler()
     }
@@ -86,13 +95,13 @@ extension ViewModel {
 
 // MARK: - Publisher Factories
 private extension ViewModel {
-
+    
 }
 
 
 // MARK: - Private Helpers
 private extension ViewModel {
-
+    
     func setupSubscribers() {
     }
 }

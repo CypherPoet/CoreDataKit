@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(ImageAttachment)
-public class ImageAttachment: NSManagedObject, ReviewAttachable {
+public class ImageAttachment: NSManagedObject {
 
 }

@@ -10,6 +10,6 @@ import Foundation
 
 
 protocol ReviewAttachable {
-    var title: String? { get set }
-    var creationDate: Date? { get set }
+    var title: String { get set }
+    var creationDate: Date { get set }
 }

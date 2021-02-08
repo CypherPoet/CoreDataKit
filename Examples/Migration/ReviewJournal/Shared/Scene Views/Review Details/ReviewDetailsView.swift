@@ -54,14 +54,15 @@ private extension ReviewDetailsView {
     
     
     var foregroundContent: some View {
-        VStack {
-            Text(viewModel.titleText)
-                .font(.largeTitle)
-                .fontWeight(.semibold)
-            
-            Spacer()
-            
-            Text(viewModel.bodyText)
+        ScrollView {
+            VStack {
+                Text(viewModel.bodyText)
+                
+                if viewModel.images.isEmpty == false {
+                    ImageCarouselView(images: viewModel.images)
+                        .frame(minHeight: 200, idealHeight: 280, maxHeight: 360)
+                }
+            }
         }
     }
 }

@@ -14,7 +14,7 @@ extension PreviewData {
     enum Reviews {
         
         static let sample1: Review = {
-            defer { try! managedObjectContext.save() }
+//            defer { try! managedObjectContext.save() }
             
             let review = Review(context: managedObjectContext)
             
@@ -25,7 +25,7 @@ extension PreviewData {
         
         
         static let sample2: Review = {
-            defer { try! managedObjectContext.save() }
+//            defer { try! managedObjectContext.save() }
             
             let review = Review(context: managedObjectContext)
             
@@ -36,7 +36,7 @@ extension PreviewData {
         
         
         static let all: [Review] = {
-            defer { try! managedObjectContext.save() }
+//            defer { try! managedObjectContext.save() }
             
             return [
                 Reviews.sample1,

@@ -8,20 +8,22 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 
 extension ImageAttachment {
-
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<ImageAttachment> {
-        return NSFetchRequest<ImageAttachment>(entityName: "ImageAttachment")
-    }
-
-    @NSManaged public var creationDate: Date?
     @NSManaged public var imageData: Data?
-    @NSManaged public var title: String?
+    @NSManaged public var width: Float
+    @NSManaged public var height: Float
     @NSManaged public var review: Review?
-
 }
+
+
+extension ImageAttachment: ReviewAttachable {
+    @NSManaged public var creationDate: Date
+    @NSManaged public var title: String
+}
+
 
 extension ImageAttachment: Identifiable {}
 

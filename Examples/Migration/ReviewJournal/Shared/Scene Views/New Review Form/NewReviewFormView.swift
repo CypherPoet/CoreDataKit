@@ -26,10 +26,10 @@ struct NewReviewFormView {
     @ObservedObject var newReview: Review
     @StateObject private var viewModel = ViewModel()
     
-
+    
     var onSubmit: (Review) -> Void
-
-
+    
+    
     @State private var isShowingPhotoPicker = false
 }
 
@@ -47,25 +47,25 @@ extension NewReviewFormView: View {
                     text: Binding($newReview.title, replacingNilWith: "")
                 )
             }
-
-            GroupBox {
-                Button(
-                    action: { isShowingPhotoPicker = true },
-                    label: {
-                        Label("Select a Photo", systemImage: "camera.circle")
-                            .imageScale(.large)
-                    }
-                )
-                .frame(maxWidth: .infinity)
-                
-                featuredImage.map {
-                    Image(uiImage: $0)
-                        .resizable()
-                        .scaledToFit()
-                        .padding(.top)
+            
+            
+            Button(
+                action: { isShowingPhotoPicker = true },
+                label: {
+                    Label("Pick Photos", systemImage: "camera.circle")
+                        .imageScale(.large)
+                        .frame(maxWidth: .infinity)
                 }
+            )
+            .frame(height: 44)
+            .background(Color.clear)
+            
+            
+            if viewModel.selectedPhotos.isEmpty == false {
+                ImageCarouselView(images: viewModel.selectedPhotos)
+                    .frame(minHeight: 200, idealHeight: 280, maxHeight: 360)
             }
-            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+            
             
             Section(
                 header: Text("Description")

@@ -51,6 +51,8 @@ extension ViewModel {
     var bodyText: String {
         review.bodyText ?? ""
     }
+    
+    var images: [UIImage] { review.uiImages }
 }
 
 
