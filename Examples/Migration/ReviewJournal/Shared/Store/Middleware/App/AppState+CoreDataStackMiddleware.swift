@@ -24,8 +24,10 @@ extension AppState {
             Self { state, action -> AnyPublisher<AppState.Action, Never>? in
                 switch action {
                 case .setupCoreDataStack:
+                    let backgroundQueue = DispatchQueue(label: "CoreDataStackMiddleware")
+                    
                     return coreDataManager
-                        .setup()
+                        .setup(runningOn: backgroundQueue)
                         .map { _ in
                             AppState.Action.coreDataSetupCompleted
                         }

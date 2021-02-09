@@ -11,16 +11,8 @@ import CoreData
 
 
 /// Main focus:
-///     - Move the `imageData` from the v3 entity to `image`, `width`, `height`,
-///       and `title` properties on the v4 entity.
+///     - Create extra `width`, `height`, and `title` properties on the v4 entity.
 class ImageAttachmentToImageAttachment_v3_to_v4: NSEntityMigrationPolicy {
-    
-    static let className = "ImageAttachment"
-    
-    static func entityDescription(forAttachmentIn context: NSManagedObjectContext) -> NSEntityDescription? {
-        NSEntityDescription.entity(forEntityName: className, in: context)
-    }
-    
     
     override func createDestinationInstances(
         forSource sourceEntity: NSManagedObject,
@@ -34,11 +26,10 @@ class ImageAttachmentToImageAttachment_v3_to_v4: NSEntityMigrationPolicy {
         }
         
         // Get the destination entity
-        let destinationImageAttachment = try self.destinationImageAttachment(in: manager)
+        let destinationImageAttachment = try self.destinationImageAttachment(in: manager.destinationContext, using: mapping)
         
         
         // Traverse property mappings
-        
         for propertyMapping in attributeMappings {
             try migrateValue(
                 in: propertyMapping,
@@ -100,26 +91,20 @@ class ImageAttachmentToImageAttachment_v3_to_v4: NSEntityMigrationPolicy {
     
     
     func destinationImageAttachment(
-        in migrationManager: NSMigrationManager
+        in destinationContext: NSManagedObjectContext,
+        using mapping: NSEntityMapping
     )  throws -> ImageAttachment {
-//        guard let entityName = Self.entityName else {
-//            throw Error.failedToMakeEntityName
-//        }
-//
-//        guard let entityDescription = NSEntityDescription.entity(
-//            forEntityName: entityName,
-//            in: migrationManager.destinationContext
-//        ) else {
-//            throw Error.failedToMakeDestinationEntityDescription
-//        }
+        guard let entityName = mapping.destinationEntityName else {
+            throw Error.failedToFindEntityName
+        }
+
         guard
-            let entityDescription = Self.entityDescription(forAttachmentIn: migrationManager.destinationContext)
+            let entityDescription = NSEntityDescription.entity(forEntityName: entityName, in: destinationContext)
         else {
             throw Error.failedToMakeDestinationEntityDescription
         }
         
-        
-        return ImageAttachment(entity: entityDescription, insertInto: migrationManager.destinationContext)
+        return ImageAttachment(entity: entityDescription, insertInto: destinationContext)
     }
 }
 
@@ -128,7 +113,7 @@ class ImageAttachmentToImageAttachment_v3_to_v4: NSEntityMigrationPolicy {
 extension ImageAttachmentToImageAttachment_v3_to_v4 {
     
     enum Error: Swift.Error {
-        case failedToMakeEntityName
+        case failedToFindEntityName
         case failedToMakeDestinationEntityDescription
         case noAttributeMappingsFound
         case noDestinationAttributeNameFound(propertyMapping: NSPropertyMapping)

@@ -507,9 +507,9 @@
 		F3B2A81925BDEF780080D5F5 /* Migration */ = {
 			isa = PBXGroup;
 			children = (
-				F36565D325C65B270081E21E /* Policies */,
 				F3B2A81A25BDEF780080D5F5 /* PersistentStoreMigrationVersion.swift */,
 				F3525CE825C3515F0032829D /* Mapping Models */,
+				F36565D325C65B270081E21E /* Policies */,
 			);
 			path = Migration;
 			sourceTree = "<group>";
@@ -665,7 +665,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1230;
-				LastUpgradeCheck = 1230;
+				LastUpgradeCheck = 1240;
 				TargetAttributes = {
 					F357BE6C25BE68DB00A9C20B = {
 						CreatedOnToolsVersion = 12.3;
@@ -1056,6 +1056,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = QRXXH2RKAG;
@@ -1080,6 +1081,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = QRXXH2RKAG;
