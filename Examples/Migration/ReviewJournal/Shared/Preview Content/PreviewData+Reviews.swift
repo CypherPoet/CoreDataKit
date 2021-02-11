@@ -36,9 +36,7 @@ extension PreviewData {
         
         
         static let all: [Review] = {
-//            defer { try! managedObjectContext.save() }
-            
-            return [
+            [
                 Reviews.sample1,
                 Reviews.sample2,
             ]

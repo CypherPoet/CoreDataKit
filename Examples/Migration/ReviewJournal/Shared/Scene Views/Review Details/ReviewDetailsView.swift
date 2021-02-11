@@ -43,8 +43,10 @@ private extension ReviewDetailsView {
         LinearGradient(
             gradient: Gradient(
                 colors: [
-                    Color.white.opacity(0.3),
-                    Color.accentColor.opacity(0.13),
+                    Color(#colorLiteral(red: 0.9991074204, green: 0.3845782578, blue: 0.5377081633, alpha: 1)).opacity(0.3),
+                    Color(#colorLiteral(red: 0.9991074204, green: 0.3845782578, blue: 0.5377081633, alpha: 1)),
+                    Color(#colorLiteral(red: 0.6954901814, green: 0.6699760556, blue: 1, alpha: 1)),
+                    Color(#colorLiteral(red: 0.6954901814, green: 0.6699760556, blue: 1, alpha: 1)).opacity(0.3),
                 ]
             ),
             startPoint: .topLeading,

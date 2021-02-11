@@ -15,6 +15,7 @@ enum PersistentStoreMigrationVersion: String {
     case version2 = "ReviewJournal v2"
     case version3 = "ReviewJournal v3"
     case version4 = "ReviewJournal v4"
+    case version5 = "ReviewJournal v5"
 }
 
 
@@ -28,7 +29,7 @@ extension PersistentStoreMigrationVersion: PersistentStoreVersionLogging {
 
     // MARK: - Current
     static var currentVersion: Self {
-        version4
+        version5
     }
     
 
@@ -42,6 +43,8 @@ extension PersistentStoreMigrationVersion: PersistentStoreVersionLogging {
         case .version3:
             return .version4
         case .version4:
+            return .version5
+        case .version5:
             return nil
         }
     }

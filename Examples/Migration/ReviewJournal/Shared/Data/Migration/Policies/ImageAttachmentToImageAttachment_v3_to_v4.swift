@@ -54,7 +54,6 @@ class ImageAttachmentToImageAttachment_v3_to_v4: NSEntityMigrationPolicy {
 }
 
 
-
 extension ImageAttachmentToImageAttachment_v3_to_v4 {
     
     enum Error: Swift.Error {

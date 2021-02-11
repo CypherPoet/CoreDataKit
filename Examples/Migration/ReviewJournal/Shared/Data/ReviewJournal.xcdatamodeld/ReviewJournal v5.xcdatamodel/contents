@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D64" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ImageAttachment" representedClassName=".ImageAttachment" syncable="YES">
+        <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="height" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" valueTransformerName="ImageTransformer" allowsExternalBinaryDataStorage="YES" customClassName=".UIImage" spotlightIndexingEnabled="YES"/>
+        <attribute name="title" attributeType="String"/>
+        <attribute name="width" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="review" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Review" inverseName="imageAttachments" inverseEntity="Review"/>
+    </entity>
+    <entity name="Review" representedClassName=".Review" syncable="YES">
+        <attribute name="bodyText" optional="YES" attributeType="String"/>
+        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="lastModificationDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="score" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="uuid" attributeType="String"/>
+        <relationship name="imageAttachments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ImageAttachment" inverseName="review" inverseEntity="ImageAttachment"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="uuid"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <elements>
+        <element name="ImageAttachment" positionX="-63" positionY="27" width="128" height="119"/>
+        <element name="Review" positionX="-63" positionY="-18" width="128" height="134"/>
+    </elements>
+</model>

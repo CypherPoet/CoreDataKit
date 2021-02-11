@@ -11,6 +11,10 @@
 		F345131825CBB3AE00DFC971 /* ImageCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F345131625CBB3AE00DFC971 /* ImageCarouselView.swift */; };
 		F345132525CBB5EC00DFC971 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F345132425CBB5EC00DFC971 /* Preview Assets.xcassets */; };
 		F345132625CBB5EC00DFC971 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F345132425CBB5EC00DFC971 /* Preview Assets.xcassets */; };
+		F349068725D4EDF400AF197C /* ReviewJournalModelMapping_v4_to_v5.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = F349068625D4EDF400AF197C /* ReviewJournalModelMapping_v4_to_v5.xcmappingmodel */; };
+		F349068825D4EDF400AF197C /* ReviewJournalModelMapping_v4_to_v5.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = F349068625D4EDF400AF197C /* ReviewJournalModelMapping_v4_to_v5.xcmappingmodel */; };
+		F349068D25D5C2B600AF197C /* ReviewToReview_v4_to_v5.swift in Sources */ = {isa = PBXBuildFile; fileRef = F349068C25D5C2B500AF197C /* ReviewToReview_v4_to_v5.swift */; };
+		F349068E25D5C2B600AF197C /* ReviewToReview_v4_to_v5.swift in Sources */ = {isa = PBXBuildFile; fileRef = F349068C25D5C2B500AF197C /* ReviewToReview_v4_to_v5.swift */; };
 		F34DB04725C911CA006980BD /* ReviewJournalModelMapping_v3_to_v4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = F34DB04625C911CA006980BD /* ReviewJournalModelMapping_v3_to_v4.xcmappingmodel */; };
 		F34DB04825C911CA006980BD /* ReviewJournalModelMapping_v3_to_v4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = F34DB04625C911CA006980BD /* ReviewJournalModelMapping_v3_to_v4.xcmappingmodel */; };
 		F3525C9D25BF4AFC0032829D /* ReviewJournal_1.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = F3525C9C25BF4AFC0032829D /* ReviewJournal_1.sqlite */; };
@@ -115,6 +119,9 @@
 /* Begin PBXFileReference section */
 		F345131625CBB3AE00DFC971 /* ImageCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarouselView.swift; sourceTree = "<group>"; };
 		F345132425CBB5EC00DFC971 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F349066725D4D6EE00AF197C /* ReviewJournal v5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ReviewJournal v5.xcdatamodel"; sourceTree = "<group>"; };
+		F349068625D4EDF400AF197C /* ReviewJournalModelMapping_v4_to_v5.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = ReviewJournalModelMapping_v4_to_v5.xcmappingmodel; sourceTree = "<group>"; };
+		F349068C25D5C2B500AF197C /* ReviewToReview_v4_to_v5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewToReview_v4_to_v5.swift; sourceTree = "<group>"; };
 		F34DB04625C911CA006980BD /* ReviewJournalModelMapping_v3_to_v4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = ReviewJournalModelMapping_v3_to_v4.xcmappingmodel; sourceTree = "<group>"; };
 		F3525C9C25BF4AFC0032829D /* ReviewJournal_1.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ReviewJournal_1.sqlite; sourceTree = "<group>"; };
 		F3525CA425BF4E4C0032829D /* NSManagedObjectContext+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Utils.swift"; sourceTree = "<group>"; };
@@ -225,6 +232,7 @@
 			children = (
 				F3525CE225C3514D0032829D /* ReviewJournalModelMapping_v2_to_v3.xcmappingmodel */,
 				F34DB04625C911CA006980BD /* ReviewJournalModelMapping_v3_to_v4.xcmappingmodel */,
+				F349068625D4EDF400AF197C /* ReviewJournalModelMapping_v4_to_v5.xcmappingmodel */,
 			);
 			path = "Mapping Models";
 			sourceTree = "<group>";
@@ -304,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				F36565D425C65B690081E21E /* ImageAttachmentToImageAttachment_v3_to_v4.swift */,
+				F349068C25D5C2B500AF197C /* ReviewToReview_v4_to_v5.swift */,
 			);
 			path = Policies;
 			sourceTree = "<group>";
@@ -750,6 +759,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F349068D25D5C2B600AF197C /* ReviewToReview_v4_to_v5.swift in Sources */,
 				F3B2A80125BDEF680080D5F5 /* PreviewData.swift in Sources */,
 				F357BDC525BE0C5900A9C20B /* ReviewsListViewer.swift in Sources */,
 				F36565D525C65B690081E21E /* ImageAttachmentToImageAttachment_v3_to_v4.swift in Sources */,
@@ -788,6 +798,7 @@
 				F3B2A7F725BDEF680080D5F5 /* AppState+LoggingMiddleware.swift in Sources */,
 				F3B2A83725BDEF790080D5F5 /* CoreDataManager+Utils.swift in Sources */,
 				F36565A625C4A7D40081E21E /* NewReviewFormView+ViewModel.swift in Sources */,
+				F349068725D4EDF400AF197C /* ReviewJournalModelMapping_v4_to_v5.xcmappingmodel in Sources */,
 				F3B2A87C25BDFA2C0080D5F5 /* Review+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -796,6 +807,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F349068E25D5C2B600AF197C /* ReviewToReview_v4_to_v5.swift in Sources */,
 				F3B2A80225BDEF680080D5F5 /* PreviewData.swift in Sources */,
 				F357BDC625BE0C5900A9C20B /* ReviewsListViewer.swift in Sources */,
 				F36565D625C65B690081E21E /* ImageAttachmentToImageAttachment_v3_to_v4.swift in Sources */,
@@ -834,6 +846,7 @@
 				F3B2A7F825BDEF680080D5F5 /* AppState+LoggingMiddleware.swift in Sources */,
 				F3B2A83825BDEF790080D5F5 /* CoreDataManager+Utils.swift in Sources */,
 				F36565A725C4A7D40081E21E /* NewReviewFormView+ViewModel.swift in Sources */,
+				F349068825D4EDF400AF197C /* ReviewJournalModelMapping_v4_to_v5.xcmappingmodel in Sources */,
 				F3B2A87D25BDFA2C0080D5F5 /* Review+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1186,12 +1199,13 @@
 		F3B2A87225BDF8DA0080D5F5 /* ReviewJournal.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				F349066725D4D6EE00AF197C /* ReviewJournal v5.xcdatamodel */,
 				F36565AB25C5CCA70081E21E /* ReviewJournal v4.xcdatamodel */,
 				F3525CC225C2662C0032829D /* ReviewJournal v3.xcdatamodel */,
 				F357BDE425BE10FC00A9C20B /* ReviewJournal v2.xcdatamodel */,
 				F3B2A87325BDF8DA0080D5F5 /* ReviewJournal.xcdatamodel */,
 			);
-			currentVersion = F36565AB25C5CCA70081E21E /* ReviewJournal v4.xcdatamodel */;
+			currentVersion = F349066725D4D6EE00AF197C /* ReviewJournal v5.xcdatamodel */;
 			path = ReviewJournal.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

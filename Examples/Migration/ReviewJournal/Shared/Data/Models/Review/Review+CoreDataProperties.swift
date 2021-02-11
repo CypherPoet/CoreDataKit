@@ -11,6 +11,7 @@ import CoreData
 
 
 extension Review {
+    @NSManaged public var uuid: String?
     @NSManaged public var bodyText: String?
     @NSManaged public var creationDate: Date?
     @NSManaged public var lastModificationDate: Date?
@@ -37,7 +38,9 @@ extension Review {
 }
 
 
-extension Review: Identifiable {}
+extension Review: Identifiable {
+    public var id: String { uuid! }
+}
 
 
 // MARK: - Lifecycle Events
@@ -46,6 +49,7 @@ extension Review {
     public override func awakeFromInsert() {
         super.awakeFromInsert()
         
+        setPrimitiveValue(UUID().uuidString, forKey: #keyPath(Review.uuid))
         setPrimitiveValue(Date(), forKey: #keyPath(Review.creationDate))
         stampDate()
     }
