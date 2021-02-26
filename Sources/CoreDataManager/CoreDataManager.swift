@@ -4,8 +4,8 @@ import Combine
 
 
 public final class CoreDataManager<VersionLog: PersistentStoreVersionLogging> {
-    private var storageStrategy: StorageStrategy
-    private var migrator: PersistentStoreMigrating
+    public var storageStrategy: StorageStrategy
+    public var migrator: PersistentStoreMigrating
     
     
     // MARK: - PersistentContainer

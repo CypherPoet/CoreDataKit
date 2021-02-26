@@ -15,6 +15,8 @@
 		F349068825D4EDF400AF197C /* ReviewJournalModelMapping_v4_to_v5.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = F349068625D4EDF400AF197C /* ReviewJournalModelMapping_v4_to_v5.xcmappingmodel */; };
 		F349068D25D5C2B600AF197C /* ReviewToReview_v4_to_v5.swift in Sources */ = {isa = PBXBuildFile; fileRef = F349068C25D5C2B500AF197C /* ReviewToReview_v4_to_v5.swift */; };
 		F349068E25D5C2B600AF197C /* ReviewToReview_v4_to_v5.swift in Sources */ = {isa = PBXBuildFile; fileRef = F349068C25D5C2B500AF197C /* ReviewToReview_v4_to_v5.swift */; };
+		F349069725D619DB00AF197C /* TestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F349069625D619DA00AF197C /* TestConstants.swift */; };
+		F34906A025D6238100AF197C /* PersistentStoreMigrationStepV1ToV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F349069F25D6238100AF197C /* PersistentStoreMigrationStepV1ToV2Tests.swift */; };
 		F34DB04725C911CA006980BD /* ReviewJournalModelMapping_v3_to_v4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = F34DB04625C911CA006980BD /* ReviewJournalModelMapping_v3_to_v4.xcmappingmodel */; };
 		F34DB04825C911CA006980BD /* ReviewJournalModelMapping_v3_to_v4.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = F34DB04625C911CA006980BD /* ReviewJournalModelMapping_v3_to_v4.xcmappingmodel */; };
 		F3525C9D25BF4AFC0032829D /* ReviewJournal_1.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = F3525C9C25BF4AFC0032829D /* ReviewJournal_1.sqlite */; };
@@ -50,6 +52,9 @@
 		F36565A725C4A7D40081E21E /* NewReviewFormView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36565A525C4A7D40081E21E /* NewReviewFormView+ViewModel.swift */; };
 		F36565D525C65B690081E21E /* ImageAttachmentToImageAttachment_v3_to_v4.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36565D425C65B690081E21E /* ImageAttachmentToImageAttachment_v3_to_v4.swift */; };
 		F36565D625C65B690081E21E /* ImageAttachmentToImageAttachment_v3_to_v4.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36565D425C65B690081E21E /* ImageAttachmentToImageAttachment_v3_to_v4.swift */; };
+		F3949F2D25E6E588008C0AB3 /* MockPersistentStoreMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3949F2C25E6E588008C0AB3 /* MockPersistentStoreMigrator.swift */; };
+		F3949F3125E70384008C0AB3 /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3949F3025E70384008C0AB3 /* CoreDataManagerTests.swift */; };
+		F3949F3625E77E67008C0AB3 /* XCTestStarterKit in Frameworks */ = {isa = PBXBuildFile; productRef = F3949F3525E77E67008C0AB3 /* XCTestStarterKit */; };
 		F3B2A7BF25BDE7E30080D5F5 /* ReviewJournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B2A79625BDE7E00080D5F5 /* ReviewJournalApp.swift */; };
 		F3B2A7C025BDE7E30080D5F5 /* ReviewJournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B2A79625BDE7E00080D5F5 /* ReviewJournalApp.swift */; };
 		F3B2A7C325BDE7E30080D5F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F3B2A79825BDE7E30080D5F5 /* Assets.xcassets */; };
@@ -122,6 +127,8 @@
 		F349066725D4D6EE00AF197C /* ReviewJournal v5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ReviewJournal v5.xcdatamodel"; sourceTree = "<group>"; };
 		F349068625D4EDF400AF197C /* ReviewJournalModelMapping_v4_to_v5.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = ReviewJournalModelMapping_v4_to_v5.xcmappingmodel; sourceTree = "<group>"; };
 		F349068C25D5C2B500AF197C /* ReviewToReview_v4_to_v5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewToReview_v4_to_v5.swift; sourceTree = "<group>"; };
+		F349069625D619DA00AF197C /* TestConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestConstants.swift; sourceTree = "<group>"; };
+		F349069F25D6238100AF197C /* PersistentStoreMigrationStepV1ToV2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PersistentStoreMigrationStepV1ToV2Tests.swift; path = "ReviewJournalUnitTests/Cases/Migration/Migration Version Steps/PersistentStoreMigrationStepV1ToV2Tests.swift"; sourceTree = SOURCE_ROOT; };
 		F34DB04625C911CA006980BD /* ReviewJournalModelMapping_v3_to_v4.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = ReviewJournalModelMapping_v3_to_v4.xcmappingmodel; sourceTree = "<group>"; };
 		F3525C9C25BF4AFC0032829D /* ReviewJournal_1.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ReviewJournal_1.sqlite; sourceTree = "<group>"; };
 		F3525CA425BF4E4C0032829D /* NSManagedObjectContext+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Utils.swift"; sourceTree = "<group>"; };
@@ -148,6 +155,8 @@
 		F36565A525C4A7D40081E21E /* NewReviewFormView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NewReviewFormView+ViewModel.swift"; sourceTree = "<group>"; };
 		F36565AB25C5CCA70081E21E /* ReviewJournal v4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ReviewJournal v4.xcdatamodel"; sourceTree = "<group>"; };
 		F36565D425C65B690081E21E /* ImageAttachmentToImageAttachment_v3_to_v4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAttachmentToImageAttachment_v3_to_v4.swift; sourceTree = "<group>"; };
+		F3949F2C25E6E588008C0AB3 /* MockPersistentStoreMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPersistentStoreMigrator.swift; sourceTree = "<group>"; };
+		F3949F3025E70384008C0AB3 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
 		F3B2A79625BDE7E00080D5F5 /* ReviewJournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewJournalApp.swift; sourceTree = "<group>"; };
 		F3B2A79825BDE7E30080D5F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3B2A79D25BDE7E30080D5F5 /* ReviewJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReviewJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,6 +196,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3949F3625E77E67008C0AB3 /* XCTestStarterKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +228,22 @@
 			path = "View Modifiers";
 			sourceTree = "<group>";
 		};
+		F349069525D619C100AF197C /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				F349069625D619DA00AF197C /* TestConstants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		F349069E25D6222100AF197C /* Migration Version Steps */ = {
+			isa = PBXGroup;
+			children = (
+				F349069F25D6238100AF197C /* PersistentStoreMigrationStepV1ToV2Tests.swift */,
+			);
+			path = "Migration Version Steps";
+			sourceTree = "<group>";
+		};
 		F3525CD825C26A630032829D /* ImageAttachment */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,11 +266,11 @@
 		F357BE6E25BE68DB00A9C20B /* ReviewJournalUnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				F357BE7125BE68DB00A9C20B /* Info.plist */,
+				F357BE6F25BE68DB00A9C20B /* ReviewJournalUnitTests.swift */,
 				F357BE7E25BE68EE00A9C20B /* Cases */,
 				F357BE7F25BE68EE00A9C20B /* Data */,
 				F357BE7C25BE68EE00A9C20B /* Utils */,
-				F357BE6F25BE68DB00A9C20B /* ReviewJournalUnitTests.swift */,
-				F357BE7125BE68DB00A9C20B /* Info.plist */,
 			);
 			path = ReviewJournalUnitTests;
 			sourceTree = "<group>";
@@ -252,6 +278,8 @@
 		F357BE7C25BE68EE00A9C20B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				F3949F2B25E6E567008C0AB3 /* Mocks */,
+				F349069525D619C100AF197C /* Constants */,
 				F357BE8025BE68EE00A9C20B /* Extensions */,
 				F357BE7D25BE68EE00A9C20B /* PersistentStoreMigrationVersion.swift */,
 			);
@@ -261,6 +289,7 @@
 		F357BE7E25BE68EE00A9C20B /* Cases */ = {
 			isa = PBXGroup;
 			children = (
+				F3949F2A25E6E50D008C0AB3 /* Core Data Manager */,
 				F357BE8225BE68EE00A9C20B /* Migration */,
 			);
 			path = Cases;
@@ -286,6 +315,7 @@
 		F357BE8225BE68EE00A9C20B /* Migration */ = {
 			isa = PBXGroup;
 			children = (
+				F349069E25D6222100AF197C /* Migration Version Steps */,
 				F357BE8625BE68EF00A9C20B /* PersistentStoreMigrator */,
 			);
 			path = Migration;
@@ -317,16 +347,32 @@
 			path = Policies;
 			sourceTree = "<group>";
 		};
+		F3949F2A25E6E50D008C0AB3 /* Core Data Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F3949F3025E70384008C0AB3 /* CoreDataManagerTests.swift */,
+			);
+			path = "Core Data Manager";
+			sourceTree = "<group>";
+		};
+		F3949F2B25E6E567008C0AB3 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				F3949F2C25E6E588008C0AB3 /* MockPersistentStoreMigrator.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 		F3B2A79025BDE7E00080D5F5 = {
 			isa = PBXGroup;
 			children = (
 				F3B2A8BD25BE03C60080D5F5 /* CypherPoetCoreDataKit */,
+				F3B2A85025BDF0C30080D5F5 /* Frameworks */,
 				F3B2A79F25BDE7E30080D5F5 /* iOS */,
 				F3B2A7A625BDE7E30080D5F5 /* macOS */,
-				F357BE6E25BE68DB00A9C20B /* ReviewJournalUnitTests */,
 				F3B2A79E25BDE7E30080D5F5 /* Products */,
+				F357BE6E25BE68DB00A9C20B /* ReviewJournalUnitTests */,
 				F3B2A79525BDE7E00080D5F5 /* Shared */,
-				F3B2A85025BDF0C30080D5F5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -621,6 +667,9 @@
 				F357BE7325BE68DB00A9C20B /* PBXTargetDependency */,
 			);
 			name = ReviewJournalUnitTests;
+			packageProductDependencies = (
+				F3949F3525E77E67008C0AB3 /* XCTestStarterKit */,
+			);
 			productName = ReviewJournalUnitTests;
 			productReference = F357BE6D25BE68DB00A9C20B /* ReviewJournalUnitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -700,6 +749,7 @@
 			packageReferences = (
 				F3B2A85D25BDF1540080D5F5 /* XCRemoteSwiftPackageReference "CypherPoetReduxUtils" */,
 				F3B2A89C25BE03790080D5F5 /* XCRemoteSwiftPackageReference "CypherPoetCoreDataKit" */,
+				F3949F3225E77798008C0AB3 /* XCRemoteSwiftPackageReference "XCTestStarterKit" */,
 			);
 			productRefGroup = F3B2A79E25BDE7E30080D5F5 /* Products */;
 			projectDirPath = "";
@@ -748,10 +798,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F357BE8925BE68EF00A9C20B /* FileManager+Utils.swift in Sources */,
+				F3949F3125E70384008C0AB3 /* CoreDataManagerTests.swift in Sources */,
+				F349069725D619DB00AF197C /* TestConstants.swift in Sources */,
 				F3525CA525BF4E4C0032829D /* NSManagedObjectContext+Utils.swift in Sources */,
+				F3949F2D25E6E588008C0AB3 /* MockPersistentStoreMigrator.swift in Sources */,
 				F357BE7025BE68DB00A9C20B /* ReviewJournalUnitTests.swift in Sources */,
 				F357BE8A25BE68EF00A9C20B /* PersistentStoreMigrationVersion.swift in Sources */,
 				F357BE8825BE68EF00A9C20B /* PersistentStoreMigratorTests.swift in Sources */,
+				F34906A025D6238100AF197C /* PersistentStoreMigrationStepV1ToV2Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1155,6 +1209,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F3949F3225E77798008C0AB3 /* XCRemoteSwiftPackageReference "XCTestStarterKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CypherPoet/XCTestStarterKit";
+			requirement = {
+				kind = exactVersion;
+				version = 0.0.1;
+			};
+		};
 		F3B2A85D25BDF1540080D5F5 /* XCRemoteSwiftPackageReference "CypherPoetReduxUtils" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/CypherPoet/CypherPoetReduxUtils";
@@ -1174,6 +1236,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F3949F3525E77E67008C0AB3 /* XCTestStarterKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F3949F3225E77798008C0AB3 /* XCRemoteSwiftPackageReference "XCTestStarterKit" */;
+			productName = XCTestStarterKit;
+		};
 		F3B2A85E25BDF1540080D5F5 /* CypherPoetReduxUtils */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F3B2A85D25BDF1540080D5F5 /* XCRemoteSwiftPackageReference "CypherPoetReduxUtils" */;
