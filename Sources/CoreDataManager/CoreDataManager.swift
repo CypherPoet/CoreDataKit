@@ -6,6 +6,7 @@ import Combine
 public final class CoreDataManager<VersionLog: PersistentStoreVersionLogging> {
     public var storageStrategy: StorageStrategy
     public var migrator: PersistentStoreMigrating
+    public var bundle: Bundle
     
     
     // MARK: - PersistentContainer
@@ -20,10 +21,12 @@ public final class CoreDataManager<VersionLog: PersistentStoreVersionLogging> {
     // MARK: - Init
     public init(
         storageStrategy: StorageStrategy = .persistent,
-        migrator: PersistentStoreMigrating? = nil
+        migrator: PersistentStoreMigrating? = nil,
+        bundle: Bundle = .main
     ) {
         self.storageStrategy = storageStrategy
         self.migrator = migrator ?? PersistentStoreMigrator(storageStrategy: storageStrategy)
+        self.bundle = bundle
     }
 }
 
@@ -33,6 +36,11 @@ extension CoreDataManager {
     
     private var inMemoryStoreDescription: NSPersistentStoreDescription {
         .init(url: URL(fileURLWithPath: "/dev/null"))
+    }
+    
+    
+    public var managedObjectModel: NSManagedObjectModel? {
+        .mergedModel(from: [bundle])
     }
 }
 
@@ -97,7 +105,6 @@ extension CoreDataManager {
 // MARK: - Private Methods
 extension CoreDataManager {
     
-    
     private func performMigrationIfNeeded() -> Future<Void, CoreDataManager.Error> {
         Future { [weak self] promise in
             guard let self = self else { return }
@@ -145,14 +152,23 @@ extension CoreDataManager {
 extension CoreDataManager {
     
     private func makePersistentContainer() -> NSPersistentContainer {
-        let container = NSPersistentContainer(name: VersionLog.persistentContainerName)
+        guard let managedObjectModel = managedObjectModel else {
+            preconditionFailure("Failed to create Managed Object Model")
+        }
+        
+        let container = NSPersistentContainer(
+            name: VersionLog.persistentContainerName,
+            managedObjectModel: managedObjectModel
+        )
         
         if storageStrategy == .inMemory {
             container.persistentStoreDescriptions = [inMemoryStoreDescription]
         }
         
+        print(container.persistentStoreDescriptions[0])
+        
         guard let description = container.persistentStoreDescriptions.first else {
-            preconditionFailure("Unable to find a persistent store description")
+            preconditionFailure("Failed to find persistent store description")
         }
         
         description.type = storageStrategy.storeKind

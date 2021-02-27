@@ -13,6 +13,7 @@ extension NSManagedObjectModel {
         guard let url =
             bundle.url(forResource: modelSchemaName, withExtension: "omo", subdirectory: subdirectoryName)
             ?? bundle.url(forResource: modelSchemaName, withExtension: "mom", subdirectory: subdirectoryName)
+            ?? bundle.url(forResource: modelSchemaName, withExtension: "momd")
         else {
             preconditionFailure("Unable to find managed object model named \"\(modelSchemaName)\" in bundle.")
         }

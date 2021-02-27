@@ -12,16 +12,12 @@ import Combine
 import CypherPoetCoreDataKit
 import XCTestStarterKit
 
-@testable import ReviewJournal
-
-
-// TODO: See if these can be put into the package itself.
-
 
 class CoreDataManagerTests: XCTestCase {
     typealias CoreDataManager = CypherPoetCoreDataKit.CoreDataManager<PersistentStoreMigrationVersion>
     
     private var sut: CoreDataManager!
+    private var storageStrategy: StorageStrategy!
     private var migrator: MockPersistentStoreMigrator!
     
     private var subscriptions = Set<AnyCancellable>()
@@ -38,7 +34,13 @@ extension CoreDataManagerTests {
         super.setUp()
         
         migrator = MockPersistentStoreMigrator()
-        sut = makeSUT(storageStrategy: .inMemory, migrator: migrator)
+        storageStrategy = .inMemory
+        
+        sut = makeSUT(
+            storageStrategy: storageStrategy,
+            migrator: migrator,
+            bundle: Bundle(for: Self.self)
+        )
     }
 
 
@@ -47,6 +49,8 @@ extension CoreDataManagerTests {
         // This method is called after the invocation of each
         // test method in the class.
         sut = nil
+        storageStrategy = nil
+        migrator = nil
 
         super.tearDown()
     }
@@ -57,12 +61,14 @@ extension CoreDataManagerTests {
 private extension CoreDataManagerTests {
 
     func makeSUT(
-        storageStrategy: StorageStrategy,
-        migrator: PersistentStoreMigrating? = nil
+        storageStrategy: StorageStrategy = .inMemory,
+        migrator: PersistentStoreMigrating? = nil,
+        bundle: Bundle = .module
     ) -> CoreDataManager {
         .init(
             storageStrategy: storageStrategy,
-            migrator: migrator
+            migrator: migrator,
+            bundle: bundle
         )
     }
 

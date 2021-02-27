@@ -3,17 +3,17 @@ import CypherPoetCoreDataKit
 
 
 enum PersistentStoreMigrationVersion: String {
-    case version1 = "ReviewJournalTests_v1"
-    case version2 = "ReviewJournalTests_v2"
+    case version1 = "Model"
+    case version2 = "Model v2"
 }
 
 
 // MARK - PersistentStoreVersionLogging
 extension PersistentStoreMigrationVersion: PersistentStoreVersionLogging {
-    
-    var modelSchemaName: String { rawValue }
-//    var modelSchemaSubdirectoryName: String { "\(rawValue).momd" }
-    var modelSchemaSubdirectoryName: String? { nil }
+    static var persistentContainerName: String { "Model" }
+
+    var modelSchemaName: String { "Model" }
+    var modelSchemaSubdirectoryName: String? { "Model" }
     
 
     // MARK: - Current

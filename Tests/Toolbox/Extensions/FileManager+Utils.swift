@@ -37,16 +37,4 @@ extension FileManager {
         try? fileManager.copyItem(at: sourceURL, to: destination)
     }
     
-    
-
-//    static func moveFileFromBundleToTempDirectory(
-//        filename: String
-//    ) -> URL {
-//        let destinationURL = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true).appendingPathComponent(filename)
-//        try? FileManager.default.removeItem(at: destinationURL)
-//        let bundleURL = Bundle(for: CoreDataMigratorTests.self).resourceURL!.appendingPathComponent(filename)
-//        try? FileManager.default.copyItem(at: bundleURL, to: destinationURL)
-//
-//        return destinationURL
-//    }
 }

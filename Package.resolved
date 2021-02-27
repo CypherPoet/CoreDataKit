@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "XCTestStarterKit",
+        "repositoryURL": "https://github.com/CypherPoet/XCTestStarterKit",
+        "state": {
+          "branch": null,
+          "revision": "12e6c4e91972ac812277958dba2c1882592fa49d",
+          "version": "0.0.1"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
