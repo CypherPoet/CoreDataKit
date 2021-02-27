@@ -4,6 +4,8 @@ import CoreData
 
 public protocol PersistentStoreVersionLogging: CaseIterable, Equatable {
     static var currentVersion: Self { get }
+    
+    /// A name with which to initialize this version's persistentContainer.
     static var persistentContainerName: String { get }
     
     var modelSchemaName: String { get }
