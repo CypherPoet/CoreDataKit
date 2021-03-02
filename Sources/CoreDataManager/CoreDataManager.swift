@@ -3,7 +3,7 @@ import CoreData
 import Combine
 
 
-public final class CoreDataManager<VersionLog: PersistentStoreVersionLogging> {
+public class CoreDataManager<VersionLog: PersistentStoreVersionLogging> {
     public var storageStrategy: StorageStrategy
     public var migrator: PersistentStoreMigrating
     public var bundle: Bundle
