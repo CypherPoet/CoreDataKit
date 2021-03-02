@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CypherPoetReduxUtils",
+        "repositoryURL": "https://github.com/CypherPoet/CypherPoetReduxUtils",
+        "state": {
+          "branch": null,
+          "revision": "fbe24e5fb43df254e7fe37782f823f39c9e8b375",
+          "version": "0.2.1"
+        }
+      },
+      {
+        "package": "XCTestStarterKit",
+        "repositoryURL": "https://github.com/CypherPoet/XCTestStarterKit",
+        "state": {
+          "branch": null,
+          "revision": "c569921d4dce297cb579e0d969c2d356250749e4",
+          "version": "0.0.3"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
