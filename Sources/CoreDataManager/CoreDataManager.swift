@@ -42,6 +42,11 @@ extension CoreDataManager {
     public var managedObjectModel: NSManagedObjectModel? {
         .mergedModel(from: [bundle])
     }
+    
+    
+    public var storeURL: URL? {
+        persistentContainer.persistentStoreDescriptions.first?.url
+    }
 }
 
 
@@ -109,7 +114,7 @@ extension CoreDataManager {
         Future { [weak self] promise in
             guard let self = self else { return }
 
-            guard let storeURL = self.persistentContainer.persistentStoreDescriptions.first?.url else {
+            guard let storeURL = self.storeURL else {
                 promise(.failure(.persistentStoreURLNotFound))
                 return
             }

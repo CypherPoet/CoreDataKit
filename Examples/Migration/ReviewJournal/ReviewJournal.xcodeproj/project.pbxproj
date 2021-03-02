@@ -53,7 +53,6 @@
 		F36565D525C65B690081E21E /* ImageAttachmentToImageAttachment_v3_to_v4.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36565D425C65B690081E21E /* ImageAttachmentToImageAttachment_v3_to_v4.swift */; };
 		F36565D625C65B690081E21E /* ImageAttachmentToImageAttachment_v3_to_v4.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36565D425C65B690081E21E /* ImageAttachmentToImageAttachment_v3_to_v4.swift */; };
 		F3949F2D25E6E588008C0AB3 /* MockPersistentStoreMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3949F2C25E6E588008C0AB3 /* MockPersistentStoreMigrator.swift */; };
-		F3949F3125E70384008C0AB3 /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3949F3025E70384008C0AB3 /* CoreDataManagerTests.swift */; };
 		F3949F3625E77E67008C0AB3 /* XCTestStarterKit in Frameworks */ = {isa = PBXBuildFile; productRef = F3949F3525E77E67008C0AB3 /* XCTestStarterKit */; };
 		F3B2A7BF25BDE7E30080D5F5 /* ReviewJournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B2A79625BDE7E00080D5F5 /* ReviewJournalApp.swift */; };
 		F3B2A7C025BDE7E30080D5F5 /* ReviewJournalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B2A79625BDE7E00080D5F5 /* ReviewJournalApp.swift */; };
@@ -156,7 +155,6 @@
 		F36565AB25C5CCA70081E21E /* ReviewJournal v4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ReviewJournal v4.xcdatamodel"; sourceTree = "<group>"; };
 		F36565D425C65B690081E21E /* ImageAttachmentToImageAttachment_v3_to_v4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAttachmentToImageAttachment_v3_to_v4.swift; sourceTree = "<group>"; };
 		F3949F2C25E6E588008C0AB3 /* MockPersistentStoreMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPersistentStoreMigrator.swift; sourceTree = "<group>"; };
-		F3949F3025E70384008C0AB3 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
 		F3B2A79625BDE7E00080D5F5 /* ReviewJournalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewJournalApp.swift; sourceTree = "<group>"; };
 		F3B2A79825BDE7E30080D5F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F3B2A79D25BDE7E30080D5F5 /* ReviewJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReviewJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,7 +287,6 @@
 		F357BE7E25BE68EE00A9C20B /* Cases */ = {
 			isa = PBXGroup;
 			children = (
-				F3949F2A25E6E50D008C0AB3 /* Core Data Manager */,
 				F357BE8225BE68EE00A9C20B /* Migration */,
 			);
 			path = Cases;
@@ -345,14 +342,6 @@
 				F349068C25D5C2B500AF197C /* ReviewToReview_v4_to_v5.swift */,
 			);
 			path = Policies;
-			sourceTree = "<group>";
-		};
-		F3949F2A25E6E50D008C0AB3 /* Core Data Manager */ = {
-			isa = PBXGroup;
-			children = (
-				F3949F3025E70384008C0AB3 /* CoreDataManagerTests.swift */,
-			);
-			path = "Core Data Manager";
 			sourceTree = "<group>";
 		};
 		F3949F2B25E6E567008C0AB3 /* Mocks */ = {
@@ -798,7 +787,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F357BE8925BE68EF00A9C20B /* FileManager+Utils.swift in Sources */,
-				F3949F3125E70384008C0AB3 /* CoreDataManagerTests.swift in Sources */,
 				F349069725D619DB00AF197C /* TestConstants.swift in Sources */,
 				F3525CA525BF4E4C0032829D /* NSManagedObjectContext+Utils.swift in Sources */,
 				F3949F2D25E6E588008C0AB3 /* MockPersistentStoreMigrator.swift in Sources */,
@@ -1081,7 +1069,7 @@
 				DEVELOPMENT_TEAM = QRXXH2RKAG;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1103,7 +1091,7 @@
 				DEVELOPMENT_TEAM = QRXXH2RKAG;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1214,7 +1202,7 @@
 			repositoryURL = "https://github.com/CypherPoet/XCTestStarterKit";
 			requirement = {
 				kind = exactVersion;
-				version = 0.0.1;
+				version = 0.0.3;
 			};
 		};
 		F3B2A85D25BDF1540080D5F5 /* XCRemoteSwiftPackageReference "CypherPoetReduxUtils" */ = {
