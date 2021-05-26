@@ -106,7 +106,6 @@
 		F3B2A87D25BDFA2C0080D5F5 /* Review+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B2A87A25BDFA2C0080D5F5 /* Review+CoreDataClass.swift */; };
 		F3B2A87E25BDFA2C0080D5F5 /* Review+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B2A87B25BDFA2C0080D5F5 /* Review+CoreDataProperties.swift */; };
 		F3B2A87F25BDFA2C0080D5F5 /* Review+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B2A87B25BDFA2C0080D5F5 /* Review+CoreDataProperties.swift */; };
-		F3B2A8A425BE03840080D5F5 /* CypherPoetCoreDataKit in Frameworks */ = {isa = PBXBuildFile; productRef = F3B2A8A325BE03840080D5F5 /* CypherPoetCoreDataKit */; };
 		F3B2A8CF25BE04D50080D5F5 /* CypherPoetCoreDataKit in Frameworks */ = {isa = PBXBuildFile; productRef = F3B2A8CE25BE04D50080D5F5 /* CypherPoetCoreDataKit */; };
 /* End PBXBuildFile section */
 
@@ -121,6 +120,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F3203187265E112100CB3A71 /* CypherPoetCoreDataKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CypherPoetCoreDataKit; path = ../..; sourceTree = "<group>"; };
 		F345131625CBB3AE00DFC971 /* ImageCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCarouselView.swift; sourceTree = "<group>"; };
 		F345132425CBB5EC00DFC971 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F349066725D4D6EE00AF197C /* ReviewJournal v5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "ReviewJournal v5.xcdatamodel"; sourceTree = "<group>"; };
@@ -186,7 +186,6 @@
 		F3B2A87325BDF8DA0080D5F5 /* ReviewJournal.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReviewJournal.xcdatamodel; sourceTree = "<group>"; };
 		F3B2A87A25BDFA2C0080D5F5 /* Review+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Review+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F3B2A87B25BDFA2C0080D5F5 /* Review+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Review+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		F3B2A8BD25BE03C60080D5F5 /* CypherPoetCoreDataKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CypherPoetCoreDataKit; path = ../../..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,7 +211,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F3B2A86525BDF1640080D5F5 /* CypherPoetReduxUtils in Frameworks */,
-				F3B2A8A425BE03840080D5F5 /* CypherPoetCoreDataKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,7 +353,7 @@
 		F3B2A79025BDE7E00080D5F5 = {
 			isa = PBXGroup;
 			children = (
-				F3B2A8BD25BE03C60080D5F5 /* CypherPoetCoreDataKit */,
+				F3203187265E112100CB3A71 /* CypherPoetCoreDataKit */,
 				F3B2A85025BDF0C30080D5F5 /* Frameworks */,
 				F3B2A79F25BDE7E30080D5F5 /* iOS */,
 				F3B2A7A625BDE7E30080D5F5 /* macOS */,
@@ -699,7 +697,6 @@
 			name = "ReviewJournal (macOS)";
 			packageProductDependencies = (
 				F3B2A86425BDF1640080D5F5 /* CypherPoetReduxUtils */,
-				F3B2A8A325BE03840080D5F5 /* CypherPoetCoreDataKit */,
 			);
 			productName = "ReviewJournal (macOS)";
 			productReference = F3B2A7A525BDE7E30080D5F5 /* ReviewJournal.app */;
@@ -737,7 +734,6 @@
 			mainGroup = F3B2A79025BDE7E00080D5F5;
 			packageReferences = (
 				F3B2A85D25BDF1540080D5F5 /* XCRemoteSwiftPackageReference "CypherPoetReduxUtils" */,
-				F3B2A89C25BE03790080D5F5 /* XCRemoteSwiftPackageReference "CypherPoetCoreDataKit" */,
 				F3949F3225E77798008C0AB3 /* XCRemoteSwiftPackageReference "XCTestStarterKit" */,
 			);
 			productRefGroup = F3B2A79E25BDE7E30080D5F5 /* Products */;
@@ -1213,14 +1209,6 @@
 				version = 0.2.1;
 			};
 		};
-		F3B2A89C25BE03790080D5F5 /* XCRemoteSwiftPackageReference "CypherPoetCoreDataKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/CypherPoet/CypherPoetCoreDataKit";
-			requirement = {
-				kind = exactVersion;
-				version = 0.0.16;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1238,11 +1226,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F3B2A85D25BDF1540080D5F5 /* XCRemoteSwiftPackageReference "CypherPoetReduxUtils" */;
 			productName = CypherPoetReduxUtils;
-		};
-		F3B2A8A325BE03840080D5F5 /* CypherPoetCoreDataKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F3B2A89C25BE03790080D5F5 /* XCRemoteSwiftPackageReference "CypherPoetCoreDataKit" */;
-			productName = CypherPoetCoreDataKit;
 		};
 		F3B2A8CE25BE04D50080D5F5 /* CypherPoetCoreDataKit */ = {
 			isa = XCSwiftPackageProductDependency;
