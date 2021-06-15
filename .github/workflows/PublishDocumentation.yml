@@ -12,8 +12,8 @@ jobs:
       - name: Generate Documentation
         uses: SwiftDocOrg/swift-doc@master
         with:
-          inputs: "Sources/MyLibrary"
-          module-name: MyLibrary
+          inputs: "Sources/CypherPoetCoreDataKit"
+          module-name: CypherPoetCoreDataKit
           format: html
           output: "Documentation"
 
