@@ -1,4 +1,4 @@
-// swift-tools-version:5.4
+// swift-tools-version:5.5
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,10 +6,10 @@ import PackageDescription
 let package = Package(
     name: "CypherPoetCoreDataKit",
     platforms: [
-        .iOS(SupportedPlatform.IOSVersion.v13),
-        .macOS(SupportedPlatform.MacOSVersion.v10_15),
-        .tvOS(SupportedPlatform.TVOSVersion.v13),
-        .watchOS(SupportedPlatform.WatchOSVersion.v6),
+        .iOS("15.0"),
+        .macOS("12.0"),
+        .tvOS(SupportedPlatform.TVOSVersion.v14),
+        .watchOS(SupportedPlatform.WatchOSVersion.v7),
     ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.

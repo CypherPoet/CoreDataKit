@@ -10,5 +10,4 @@ extension CoreDataManager {
         case migrationFailed(PersistentStoreMigrator.Error)
         case unknownError(Swift.Error)
     }
-    
 }

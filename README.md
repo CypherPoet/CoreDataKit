@@ -31,7 +31,7 @@ _A collection of utilities for building Core Data applications in SwiftUI._
 
 ## 🚧 Disclaimer
 
-This library is still very much a WIP as I study some of the new best practices, patterns, and affordances for Core Data after the release of SwiftUI 2.0. Please treat it as a guideline/reference for the time being 🙂.
+This library is still very much a WIP as I study/experiment with/develop best practices, patterns, and affordances for Core Data after the releases of Swift 5.5 and "SwiftUI 3.0". Please treat it as a guideline/reference for the time being 🙂.
 
 
 ## Features
