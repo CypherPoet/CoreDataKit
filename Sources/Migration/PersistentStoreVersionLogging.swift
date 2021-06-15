@@ -8,7 +8,9 @@ public protocol PersistentStoreVersionLogging: CaseIterable, Equatable {
     /// A name with which to initialize this version's persistentContainer.
     static var persistentContainerName: String { get }
     
+    /// The name corresponding to the current persistent store version's `.xcdatamodeld` file.
     var modelSchemaName: String { get }
+    
     var modelSchemaSubdirectoryName: String? { get }
     
     

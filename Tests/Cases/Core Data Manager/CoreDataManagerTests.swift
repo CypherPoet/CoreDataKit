@@ -58,9 +58,9 @@ extension CoreDataManagerTests {
 
 
 // MARK: - Factories
-private extension CoreDataManagerTests {
+extension CoreDataManagerTests {
 
-    func makeSUT(
+    private func makeSUT(
         storageStrategy: StorageStrategy = .inMemory,
         migrator: PersistentStoreMigrating? = nil,
         bundle: Bundle = .module
@@ -74,25 +74,25 @@ private extension CoreDataManagerTests {
 
     /// Helper to make the system under test from any default initializer
     /// and then test its initial conditions
-    func makeSUTFromDefaults() -> CoreDataManager {
+    private func makeSUTFromDefaults() -> CoreDataManager {
         .init()
     }
 }
 
 
 // MARK: - "Given" Helpers (Conditions Exist)
-private extension CoreDataManagerTests {
+extension CoreDataManagerTests {
 
-    func givenDefaultSUTIsCreated() {
+    private func givenDefaultSUTIsCreated() {
         sut = makeSUTFromDefaults()
     }
 }
 
 
 // MARK: - "When" Helpers (Actions Are Performed)
-private extension CoreDataManagerTests {
+extension CoreDataManagerTests {
 
-    func whenSetupHasCompleted() throws {
+    private func whenSetupHasCompleted() throws {
         let publisher = sut.setup()
         
         let _ = try awaitCompletion(of: publisher)
@@ -121,7 +121,7 @@ extension CoreDataManagerTests {
 // MARK: - Test Initializing with Custom Arguments
 extension CoreDataManagerTests {
 
-    func test_CoreDataManager_WhenCreatedWithCustomStorageStrategy_CreatesDefaultMigratorWithCustomStorageStrategy() throws {
+    func test_WhenCreatedWithCustomStorageStrategy_CreatesDefaultMigratorWithCustomStorageStrategy() throws {
         sut = makeSUT(storageStrategy: .inMemory)
         XCTAssertEqual(sut.migrator.storageStrategy, .inMemory)
         
@@ -131,10 +131,33 @@ extension CoreDataManagerTests {
 }
 
 
+// MARK: - Persistent Store Description Configuration
+extension CoreDataManagerTests {
+
+    
+    func test_GivenPersistentStorageType_ConfiguresStoresToBeAddedAsynchronously() throws {
+        sut = makeSUT(storageStrategy: .persistent)
+        
+        let persistentStoreDescription = try XCTUnwrap(sut.persistentContainer.persistentStoreDescriptions.first)
+        
+        XCTAssertTrue(persistentStoreDescription.shouldAddStoreAsynchronously)
+    }
+    
+    
+    func test_GivenInMemoryStorageType_ConfiguresStoresToBeAddedSynchronously() throws {
+        sut = makeSUT(storageStrategy: .inMemory)
+        
+        let persistentStoreDescription = try XCTUnwrap(sut.persistentContainer.persistentStoreDescriptions.first)
+        
+        XCTAssertFalse(persistentStoreDescription.shouldAddStoreAsynchronously)
+    }
+}
+
+
 // MARK: - `setup` Tests
 extension CoreDataManagerTests {
 
-    func test_CoreDataManagerSetup_LoadsPersistentStore() throws {
+    func test_Setup_LoadsPersistentStore() throws {
         try whenSetupHasCompleted()
         
         XCTAssertGreaterThan(
@@ -144,7 +167,7 @@ extension CoreDataManagerTests {
     }
     
     
-    func test_CoreDataManagerSetup_MakesMainContextFromPersistentContainerViewContext() throws {
+    func test_Setup_MakesMainContextFromPersistentContainerViewContext() throws {
         try whenSetupHasCompleted()
         
         XCTAssertEqual(
@@ -154,7 +177,7 @@ extension CoreDataManagerTests {
     }
     
     
-    func test_CoreDataManagerSetup_MakesMainContextFromThePersistentStoreCoordinatorsFirstStore() throws {
+    func test_Setup_MakesMainContextFromThePersistentStoreCoordinatorsFirstStore() throws {
         try whenSetupHasCompleted()
         
         let sutPersistentStore = try XCTUnwrap(
@@ -174,7 +197,7 @@ extension CoreDataManagerTests {
 // MARK: - Migration Handing Tests
 extension CoreDataManagerTests {
     
-    func test_CoreDataManagerSetup_ChecksIfMigrationIsNeeded() throws {
+    func test_Setup_ChecksIfMigrationIsNeeded() throws {
         XCTAssertFalse(migrator.requiresMigrationWasCalled)
         
         try whenSetupHasCompleted()
@@ -183,7 +206,7 @@ extension CoreDataManagerTests {
     }
     
     
-    func test_CoreDataManagerSetup_WhenMigrationIsNeeded_PerformsMigration() throws {
+    func test_Setup_WhenMigrationIsNeeded_PerformsMigration() throws {
         migrator.isMigrationExpectedToBeRequired = true
         XCTAssertFalse(migrator.migrateStoreWasCalled)
         
@@ -193,7 +216,7 @@ extension CoreDataManagerTests {
     }
     
     
-    func test_CoreDataManagerSetup_WhenMigrationIsNotNeeded_DoesNotPerformMigration() throws {
+    func test_Setup_WhenMigrationIsNotNeeded_DoesNotPerformMigration() throws {
         migrator.isMigrationExpectedToBeRequired = false
         XCTAssertFalse(migrator.migrateStoreWasCalled)
         

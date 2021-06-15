@@ -34,11 +34,6 @@ public class CoreDataManager<VersionLog: PersistentStoreVersionLogging> {
 // MARK: - Computeds
 extension CoreDataManager {
     
-    private var inMemoryStoreDescription: NSPersistentStoreDescription {
-        .init(url: URL(fileURLWithPath: "/dev/null"))
-    }
-    
-    
     public var managedObjectModel: NSManagedObjectModel? {
         .mergedModel(from: [bundle])
     }
@@ -153,6 +148,7 @@ extension CoreDataManager {
 }
 
 
+
 // MARK: - Private Factories
 extension CoreDataManager {
     
@@ -167,20 +163,31 @@ extension CoreDataManager {
         )
         
         if storageStrategy == .inMemory {
-            container.persistentStoreDescriptions = [inMemoryStoreDescription]
+            container.persistentStoreDescriptions = [.inMemoryStore]
         }
-        
-        print(container.persistentStoreDescriptions[0])
         
         guard let description = container.persistentStoreDescriptions.first else {
             preconditionFailure("Failed to find persistent store description")
         }
         
+        configurePersistentStoreDescription(description)
+        
+        return container
+    }
+    
+    
+    private func configurePersistentStoreDescription(_ description: NSPersistentStoreDescription) {
         description.type = storageStrategy.storeKind
         description.shouldMigrateStoreAutomatically = false
         description.shouldInferMappingModelAutomatically = false
         
-        return container
+        // Default to loading the store asynchronously to allow for (potentially)
+        // slow store migrations.
+        description.shouldAddStoreAsynchronously = true
+        
+        if storageStrategy == .inMemory {
+            description.shouldAddStoreAsynchronously = false
+        }
     }
     
     
