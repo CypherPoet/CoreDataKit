@@ -131,9 +131,6 @@ extension CoreDataManager {
             preconditionFailure("Failed to create Managed Object Model")
         }
         
-        print("makePersistentContainer: bundle url absoluteString")
-        print(bundle.bundleURL.absoluteString)
-        
         let container = NSPersistentContainer(
             name: VersionLog.persistentContainerName,
             managedObjectModel: managedObjectModel

@@ -55,13 +55,21 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
       <CodeCoverageTargets>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CypherPoetCoreDataKitTests"
             BuildableName = "CypherPoetCoreDataKitTests"
             BlueprintName = "CypherPoetCoreDataKitTests"
+            ReferencedContainer = "container:">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "CypherPoetCoreDataKit"
+            BuildableName = "CypherPoetCoreDataKit"
+            BlueprintName = "CypherPoetCoreDataKit"
             ReferencedContainer = "container:">
          </BuildableReference>
       </CodeCoverageTargets>

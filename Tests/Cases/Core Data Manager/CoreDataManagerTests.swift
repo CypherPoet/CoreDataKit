@@ -8,6 +8,7 @@
 
 
 import XCTest
+import CoreData
 import CypherPoetCoreDataKit
 
 
@@ -17,6 +18,7 @@ class CoreDataManagerTests: XCTestCase {
     private var sut: SystemUnderTest!
     private var storageStrategy: StorageStrategy!
     private var migrator: MockPersistentStoreMigrator!
+    private var bundle: Bundle!
 }
 
 
@@ -27,15 +29,16 @@ extension CoreDataManagerTests {
         // Put setup code here.
         // This method is called before the invocation of each
         // test method in the class.
-        super.setUp()
+        try super.setUpWithError()
         
         migrator = MockPersistentStoreMigrator()
         storageStrategy = .inMemory
+        bundle = .module
         
         sut = makeSUT(
             storageStrategy: storageStrategy,
             migrator: migrator,
-            bundle: Bundle(for: Self.self)
+            bundle: bundle
         )
     }
 
@@ -47,8 +50,9 @@ extension CoreDataManagerTests {
         sut = nil
         storageStrategy = nil
         migrator = nil
-
-        super.tearDown()
+        bundle = nil
+        
+        try super.tearDownWithError()
     }
 }
 
@@ -226,7 +230,6 @@ extension CoreDataManagerTests {
         do {
             try await whenSetupHasCompleted()
         } catch {
-//            XCTAssertEqual(error as? SystemUnderTest.Error, .persistentStoreURLNotFound)
             guard case SystemUnderTest.Error.persistentStoreURLNotFound = error else {
                 XCTFail()
                 return
