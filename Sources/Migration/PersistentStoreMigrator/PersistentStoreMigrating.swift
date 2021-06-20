@@ -8,7 +8,8 @@ public protocol PersistentStoreMigrating {
     
     func requiresMigration<Version: PersistentStoreVersionLogging>(
         at storeURL: URL,
-        to version: Version
+        to version: Version,
+        in bundle: Bundle
     ) -> Bool
     
 

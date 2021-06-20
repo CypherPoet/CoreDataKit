@@ -89,7 +89,11 @@ extension CoreDataManager {
 
         let currentVersion = VersionLog.currentVersion
 
-        guard migrator.requiresMigration(at: storeURL, to: currentVersion) else {
+        guard migrator.requiresMigration(
+            at: storeURL,
+            to: currentVersion,
+            in: bundle
+        ) else {
             return
         }
 
@@ -126,6 +130,9 @@ extension CoreDataManager {
         guard let managedObjectModel = managedObjectModel else {
             preconditionFailure("Failed to create Managed Object Model")
         }
+        
+        print("makePersistentContainer: bundle url absoluteString")
+        print(bundle.bundleURL.absoluteString)
         
         let container = NSPersistentContainer(
             name: VersionLog.persistentContainerName,

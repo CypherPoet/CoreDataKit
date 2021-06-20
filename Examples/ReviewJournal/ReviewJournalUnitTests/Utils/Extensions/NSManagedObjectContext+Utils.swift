@@ -13,7 +13,13 @@ extension NSManagedObjectContext {
     
     convenience init(for model: NSManagedObjectModel, at storeURL: URL) {
         let persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
-        try! persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: storeURL, options: nil)
+        
+        try! persistentStoreCoordinator.addPersistentStore(
+            ofType: NSSQLiteStoreType,
+            configurationName: nil,
+            at: storeURL,
+            options: nil
+        )
         
         self.init(concurrencyType: .mainQueueConcurrencyType)
         

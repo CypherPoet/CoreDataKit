@@ -22,14 +22,18 @@ extension PersistentStoreMigrator {
     
     public func requiresMigration<Version>(
         at storeURL: URL,
-        to version: Version
+        to version: Version,
+        in bundle: Bundle = .main
     ) -> Bool where Version: PersistentStoreVersionLogging {
         guard
             let metadata = NSPersistentStoreCoordinator.metadata(
                 forStoreAt: storeURL,
                 using: storageStrategy
             ),
-            let compatibleVersion = Version.compatibleVersion(for: metadata)
+            let compatibleVersion = Version.compatibleVersion(
+                for: metadata,
+                in: bundle
+            )
         else {
             return false
         }
