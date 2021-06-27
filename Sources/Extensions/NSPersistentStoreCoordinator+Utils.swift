@@ -13,7 +13,7 @@ extension NSPersistentStoreCoordinator {
         using storageStrategy: StorageStrategy = .persistent
     ) -> PersistentStoreMetaData?  {
         try? NSPersistentStoreCoordinator.metadataForPersistentStore(
-            ofType: storageStrategy.storeKind,
+            ofType: storageStrategy.storeKind.rawValue,
             at: storeURL,
             options: nil
         )
@@ -34,7 +34,7 @@ extension NSPersistentStoreCoordinator {
             destinationOptions: nil,
             withPersistentStoreFrom: sourceURL,
             sourceOptions: nil,
-            ofType: storageStrategy.storeKind
+            ofType: storageStrategy.storeKind.rawValue
         )
     }
     
@@ -47,7 +47,7 @@ extension NSPersistentStoreCoordinator {
         
         try persistentStoreCoordinator.destroyPersistentStore(
             at: targetURL,
-            ofType: storageStrategy.storeKind,
+            ofType: storageStrategy.storeKind.rawValue,
             options: nil
         )
     }

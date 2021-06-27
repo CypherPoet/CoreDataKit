@@ -73,11 +73,11 @@ extension PersistentStoreMigrator {
             do {
                 try migrationManager.migrateStore(
                     from: temporaryStoreURL,
-                    sourceType: storeKind,
+                    sourceType: storeKind.rawValue,
                     options: nil,
                     with: migrationStep.mappingModel,
                     toDestinationURL: destinationURL,
-                    destinationType: storeKind,
+                    destinationType: storeKind.rawValue,
                     destinationOptions: nil
                 )
             } catch {
@@ -210,7 +210,7 @@ extension PersistentStoreMigrator {
         do {
             // Force the checkpointing operation.
             let store = try persistentStoreCoordinator.addPersistentStore(
-                ofType: storageStrategy.storeKind,
+                ofType: storageStrategy.storeKind.rawValue,
                 configurationName: nil,
                 at: storeURL,
                 options: options
