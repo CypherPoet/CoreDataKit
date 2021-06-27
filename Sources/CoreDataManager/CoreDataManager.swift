@@ -59,8 +59,14 @@ extension CoreDataManager {
     }
 
     
-    public func save(_ context: NSManagedObjectContext) async throws {
-        try await context.perform {
+    ///
+    /// - Parameters:
+    ///   - taskSchedulingMode: Determines how the current context's thread will execute the task.
+    public func save(
+        _ context: NSManagedObjectContext,
+        taskSchedulingMode: NSManagedObjectContext.ScheduledTaskType = .immediate
+    ) async throws {
+        try await context.perform(schedule: taskSchedulingMode) {
             if context.hasChanges {
                 do {
                     try context.save()
@@ -72,9 +78,14 @@ extension CoreDataManager {
     }
 
     
-    public func saveContexts() async throws {
-        try await save(backgroundContext)
-        try await save(mainContext)
+    ///
+    /// - Parameters:
+    ///   - taskSchedulingMode: Determines how the current context's thread will execute the task.
+    public func saveContexts(
+        taskSchedulingMode: NSManagedObjectContext.ScheduledTaskType = .immediate
+    ) async throws {
+        try await save(backgroundContext, taskSchedulingMode: taskSchedulingMode)
+        try await save(mainContext, taskSchedulingMode: taskSchedulingMode)
     }
 }
 
@@ -151,7 +162,7 @@ extension CoreDataManager {
     
     
     private func configurePersistentStoreDescription(_ description: NSPersistentStoreDescription) {
-        description.type = storageStrategy.storeKind
+        description.type = storageStrategy.storeKind.rawValue
         description.shouldMigrateStoreAutomatically = false
         description.shouldInferMappingModelAutomatically = false
         
