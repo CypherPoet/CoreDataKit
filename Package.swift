@@ -34,7 +34,6 @@ let package = Package(
             name: "CoreDataKitTests",
             dependencies: [
                 "CoreDataKit",
-//                "XCTestStarterKit",
             ],
             path: "Tests/",
             resources: [

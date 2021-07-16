@@ -36,12 +36,12 @@ This library is still very much a WIP as I study/experiment with/develop best pr
 
 ## Features
 
-- ✅ A [`CoreDataManager`](./Sources/CoreDataManager/) that handles setting up your ["Core Data Stack"](https://developer.apple.com/documentation/coredata/core_data_stack).
+- ✅ A [`CoreDataManager`](./Sources/CoreDataManager/) that handles setting up a ["Core Data Stack"](https://developer.apple.com/documentation/coredata/core_data_stack).
 - ✅ A [`rich set of utilities`](./Sources/Migration/) for performing Core Data migrations.
 - ✅ A [`FetchedResultsControlling` protocol](./Sources/FetchUtils/FetchedResultsControlling.swift) that helps architect `NSFetchedResultsController` instances and extract data from their `NSFetchRequest` results.
-- ✅ Predicate Utilities
-- ✅ Strongly-typed errors.
-- ✅ `NSPersistentStore` helpers for using `NSSQLiteStoreType` in production apps and `NSInMemoryStoreType` in tests or previews:
+- ✅ Utilities for composing `NSPredicate` instances in a strongly-typed fashion. 
+- ✅ Strongly-typed errors under types like `CoreDataManager`, `PersistentStoreMigrator` and more.
+- ✅ `NSPersistentStore` helpers for using different SQLite writing locations in development and production.
 
 
 ## Installation
@@ -61,7 +61,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/CypherPoet/CoreDataKit", 
-            .exact("0.0.55")
+            .exact("0.0.19")
         ),
     ],
     //...
