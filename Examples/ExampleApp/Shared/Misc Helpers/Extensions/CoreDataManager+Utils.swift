@@ -7,11 +7,11 @@
 //
 
 import Foundation
-import CypherPoetCoreDataKit
+import CoreDataKit
 
 
 // Expose the `CoreDataManager` type to the rest of our app
-typealias CoreDataManager = CypherPoetCoreDataKit.CoreDataManager
+typealias CoreDataManager = CoreDataKit.CoreDataManager
 
 
 extension CoreDataManager {

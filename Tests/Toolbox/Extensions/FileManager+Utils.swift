@@ -14,27 +14,31 @@ extension FileManager {
         }
     }
     
-    
+
     static func copyFile(
+        in bundle: Bundle,
         named fileName: String,
         withExtension extensionName: String,
-        inSubdirectory subdirectoryName: String? = nil,
+        atSubdirectory subdirectoryName: String? = nil,
         to destination: URL,
         using fileManager: FileManager = .default
     ) {
         try? fileManager.removeItem(at: destination)
         
-        guard let sourceURL = Bundle.module.url(
-            forResource: fileName,
-            withExtension: extensionName,
-            subdirectory: subdirectoryName
-        ) else {
-            fatalError("Unable to find URL in Bundle")
+        guard var baseURL = bundle.resourceURL else {
+            preconditionFailure(("Unable to find resourceURL in Bundle"))
         }
+        
+        if let subdirectoryName = subdirectoryName {
+            baseURL = baseURL.appendingPathComponent(subdirectoryName, isDirectory: true)
+        }
+        
+        let sourceURL = baseURL
+            .appendingPathComponent(fileName)
+            .appendingPathExtension(extensionName)
         
         print("Copying from \(sourceURL) to \(destination)")
         
         try? fileManager.copyItem(at: sourceURL, to: destination)
     }
-    
 }

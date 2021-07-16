@@ -1,5 +1,5 @@
 import Foundation
-import CypherPoetCoreDataKit
+import CoreDataKit
 
 
 enum PersistentStoreMigrationVersion: String {
@@ -8,12 +8,11 @@ enum PersistentStoreMigrationVersion: String {
 }
 
 
-// MARK - PersistentStoreVersionLogging
+// MARK: - PersistentStoreVersionLogging
 extension PersistentStoreMigrationVersion: PersistentStoreVersionLogging {
     static var persistentContainerName: String { "Model" }
 
-    var modelSchemaName: String { "Model" }
-    var modelSchemaSubdirectoryName: String? { "Model" }
+    var modelSchemaName: String { rawValue }
     
 
     // MARK: - Current

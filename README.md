@@ -1,16 +1,16 @@
-# CypherPoetCoreDataKit
+# CoreDataKit
 
 <div align="center">
    <img width="600px" src="./Extras/Images/Banner-1.png" alt="CypherPoetCoreDataKit Header Image">
 </div>
 
 <p>
-    <img src="https://img.shields.io/badge/Swift-5.4-F06C33.svg" />
-    <img src="https://img.shields.io/badge/iOS-13.0+-865EFC.svg" />
-    <img src="https://img.shields.io/badge/iPadOS-13.0+-F65EFC.svg" />
-    <img src="https://img.shields.io/badge/macOS-10.15+-179AC8.svg" />
-    <img src="https://img.shields.io/badge/tvOS-13.0+-41465B.svg" />
-    <img src="https://img.shields.io/badge/watchOS-6.0+-1FD67A.svg" />
+    <img src="https://img.shields.io/badge/Swift-5.5-F06C33.svg" />
+    <img src="https://img.shields.io/badge/iOS-15.0+-865EFC.svg" />
+    <img src="https://img.shields.io/badge/iPadOS-15.0+-F65EFC.svg" />
+    <img src="https://img.shields.io/badge/macOS-12.0+-179AC8.svg" />
+    <img src="https://img.shields.io/badge/tvOS-15.0+-41465B.svg" />
+    <img src="https://img.shields.io/badge/watchOS-8.0+-1FD67A.svg" />
     <img src="https://img.shields.io/badge/License-MIT-blue.svg" />
     <img src="https://github.com/CypherPoet/CypherPoetCoreDataKit/workflows/Build%20&%20Test/badge.svg" />
     <a href="https://github.com/apple/swift-package-manager">
@@ -31,7 +31,7 @@ _A collection of utilities for building Core Data applications in SwiftUI._
 
 ## 🚧 Disclaimer
 
-This library is still very much a WIP as I study some of the new best practices, patterns, and affordances for Core Data after the release of SwiftUI 2.0. Please treat it as a guideline/reference for the time being 🙂.
+This library is still very much a WIP as I study/experiment with/develop best practices, patterns, and affordances for Core Data after the releases of Swift 5.5 and "SwiftUI 3.0". Please treat it as a guideline/reference for the time being 🙂.
 
 
 ## Features
@@ -48,36 +48,34 @@ This library is still very much a WIP as I study some of the new best practices,
 
 ### Xcode Projects
 
-### Xcode Projects
-
 Select `File` -> `Swift Packages` -> `Add Package Dependency` and enter `https://github.com/CypherPoet/CypherPoetCoreDataKit`.
 
 
 ### Swift Package Manager Projects
 
-You can add `CypherPoetCoreDataKit` as a package dependency in your `Package.swift` file:
+You can add this project as a package dependency in your `Package.swift` file:
 
 ```swift
 let package = Package(
     //...
     dependencies: [
         .package(
-            url: "https://github.com/CypherPoet/CypherPoetCoreDataKit",
-            .exact("0.0.18")
+            url: "https://github.com/CypherPoet/CoreDataKit", 
+            .exact("0.0.55")
         ),
     ],
     //...
 )
 ```
 
-From there, refer to `CypherPoetCoreDataKit` as a "target dependency" in any of _your_ package's targets that need it.
+From there, refer to the `CoreDataKit` "product" delivered by the `CypherPoetCoreDataKit` "package" inside of any of your project's target dependencies:
 
 ```swift
 targets: [
     .target(
         name: "YourLibrary",
         dependencies: [
-          "CypherPoetCoreDataKit",
+            .product(name: "CoreDataKit", package: "CypherPoetCoreDataKit"),
         ],
         ...
     ),
@@ -85,7 +83,7 @@ targets: [
 ]
 ```
 
-Then simply `import CypherPoetCoreDataKit` wherever you’d like to use it.
+Then simply `import CoreDataKit` wherever you’d like to use it.
 
 
 
@@ -95,7 +93,7 @@ Currently, usage of these utilities is best demonstrated by the various example 
 
 ### Dynamically initializing a Core Data Stack for your app depending on whether it's running for production or for Xcode Previews.
 
-- [🔗 Example](https://github.com/CypherPoet/CypherPoetCoreDataKit/blob/migration-helpers/Examples/ReviewJournal/Shared/Misc%20Utils/Extensions/CoreDataManager%2BUtils.swift)
+- [🔗 Example](https://github.com/CypherPoet/CoreDataKit/blob/migration-helpers/Examples/ReviewJournal/Shared/Misc%20Utils/Extensions/CoreDataManager%2BUtils.swift)
 
 ### Setting up the Core Data stack on launch
 

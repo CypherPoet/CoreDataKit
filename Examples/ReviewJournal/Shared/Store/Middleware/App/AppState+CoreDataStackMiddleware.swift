@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 import CypherPoetReduxUtils
-import CypherPoetCoreDataKit
+import CoreDataKit
 
 
 extension AppState {

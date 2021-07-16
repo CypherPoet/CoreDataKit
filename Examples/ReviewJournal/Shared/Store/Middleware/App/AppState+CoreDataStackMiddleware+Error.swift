@@ -12,7 +12,7 @@
 
 
 import Foundation
-import CypherPoetCoreDataKit
+import CoreDataKit
 
 
 extension AppState.CoreDataStackMiddleware {

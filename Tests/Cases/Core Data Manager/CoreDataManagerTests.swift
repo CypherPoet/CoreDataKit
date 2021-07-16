@@ -8,19 +8,17 @@
 
 
 import XCTest
-import Combine
-import CypherPoetCoreDataKit
-import XCTestStarterKit
+import CoreData
+import CoreDataKit
 
 
 class CoreDataManagerTests: XCTestCase {
-    typealias CoreDataManager = CypherPoetCoreDataKit.CoreDataManager<PersistentStoreMigrationVersion>
+    typealias SystemUnderTest = CoreDataKit.CoreDataManager<PersistentStoreMigrationVersion>
     
-    private var sut: CoreDataManager!
+    private var sut: SystemUnderTest!
     private var storageStrategy: StorageStrategy!
     private var migrator: MockPersistentStoreMigrator!
-    
-    private var subscriptions = Set<AnyCancellable>()
+    private var bundle: Bundle!
 }
 
 
@@ -31,15 +29,16 @@ extension CoreDataManagerTests {
         // Put setup code here.
         // This method is called before the invocation of each
         // test method in the class.
-        super.setUp()
+        try super.setUpWithError()
         
         migrator = MockPersistentStoreMigrator()
         storageStrategy = .inMemory
+        bundle = .module
         
         sut = makeSUT(
             storageStrategy: storageStrategy,
             migrator: migrator,
-            bundle: Bundle(for: Self.self)
+            bundle: bundle
         )
     }
 
@@ -51,8 +50,9 @@ extension CoreDataManagerTests {
         sut = nil
         storageStrategy = nil
         migrator = nil
-
-        super.tearDown()
+        bundle = nil
+        
+        try super.tearDownWithError()
     }
 }
 
@@ -64,7 +64,7 @@ extension CoreDataManagerTests {
         storageStrategy: StorageStrategy = .inMemory,
         migrator: PersistentStoreMigrating? = nil,
         bundle: Bundle = .module
-    ) -> CoreDataManager {
+    ) -> SystemUnderTest {
         .init(
             storageStrategy: storageStrategy,
             migrator: migrator,
@@ -74,7 +74,7 @@ extension CoreDataManagerTests {
 
     /// Helper to make the system under test from any default initializer
     /// and then test its initial conditions
-    private func makeSUTFromDefaults() -> CoreDataManager {
+    private func makeSUTFromDefaults() -> SystemUnderTest {
         .init()
     }
 }
@@ -92,10 +92,8 @@ extension CoreDataManagerTests {
 // MARK: - "When" Helpers (Actions Are Performed)
 extension CoreDataManagerTests {
 
-    private func whenSetupHasCompleted() throws {
-        let publisher = sut.setup()
-        
-        let _ = try awaitCompletion(of: publisher)
+    private func whenSetupHasCompleted() async throws {
+        try await sut.setup()
     }
 }
 
@@ -157,8 +155,8 @@ extension CoreDataManagerTests {
 // MARK: - `setup` Tests
 extension CoreDataManagerTests {
 
-    func test_Setup_LoadsPersistentStore() throws {
-        try whenSetupHasCompleted()
+    func test_Setup_LoadsPersistentStore() async throws {
+        try await whenSetupHasCompleted()
         
         XCTAssertGreaterThan(
             sut.persistentContainer.persistentStoreCoordinator.persistentStores.count,
@@ -167,8 +165,8 @@ extension CoreDataManagerTests {
     }
     
     
-    func test_Setup_MakesMainContextFromPersistentContainerViewContext() throws {
-        try whenSetupHasCompleted()
+    func test_Setup_MakesMainContextFromPersistentContainerViewContext() async throws {
+        try await whenSetupHasCompleted()
         
         XCTAssertEqual(
             sut.mainContext,
@@ -177,8 +175,8 @@ extension CoreDataManagerTests {
     }
     
     
-    func test_Setup_MakesMainContextFromThePersistentStoreCoordinatorsFirstStore() throws {
-        try whenSetupHasCompleted()
+    func test_Setup_MakesMainContextFromThePersistentStoreCoordinatorsFirstStore() async throws {
+        try await whenSetupHasCompleted()
         
         let sutPersistentStore = try XCTUnwrap(
             sut.persistentContainer.persistentStoreCoordinator.persistentStores.first
@@ -194,34 +192,48 @@ extension CoreDataManagerTests {
 }
 
 
-// MARK: - Migration Handing Tests
+// MARK: - Migration During Setup Tests
 extension CoreDataManagerTests {
     
-    func test_Setup_ChecksIfMigrationIsNeeded() throws {
+    func test_PerformingMigration_ChecksIfMigrationIsNeeded() async throws {
         XCTAssertFalse(migrator.requiresMigrationWasCalled)
         
-        try whenSetupHasCompleted()
+        try await whenSetupHasCompleted()
         
         XCTAssertTrue(migrator.requiresMigrationWasCalled)
     }
     
     
-    func test_Setup_WhenMigrationIsNeeded_PerformsMigration() throws {
+    func test_PerformingMigration_WhenMigrationIsNeeded_PerformsMigration() async throws {
         migrator.isMigrationExpectedToBeRequired = true
         XCTAssertFalse(migrator.migrateStoreWasCalled)
         
-        try whenSetupHasCompleted()
+        try await whenSetupHasCompleted()
         
         XCTAssertTrue(migrator.migrateStoreWasCalled)
     }
     
     
-    func test_Setup_WhenMigrationIsNotNeeded_DoesNotPerformMigration() throws {
+    func test_PerformingMigration_WhenMigrationIsNotNeeded_DoesNotPerformMigration() async throws {
         migrator.isMigrationExpectedToBeRequired = false
         XCTAssertFalse(migrator.migrateStoreWasCalled)
         
-        try whenSetupHasCompleted()
+        try await whenSetupHasCompleted()
         
         XCTAssertFalse(migrator.migrateStoreWasCalled)
+    }
+    
+    
+    func test_PerformingMigration_whenStoreURLIsNil_ThrowsError() async throws {
+        sut.persistentContainer.persistentStoreDescriptions = []
+        
+        do {
+            try await whenSetupHasCompleted()
+        } catch {
+            guard case SystemUnderTest.Error.persistentStoreURLNotFound = error else {
+                XCTFail()
+                return
+            }
+        }
     }
 }

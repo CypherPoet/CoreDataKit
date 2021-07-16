@@ -1,5 +1,5 @@
 import Foundation
-import CypherPoetCoreDataKit
+import CoreDataKit
 
 
 final class MockPersistentStoreMigrator {
@@ -27,13 +27,22 @@ extension MockPersistentStoreMigrator: PersistentStoreMigrating {
         .inMemory
     }
     
-    func requiresMigration<Version>(at storeURL: URL, to version: Version) -> Bool where Version : PersistentStoreVersionLogging {
+    
+    func requiresMigration<Version>(
+        at storeURL: URL,
+        to version: Version,
+        in bundle: Bundle = .module
+    ) -> Bool where Version : PersistentStoreVersionLogging {
         requiresMigrationWasCalled = true
         
         return isMigrationExpectedToBeRequired
     }
     
-    func migrateStore<Version>(at storeURL: URL, to version: Version) throws where Version : PersistentStoreVersionLogging {
+    
+    func migrateStore<Version>(
+        at storeURL: URL,
+        to version: Version
+    ) throws where Version: PersistentStoreVersionLogging {
         migrateStoreWasCalled = true
     }
     

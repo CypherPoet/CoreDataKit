@@ -1,6 +1,5 @@
 import Foundation
 import CoreData
-import Combine
 
 
 public class CoreDataManager<VersionLog: PersistentStoreVersionLogging> {
@@ -48,56 +47,39 @@ extension CoreDataManager {
 // MARK: - Public Methods
 extension CoreDataManager {
     
-    @discardableResult
-    public func setup(
-        runningOn schedulingQueue: DispatchQueue = .global(qos: .userInitiated),
-        completingOn receptionQueue: DispatchQueue = .main
-    ) -> AnyPublisher<Void, CoreDataManager.Error> {
-        performMigrationIfNeeded()
-            .subscribe(on: schedulingQueue)
-            .receive(on: receptionQueue)
-            .flatMap { _ in
-                self.loadPersistentStores()
-            }
-            .eraseToAnyPublisher()
+    public func setup() async throws {
+        try await performMigrationIfNeeded()
+        try await loadPersistentStores()
     }
-  
+
     
-    @discardableResult
-    public func save(_ context: NSManagedObjectContext) -> Future<Void, CoreDataManager.Error> {
-        Future { promise in
-            context.performAndWait {
-                if context.hasChanges {
-                    do {
-                        try context.save()
-                        promise(.success(()))
-                    } catch let error as NSError {
-                        promise(.failure(.saveFailed(error)))
-                    }
+    ///
+    /// - Parameters:
+    ///   - taskSchedulingMode: Determines how the current context's thread will execute the task.
+    public func save(
+        _ context: NSManagedObjectContext,
+        taskSchedulingMode: NSManagedObjectContext.ScheduledTaskType = .immediate
+    ) async throws {
+        try await context.perform(schedule: taskSchedulingMode) {
+            if context.hasChanges {
+                do {
+                    try context.save()
+                } catch let error as NSError {
+                    throw Error.saveFailed(error)
                 }
             }
         }
     }
 
-    @discardableResult
-    public func saveContexts() -> Future<Void, CoreDataManager.Error> {
-        Future { [weak self] promise in
-            guard let self = self else { return }
-            
-            [self.backgroundContext, self.mainContext].forEach { context in
-                context.performAndWait {
-                    if context.hasChanges {
-                        do {
-                            try context.save()
-                        } catch let error as NSError {
-                            promise(.failure(.saveFailed(error)))
-                        }
-                    }
-                }
-            }
-            
-            promise(.success(()))
-        }
+    
+    ///
+    /// - Parameters:
+    ///   - taskSchedulingMode: Determines how the current context's thread will execute the task.
+    public func saveContexts(
+        taskSchedulingMode: NSManagedObjectContext.ScheduledTaskType = .immediate
+    ) async throws {
+        try await save(backgroundContext, taskSchedulingMode: taskSchedulingMode)
+        try await save(mainContext, taskSchedulingMode: taskSchedulingMode)
     }
 }
 
@@ -105,48 +87,44 @@ extension CoreDataManager {
 // MARK: - Private Methods
 extension CoreDataManager {
     
-    private func performMigrationIfNeeded() -> Future<Void, CoreDataManager.Error> {
-        Future { [weak self] promise in
-            guard let self = self else { return }
+    internal func performMigrationIfNeeded() async throws {
+        guard let storeURL = storeURL else {
+            throw Error.persistentStoreURLNotFound
+        }
 
-            guard let storeURL = self.storeURL else {
-                promise(.failure(.persistentStoreURLNotFound))
-                return
-            }
+        let currentVersion = VersionLog.currentVersion
 
-            let currentVersion = VersionLog.currentVersion
+        guard migrator.requiresMigration(
+            at: storeURL,
+            to: currentVersion,
+            in: bundle
+        ) else {
+            return
+        }
 
-            guard self.migrator.requiresMigration(at: storeURL, to: currentVersion) else {
-                promise(.success(()))
-                return
-            }
-
-            do {
-                try self.migrator.migrateStore(at: storeURL, to: currentVersion)
-                promise(.success(()))
-            } catch let error as PersistentStoreMigrator.Error {
-                promise(.failure(.migrationFailed(error)))
-            } catch {
-                promise(.failure(.unknownError(error)))
-            }
+        do {
+            try migrator.migrateStore(at: storeURL, to: currentVersion)
+        } catch let error as PersistentStoreMigrator.Error {
+            throw Error.migrationFailed(error)
+        } catch {
+            throw Error.unknownError(error)
         }
     }
     
-    
-    private func loadPersistentStores() -> Future<Void, CoreDataManager.Error> {
-        Future { [weak self] promise in
-            self?.persistentContainer.loadPersistentStores { description, error in
-                guard error == nil else {
-                    promise(.failure(.persistentStoreLoadingFailed(error! as NSError)))
-                    return
+  
+    internal func loadPersistentStores() async throws {
+        return try await withCheckedThrowingContinuation { continuation in
+            persistentContainer.loadPersistentStores { description, error in
+                switch error {
+                case .some(let error):
+                    continuation.resume(throwing: CoreDataManager.Error.persistentStoreLoadingFailed(error as NSError))
+                case .none:
+                    continuation.resume(returning: Void())
                 }
-                
-                promise(.success(()))
             }
         }
     }
 }
-
 
 
 // MARK: - Private Factories
@@ -177,7 +155,7 @@ extension CoreDataManager {
     
     
     private func configurePersistentStoreDescription(_ description: NSPersistentStoreDescription) {
-        description.type = storageStrategy.storeKind
+        description.type = storageStrategy.storeKind.rawValue
         description.shouldMigrateStoreAutomatically = false
         description.shouldInferMappingModelAutomatically = false
         

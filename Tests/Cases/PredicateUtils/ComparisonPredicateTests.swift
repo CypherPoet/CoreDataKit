@@ -1,7 +1,5 @@
 import XCTest
-
-@testable import CypherPoetCoreDataKit
-
+@testable import CoreDataKit
 
 
 final class ComparisonPredicateTests: XCTestCase {
