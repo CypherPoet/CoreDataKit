@@ -1,4 +1,4 @@
-# CypherPoetCoreDataKit
+# CoreDataKit
 
 <div align="center">
    <img width="600px" src="./Extras/Images/Banner-1.png" alt="CypherPoetCoreDataKit Header Image">
@@ -48,36 +48,34 @@ This library is still very much a WIP as I study/experiment with/develop best pr
 
 ### Xcode Projects
 
-### Xcode Projects
-
 Select `File` -> `Swift Packages` -> `Add Package Dependency` and enter `https://github.com/CypherPoet/CypherPoetCoreDataKit`.
 
 
 ### Swift Package Manager Projects
 
-You can add `CypherPoetCoreDataKit` as a package dependency in your `Package.swift` file:
+You can add this project as a package dependency in your `Package.swift` file:
 
 ```swift
 let package = Package(
     //...
     dependencies: [
         .package(
-            url: "https://github.com/CypherPoet/CypherPoetCoreDataKit",
-            .exact("0.0.18")
+            url: "https://github.com/CypherPoet/CoreDataKit", 
+            .exact("0.0.55")
         ),
     ],
     //...
 )
 ```
 
-From there, refer to `CypherPoetCoreDataKit` as a "target dependency" in any of _your_ package's targets that need it.
+From there, refer to the `CoreDataKit` "product" delivered by the `CypherPoetCoreDataKit` "package" inside of any of your project's target dependencies:
 
 ```swift
 targets: [
     .target(
         name: "YourLibrary",
         dependencies: [
-          "CypherPoetCoreDataKit",
+            .product(name: "CoreDataKit", package: "CypherPoetCoreDataKit"),
         ],
         ...
     ),
@@ -85,7 +83,7 @@ targets: [
 ]
 ```
 
-Then simply `import CypherPoetCoreDataKit` wherever you’d like to use it.
+Then simply `import CoreDataKit` wherever you’d like to use it.
 
 
 
@@ -95,7 +93,7 @@ Currently, usage of these utilities is best demonstrated by the various example 
 
 ### Dynamically initializing a Core Data Stack for your app depending on whether it's running for production or for Xcode Previews.
 
-- [🔗 Example](https://github.com/CypherPoet/CypherPoetCoreDataKit/blob/migration-helpers/Examples/ReviewJournal/Shared/Misc%20Utils/Extensions/CoreDataManager%2BUtils.swift)
+- [🔗 Example](https://github.com/CypherPoet/CoreDataKit/blob/migration-helpers/Examples/ReviewJournal/Shared/Misc%20Utils/Extensions/CoreDataManager%2BUtils.swift)
 
 ### Setting up the Core Data stack on launch
 

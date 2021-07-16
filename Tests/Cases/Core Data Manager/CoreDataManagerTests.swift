@@ -9,11 +9,11 @@
 
 import XCTest
 import CoreData
-import CypherPoetCoreDataKit
+import CoreDataKit
 
 
 class CoreDataManagerTests: XCTestCase {
-    typealias SystemUnderTest = CypherPoetCoreDataKit.CoreDataManager<PersistentStoreMigrationVersion>
+    typealias SystemUnderTest = CoreDataKit.CoreDataManager<PersistentStoreMigrationVersion>
     
     private var sut: SystemUnderTest!
     private var storageStrategy: StorageStrategy!

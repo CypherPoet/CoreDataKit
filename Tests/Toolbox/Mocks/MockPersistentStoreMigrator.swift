@@ -1,5 +1,5 @@
 import Foundation
-import CypherPoetCoreDataKit
+import CoreDataKit
 
 
 final class MockPersistentStoreMigrator {

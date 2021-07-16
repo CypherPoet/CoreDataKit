@@ -1,5 +1,5 @@
 DOCS_DIRECTORY=${PWD}/.build/documentation
-MODULE_NAME="CypherPoetCoreDataKit"
+MODULE_NAME="CoreDataKit"
 
 swift doc generate \
   ./Sources/${MODULE_NAME} \

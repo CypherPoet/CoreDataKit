@@ -10,7 +10,7 @@
 
 import Foundation
 import CoreData
-import CypherPoetCoreDataKit
+import CoreDataKit
 
 
 // MARK: - Predicates

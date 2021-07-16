@@ -6,7 +6,7 @@
 
 import Foundation
 import XCTest
-import CypherPoetCoreDataKit
+import CoreDataKit
 import CoreData
 
 @testable import ReviewJournal
