@@ -16,17 +16,17 @@ public protocol FetchedResultsControlling: NSObject, NSFetchedResultsControllerD
     var fetchedResultsController: NSFetchedResultsController<FetchedResult> { get }
     
     
-    func extractAllResults(
+    nonisolated func extractAllResults(
         from fetchedResultsController: FetchedResultsController
     ) -> [FetchedResult]
     
 
-    func extractFirstSectionResults(
+    nonisolated func extractFirstSectionResults(
         from fetchedResultsController: FetchedResultsController
     ) -> [FetchedResult]
     
     
-    func extractResults(
+    nonisolated func extractResults(
         from sectionInfo: NSFetchedResultsSectionInfo
     ) -> [FetchedResult]
 }
@@ -48,8 +48,9 @@ extension FetchedResultsControlling {
         )
     }
     
-
-    public func extractAllResults(
+    
+    
+    nonisolated public func extractAllResults(
         from fetchedResultsController: FetchedResultsController
     ) -> [FetchedResult] {
         guard let sections = fetchedResultsController.sections else { return [] }
@@ -60,7 +61,7 @@ extension FetchedResultsControlling {
     }
     
 
-    public func extractFirstSectionResults(
+    nonisolated public func extractFirstSectionResults(
         from fetchedResultsController: FetchedResultsController
     ) -> [FetchedResult] {
         guard let firstSection = fetchedResultsController.sections?.first else { return [] }
@@ -69,27 +70,9 @@ extension FetchedResultsControlling {
     }
     
     
-    public func extractResults(
+    nonisolated public func extractResults(
         from sectionInfo: NSFetchedResultsSectionInfo
     ) -> [FetchedResult] {
         sectionInfo.objects as? [FetchedResult] ?? []
     }
 }
-
-
-// 🔑 Example of adopting `NSFetchedResultsControllerDelegate` and sending
-// `sections` to a `sectionsPublisher` owned by the `FetchedResultsControlling` type.
-//
-//// MARK: - NSFetchedResultsControllerDelegate
-//extension ViewModel: NSFetchedResultsControllerDelegate {
-//
-//func controllerDidChangeContent(
-//    _ controller: NSFetchedResultsController<NSFetchRequestResult>
-//) {
-//    guard
-//        let fetchedResultsController = controller as? FetchedResultsController
-//    else { return }
-//        
-//    sectionsPublisher.send(fetchedResultsController.sections ?? [])
-//}
-//}
