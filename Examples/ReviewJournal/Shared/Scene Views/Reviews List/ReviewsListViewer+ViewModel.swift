@@ -9,7 +9,7 @@
 import SwiftUI
 import Combine
 import CoreData
-import CypherPoetCoreDataKit
+import CoreDataKit
 
 
 fileprivate typealias ViewModel = ReviewsListViewer.ViewModel

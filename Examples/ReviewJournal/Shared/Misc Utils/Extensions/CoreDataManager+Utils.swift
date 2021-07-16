@@ -8,12 +8,12 @@
 
 
 import Foundation
-import CypherPoetCoreDataKit
+import CoreDataKit
 
 
 // Syntactic sugar for our specialized `CoreDataManager` type that
 // can then be used throughout the app.
-typealias CoreDataManager = CypherPoetCoreDataKit.CoreDataManager<PersistentStoreMigrationVersion>
+typealias CoreDataManager = CoreDataKit.CoreDataManager<PersistentStoreMigrationVersion>
 
 
 extension CoreDataManager {

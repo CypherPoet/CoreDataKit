@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import CypherPoetCoreDataKit
+import CoreDataKit
 import Combine
 
 

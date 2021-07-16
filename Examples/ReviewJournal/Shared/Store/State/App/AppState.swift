@@ -10,7 +10,7 @@
 import Foundation
 import SwiftUI
 import CypherPoetReduxUtils
-import CypherPoetCoreDataKit
+import CoreDataKit
 
 
 struct AppState {
