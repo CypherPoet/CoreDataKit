@@ -6,35 +6,35 @@ import PackageDescription
 let package = Package(
     name: "CypherPoetCoreDataKit",
     platforms: [
-        .iOS("15.0"),
-        .macOS("12.0"),
-        .tvOS(SupportedPlatform.TVOSVersion.v14),
-        .watchOS(SupportedPlatform.WatchOSVersion.v7),
+        .iOS(.v15),
+        .macOS(.v12),
+        .tvOS(.v15),
+        .watchOS(.v8),
     ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
-            name: "CypherPoetCoreDataKit",
-            targets: ["CypherPoetCoreDataKit"]
+            name: "CoreDataKit",
+            targets: ["CoreDataKit"]
         ),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/CypherPoet/XCTestStarterKit", .exact("0.0.3")),
+//        .package(url: "https://github.com/CypherPoet/XCTestStarterKit", .exact("0.0.3")),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
-            name: "CypherPoetCoreDataKit",
+            name: "CoreDataKit",
             dependencies: [],
             path: "Sources/"
         ),
         .testTarget(
-            name: "CypherPoetCoreDataKitTests",
+            name: "CoreDataKitTests",
             dependencies: [
-                "CypherPoetCoreDataKit",
-                "XCTestStarterKit",
+                "CoreDataKit",
+//                "XCTestStarterKit",
             ],
             path: "Tests/",
             resources: [

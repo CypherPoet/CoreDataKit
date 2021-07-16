@@ -49,13 +49,7 @@ extension CoreDataManager {
     
     public func setup() async throws {
         try await performMigrationIfNeeded()
-        
-        switch await loadPersistentStores() {
-        case .success:
-            break
-        case .failure(let error):
-            throw error
-        }
+        try await loadPersistentStores()
     }
 
     
@@ -118,20 +112,19 @@ extension CoreDataManager {
     }
     
   
-    internal func loadPersistentStores() async -> Result<Void, CoreDataManager.Error> {
-        await withCheckedContinuation { continuation in
+    internal func loadPersistentStores() async throws {
+        return try await withCheckedThrowingContinuation { continuation in
             persistentContainer.loadPersistentStores { description, error in
                 switch error {
                 case .some(let error):
-                    continuation.resume(returning: .failure(Error.persistentStoreLoadingFailed(error as NSError)))
+                    continuation.resume(throwing: CoreDataManager.Error.persistentStoreLoadingFailed(error as NSError))
                 case .none:
-                    continuation.resume(returning: .success(()))
+                    continuation.resume(returning: Void())
                 }
             }
         }
     }
 }
-
 
 
 // MARK: - Private Factories
