@@ -1,4 +1,4 @@
-# CoreDataKit
+# CoreData Kit
 
 <div align="center">
    <img width="600px" src="./Extras/Images/Banner-1.png" alt="CypherPoetCoreDataKit Header Image">
@@ -24,7 +24,7 @@
 
 <p align="center">
 
-_A collection of utilities for building Core Data applications in SwiftUI._
+_A collection of utilities for building Core Data-backed applications in Swift._
 
 <p />
 
@@ -39,7 +39,7 @@ This library is still very much a WIP as I study/experiment with/develop best pr
 - ✅ A [`CoreDataManager`](./Sources/CoreDataManager/) that handles setting up a ["Core Data Stack"](https://developer.apple.com/documentation/coredata/core_data_stack).
 - ✅ A [`rich set of utilities`](./Sources/Migration/) for performing Core Data migrations.
 - ✅ A [`FetchedResultsControlling` protocol](./Sources/FetchUtils/FetchedResultsControlling.swift) that helps architect `NSFetchedResultsController` instances and extract data from their `NSFetchRequest` results.
-- ✅ Utilities for composing `NSPredicate` instances in a strongly-typed fashion. 
+- ✅ Utilities for composing `NSPredicate` instances in a strongly-typed fashion.
 - ✅ Strongly-typed errors under types like `CoreDataManager`, `PersistentStoreMigrator` and more.
 - ✅ `NSPersistentStore` helpers for using different SQLite writing locations in development and production.
 
@@ -60,7 +60,7 @@ let package = Package(
     //...
     dependencies: [
         .package(
-            url: "https://github.com/CypherPoet/CoreDataKit", 
+            url: "https://github.com/CypherPoet/CoreDataKit",
             .exact("0.0.19")
         ),
     ],
