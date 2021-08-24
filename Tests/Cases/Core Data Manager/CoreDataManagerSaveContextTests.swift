@@ -101,7 +101,7 @@ extension CoreDataManagerSaveContextTests {
 // MARK: - "When" Helpers (Actions Are Performed)
 extension CoreDataManagerSaveContextTests {
 
-    private func whenSetupHasCompleted() async throws {
+    private func whenCoreDataManagerSetupHasCompleted() async throws {
         try await sut.setup()
     }
     
@@ -133,8 +133,8 @@ extension CoreDataManagerSaveContextTests {
 // MARK: - Save Context Tests
 extension CoreDataManagerSaveContextTests {
     
-    func test_saveContext_whenContextHasNoChanges_DoesntPerformSave() async throws {
-        try await whenSetupHasCompleted()
+    func test_SaveContext_WhenContextHasNoChanges_DoesntPerformSave() async throws {
+        try await whenCoreDataManagerSetupHasCompleted()
         whenTemporaryContextIsCreated()
         
         managedObjectContextSavedExpectation.isInverted = true
@@ -145,8 +145,8 @@ extension CoreDataManagerSaveContextTests {
     }
     
     
-    func test_saveContext_whenContextHasChanges_PerformsSave() async throws {
-        try await whenSetupHasCompleted()
+    func test_SaveContext_WhenContextHasChanges_PerformsSave() async throws {
+        try await whenCoreDataManagerSetupHasCompleted()
         whenTemporaryContextIsCreated()
         
         await temporaryContext.perform {

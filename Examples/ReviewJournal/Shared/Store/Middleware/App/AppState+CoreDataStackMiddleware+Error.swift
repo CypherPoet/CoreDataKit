@@ -43,9 +43,9 @@ extension AppState.CoreDataStackMiddleware.Error: LocalizedError {
                     "(persistentStoreURLNotFound) Failed to find persistent store",
                     comment: ""
                 )
-            case .saveFailed(let error):
+            case .genericSaveFailure(let error):
                 return NSLocalizedString(
-                    "(saveFailed) An error occurred while setting up the app's data store: \(error.localizedDescription)",
+                    "(genericSaveFailure) An error occurred while setting up the app's data store: \(error.localizedDescription)",
                     comment: ""
                 )
             case .persistentStoreLoadingFailed(let error):

@@ -19,7 +19,7 @@ extension StorageStrategy {
             return .sqlite
         case .inMemory:
             // 📝 While undocumented, using `NSInMemoryStoreType` now appears to
-            // be deprecated in favor of using a SQLite store that writes to /dev/null.
+            // be deprecated in favor of using a SQLite store that writes to `/dev/null`.
             //
             // See:
             //  - https://twitter.com/sowenjub/status/1376653234140512259

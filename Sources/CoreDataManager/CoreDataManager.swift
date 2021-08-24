@@ -60,13 +60,26 @@ extension CoreDataManager {
         _ context: NSManagedObjectContext,
         taskSchedulingMode: NSManagedObjectContext.ScheduledTaskType = .immediate
     ) async throws {
-        try await context.perform(schedule: taskSchedulingMode) {
-            if context.hasChanges {
-                do {
+        do {
+            try await context.perform(schedule: taskSchedulingMode) {
+                if context.hasChanges {
                     try context.save()
-                } catch let error as NSError {
-                    throw Error.saveFailed(error)
                 }
+            }
+        } catch let nsError as NSError {
+            guard nsError.domain == NSCocoaErrorDomain else {
+                throw Error.genericSaveFailure(nsError)
+            }
+            
+            switch nsError.code {
+            case NSValidationMultipleErrorsError:
+                let errors = nsError.userInfo["NSDetailedErrors"] as? Array<NSError> ?? []
+                
+                throw Error.saveFailureFromMultipleValidationErrors(errors)
+            case NSManagedObjectValidationError:
+                throw Error.saveFailureFromValidationError(nsError)
+            default:
+                throw Error.genericSaveFailure(nsError)
             }
         }
     }
