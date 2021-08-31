@@ -1,6 +1,5 @@
 //
 // CoreDataManagerTests.swift
-// ReviewJournal
 //
 // Created by CypherPoet on 2/24/21.
 // ✌️
