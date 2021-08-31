@@ -1,6 +1,5 @@
 //
 // CoreDataManagerSaveContextTests.swift
-// ReviewJournal
 //
 // Created by CypherPoet on 2/24/21.
 // ✌️
@@ -16,52 +15,40 @@ class CoreDataManagerSaveContextTests: XCTestCase {
     typealias SystemUnderTest = CoreDataKit.CoreDataManager<PersistentStoreMigrationVersion>
     
     private var sut: SystemUnderTest!
+    private var managedObjectContext: NSManagedObjectContext!
     private var storageStrategy: StorageStrategy!
     private var bundle: Bundle!
     private var fileManager: FileManager!
     private var managedObjectContextSavedExpectation: XCTestExpectation!
-    private var temporaryContext: NSManagedObjectContext!
 }
 
 
 // MARK: - Lifecycle
 extension CoreDataManagerSaveContextTests {
 
-    override func setUpWithError() throws {
-        // Put setup code here.
-        // This method is called before the invocation of each
-        // test method in the class.
-        super.setUp()
+    override func setUp() async throws {
+        try await super.setUp()
         
         storageStrategy = .inMemory
         bundle = .module
         fileManager = .default
         
-        sut = makeSUT(
-            storageStrategy: storageStrategy,
-            bundle: bundle
-        )
+        sut = makeSUT()
+        managedObjectContext = sut.mainContext
         
-        
-        managedObjectContextSavedExpectation = expectation(
-            forNotification: .NSManagedObjectContextDidSave,
-            object: temporaryContext
-        )
+        try await sut.setup()
     }
 
 
-    override func tearDownWithError() throws {
-        // Put teardown code here.
-        // This method is called after the invocation of each
-        // test method in the class.
+    override func tearDown() async throws {
+        try await super.tearDown()
+
         sut = nil
+        managedObjectContext = nil
         storageStrategy = nil
         bundle = nil
         fileManager = nil
         managedObjectContextSavedExpectation = nil
-        temporaryContext = nil
-        
-        super.tearDown()
     }
 }
 
@@ -69,14 +56,9 @@ extension CoreDataManagerSaveContextTests {
 // MARK: - Factories
 extension CoreDataManagerSaveContextTests {
 
-    private func makeSUT(
-        storageStrategy: StorageStrategy = .inMemory,
-        migrator: PersistentStoreMigrating? = nil,
-        bundle: Bundle = .module
-    ) -> SystemUnderTest {
+    private func makeSUT() -> SystemUnderTest {
         .init(
             storageStrategy: storageStrategy,
-            migrator: migrator,
             bundle: bundle
         )
     }
@@ -92,40 +74,32 @@ extension CoreDataManagerSaveContextTests {
 // MARK: - "Given" Helpers (Conditions Exist)
 extension CoreDataManagerSaveContextTests {
 
-    private func givenDefaultSUTIsCreated() {
-        sut = makeSUTFromDefaults()
+    private func givenContextSaveIsExpected() {
+        managedObjectContextSavedExpectation = expectation(
+            forNotification: .NSManagedObjectContextDidSave,
+            object: managedObjectContext
+        )
+    }
+    
+    
+    private func givenContextSaveIsNotExpected() {
+        givenContextSaveIsExpected()
+        managedObjectContextSavedExpectation.isInverted = true
     }
 }
 
 
 // MARK: - "When" Helpers (Actions Are Performed)
 extension CoreDataManagerSaveContextTests {
-
-    private func whenCoreDataManagerSetupHasCompleted() async throws {
-        try await sut.setup()
-    }
     
-    
-    private func whenTemporaryContextIsCreated() {
-        let sqliteFileName = PersistentStoreMigrationVersion.currentVersion.modelSchemaName
-        let sqliteFileURL = fileManager.temporaryDirectory
-            .appendingPathComponent(sqliteFileName)
-            .appendingPathExtension("sqlite")
-
-        FileManager.copyFile(
-            in: Bundle.module,
-            named: PersistentStoreMigrationVersion.currentVersion.modelSchemaName,
-            withExtension: "sqlite",
-            to: sqliteFileURL,
-            using: fileManager
-        )
+    private func whenSaveErrorOccurs() async throws -> SystemUnderTest.Error {
+        do {
+            try await sut.save(managedObjectContext)
+        } catch {
+            return try! XCTUnwrap(error as? CoreDataManager.Error)
+        }
         
-        let dataModel = sut.managedObjectModel!
-        
-        temporaryContext = NSManagedObjectContext(
-            model: dataModel,
-            storeURL: sqliteFileURL
-        )
+        preconditionFailure("Expected `CoreDataManager.Error` after save")
     }
 }
 
@@ -134,29 +108,50 @@ extension CoreDataManagerSaveContextTests {
 extension CoreDataManagerSaveContextTests {
     
     func test_SaveContext_WhenContextHasNoChanges_DoesntPerformSave() async throws {
-        try await whenCoreDataManagerSetupHasCompleted()
-        whenTemporaryContextIsCreated()
+        givenContextSaveIsNotExpected()
         
-        managedObjectContextSavedExpectation.isInverted = true
-        
-        try await sut.save(temporaryContext)
+        try await sut.save(managedObjectContext)
         
         wait(for: [managedObjectContextSavedExpectation], timeout: 0.5)
     }
     
     
     func test_SaveContext_WhenContextHasChanges_PerformsSave() async throws {
-        try await whenCoreDataManagerSetupHasCompleted()
-        whenTemporaryContextIsCreated()
+        givenContextSaveIsExpected()
         
-        await temporaryContext.perform {
-            let player = Player(context: self.temporaryContext)
+        await managedObjectContext.perform {
+            let player = Player(context: self.managedObjectContext)
             
             player.name = "CypherPoet"
         }
 
-        try await sut.save(temporaryContext)
+        try await sut.save(managedObjectContext)
         
         wait(for: [managedObjectContextSavedExpectation], timeout: 0.5)
+    }
+}
+
+
+// MARK: - Context Saving Error Handling Tests
+
+
+extension CoreDataManagerSaveContextTests {
+    
+    func test_SaveContext_WhenNSManagedObjectValidationError_ThrowsErrorForSaveFailingDueToValidationError()
+    async throws {
+        await managedObjectContext.perform {
+            let player = Player(context: self.managedObjectContext)
+            
+            player.name = ""
+        }
+        
+        let saveError = try await whenSaveErrorOccurs()
+        
+        switch (saveError) {
+        case .saveFailureFromValidationError:
+            break
+        default:
+            XCTFail("Expected Validation Error. Received error: \(saveError)")
+        }
     }
 }
