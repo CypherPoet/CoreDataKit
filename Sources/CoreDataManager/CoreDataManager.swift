@@ -52,7 +52,6 @@ extension CoreDataManager {
         try await loadPersistentStores()
     }
 
-    
     ///
     /// - Parameters:
     ///   - taskSchedulingMode: Determines how the current context's thread will execute the task.
@@ -67,20 +66,7 @@ extension CoreDataManager {
                 }
             }
         } catch let nsError as NSError {
-            guard nsError.domain == NSCocoaErrorDomain else {
-                throw Error.genericSaveFailure(nsError)
-            }
-            
-            switch nsError.code {
-            case NSValidationMultipleErrorsError:
-                let errors = nsError.userInfo["NSDetailedErrors"] as? Array<NSError> ?? []
-                
-                throw Error.saveFailureFromMultipleValidationErrors(errors)
-            case NSManagedObjectValidationError:
-                throw Error.saveFailureFromValidationError(nsError)
-            default:
-                throw Error.genericSaveFailure(nsError)
-            }
+            throw parseSaveError(from: nsError)
         }
     }
 
@@ -97,7 +83,7 @@ extension CoreDataManager {
 }
 
 
-// MARK: - Private Methods
+// MARK: - Internal Helpers
 extension CoreDataManager {
     
     internal func performMigrationIfNeeded() async throws {
@@ -135,6 +121,40 @@ extension CoreDataManager {
                     continuation.resume(returning: Void())
                 }
             }
+        }
+    }
+    
+
+    private func parseSaveError(from nsError: NSError) -> Error {
+        guard nsError.domain == NSCocoaErrorDomain else {
+            return Error.genericSaveFailure(nsError)
+        }
+        
+        switch nsError.code {
+        case NSValidationMultipleErrorsError:
+            let errors = nsError.userInfo["NSDetailedErrors"] as? Array<NSError> ?? []
+            
+            return Error.saveFailureFromMultipleValidationErrors(errors)
+        case
+            NSManagedObjectValidationError,
+            NSManagedObjectConstraintValidationError,
+            NSValidationMultipleErrorsError,
+            NSValidationMissingMandatoryPropertyError,
+            NSValidationRelationshipLacksMinimumCountError,
+            NSValidationRelationshipExceedsMaximumCountError,
+            NSValidationRelationshipDeniedDeleteError,
+            NSValidationNumberTooLargeError,
+            NSValidationNumberTooSmallError,
+            NSValidationDateTooLateError,
+            NSValidationDateTooSoonError,
+            NSValidationInvalidDateError,
+            NSValidationStringTooLongError,
+            NSValidationStringTooShortError,
+            NSValidationStringPatternMatchingError,
+            NSValidationInvalidURIError:
+            return Error.saveFailureFromValidationError(nsError)
+        default:
+            return Error.genericSaveFailure(nsError)
         }
     }
 }
