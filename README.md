@@ -61,7 +61,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/CypherPoet/CoreDataKit",
-            .exact("0.0.20")
+            .exact("0.0.21")
         ),
     ],
     //...
